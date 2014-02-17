@@ -31,6 +31,19 @@ Installation from source requires
   * sphinx
 """
 
+def get_files(dirPath):
+    notIncluded = ["\.pyc"]
+    allFiles = []
+    for fileName in os.listdir(dirPath):
+        include = True
+        for pat in notIncluded:
+            if re.search(pat,fileName):
+                include = False
+        if include == True:
+            allFiles.append(os.path.join(dirPath,fileName))
+    return allFiles
+
+
 REQUIRES = ['numpy', 'matplotlib','PyQt4','QSciEditor','sphinx']
 DISTNAME = 'lpedit'
 LICENSE = 'GNU GPL v3'
@@ -47,23 +60,23 @@ CLASSIFIERS = [
     'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)'
 ]
 
+FILES = ["lpedit/icons/*",
+         "lpedit/styfiles/*",
+         "lpedit/sphinxfiles/*",
+         "lpedit/examples/*",
+         "lpedit/templates/*"]
+
+#data_files = [('icons',get_files(os.path.join('lpedit','icons'))),
+#              ('styfiles',get_files(os.path.join('lpedit','styfiles'))),
+#              ('sphinxfiles',get_files(os.path.join('lpedit','sphinxfiles'))),
+#              ('examples',get_files(os.path.join('lpedit','examples'))),
+#              ('templates',get_files(os.path.join('lpedit','templates')))],
+
 ISRELEASED = True
 VERSION = __version__
 FULLVERSION = VERSION
 if not ISRELEASED:
     FULLVERSION += '.beta'
-
-def get_files(dirPath):
-    notIncluded = ["\.pyc"]
-    allFiles = []
-    for fileName in os.listdir(dirPath):
-        include = True
-        for pat in notIncluded:
-            if re.search(pat,fileName):
-                include = False
-        if include == True:
-            allFiles.append(os.path.join(dirPath,fileName))
-    return allFiles
 
 if __name__ == '__main__':
     setup(name=DISTNAME,
@@ -83,6 +96,9 @@ if __name__ == '__main__':
           #windows=[{"script":"lpEditStart.py"}],
           long_description=LONG_DESCRIPTION,
           classifiers=CLASSIFIERS,
+          package_data = {'package' : FILES},
+          #package_data={'icons': ['ta/*']},
+
           data_files = [('icons',get_files(os.path.join('lpedit','icons'))),
                         ('styfiles',get_files(os.path.join('lpedit','styfiles'))),
                         ('sphinxfiles',get_files(os.path.join('lpedit','sphinxfiles'))),
