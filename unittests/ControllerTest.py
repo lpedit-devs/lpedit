@@ -4,7 +4,7 @@ import sys,os,unittest
 import matplotlib as mpl
 if mpl.get_backend() != 'agg':
     mpl.use('agg')
-from lpEdit import Controller
+from lpedit import Controller
 
 ## test class for the main window function
 class ControllerTest(unittest.TestCase):

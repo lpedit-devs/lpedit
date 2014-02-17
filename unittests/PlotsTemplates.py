@@ -5,7 +5,7 @@ import sys,os,unittest,shutil,re
 import matplotlib as mpl
 if mpl.get_backend() != 'agg':
     mpl.use('agg')
-from lpEdit import Controller,NoGuiAnalysis
+from lpedit import Controller,NoGuiAnalysis
 
 ## test class for the main window function
 class PlotsTemplates(unittest.TestCase):

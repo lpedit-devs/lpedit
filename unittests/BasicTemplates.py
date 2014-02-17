@@ -2,8 +2,8 @@
 
 
 import sys,os,time,unittest,shutil,re
-from lpEdit import Controller,NoGuiAnalysis
-from lpEdit import SphinxLogger
+from lpedit import Controller,NoGuiAnalysis
+from lpedit import SphinxLogger
 
 ## test class for the main window function
 class BasicTemplates(unittest.TestCase):

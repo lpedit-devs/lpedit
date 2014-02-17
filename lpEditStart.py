@@ -8,10 +8,7 @@ A. Richards
 
 import sys, getopt, os, re
 from PyQt4 import QtGui
-#__currentdir__ = os.path.realpath(os.path.dirname(__file__))
-#sys.path.append(os.path.join(__currentdir__,'lpEdit'))
-
-from lpEdit import MainWindow
+from lpedit import MainWindow
 
 ## check for the debug flag
 try:

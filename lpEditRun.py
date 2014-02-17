@@ -8,10 +8,8 @@ A. Richards
 
 import sys, getopt, os
 from PyQt4 import QtGui
-sys.path.append(os.path.join(os.getcwd(),'lpEdit'))
-from lpEdit import NoGuiAnalysis
-
-
+sys.path.append(os.path.join(os.getcwd(),'lpedit'))
+from lpedit import NoGuiAnalysis
 
 def print_help():
     print "\n"

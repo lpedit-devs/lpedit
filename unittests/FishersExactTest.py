@@ -5,7 +5,7 @@ import sys,os,unittest
 import matplotlib as mpl
 if mpl.get_backend() != 'agg':
     mpl.use('agg')
-from lpEdit import Controller,NoGuiAnalysis
+from lpedit import Controller,NoGuiAnalysis
 
 ## test class for the main window function
 class FishersExactTest(unittest.TestCase):
