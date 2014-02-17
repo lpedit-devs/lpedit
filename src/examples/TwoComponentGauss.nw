@@ -1,0 +1,230 @@
+%A template demonstrating EM for a two component Gaussian
+%INCLUDE TwoComponentData.csv, TwoComponentGaussianEM.py
+\documentclass{article}
+
+%% packages
+\usepackage{amsmath,pgf,graphicx,textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{color,hyperref,natbib,bm,fullpage}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.50}
+\definecolor{darkgreen}{rgb}{0.0,0.50,0.0}
+\hypersetup{colorlinks = true, linkcolor=darkblue, citecolor=darkblue, pdfauthor={A. Richards},
+pdftitle={Two component Gaussian EM}}
+\newcommand{\red}{\textcolor{red}} 
+
+\title{EM algorithm: two component Gaussian} \author{A. Richards}
+
+\begin{document}
+\maketitle The EM algorithm is used to simplify difficult maximum likelihood
+problems.  The classic example for the EM is in the context of a two component
+mixture model.  For more information on this problem see \cite{ElemStatLearn01}
+(Page 236). Where in their example they use the following data (See Table 8.1 in
+the book).
+
+\noindent Table 1: data example data 
+\begin{equation*}
+\begin{array}{cccccccccc} 
+\hline 
+-0.39 & 0.12 & 0.94 & 1.67 & 1.76 &
+ 2.44 & 3.72 & 4.28 & 4.92 & 5.53 \\ 
+ 0.06 & 0.48 & 1.01 & 1.68 & 1.80 &
+ 3.25 & 4.12 & 4.60 & 5.28 & 6.22 \\ 
+\hline 
+\end{array} 
+\end{equation*}
+
+<<label=imports>>=
+import csv
+import numpy as np
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+from TwoComponentGaussianEM import TwoComponentGaussian 
+@
+
+<<label=load-data->>=
+csvFileHandle = csv.reader(open("TwoComponentData.csv",'r'))
+y1 = csvFileHandle.next()
+y2 = csvFileHandle.next()
+y1 = np.array([float(i) for i in y1])
+y2 = np.array([float(i) for i in y2])
+print(y1)
+print(y2)
+@
+
+The mixture model can be defined by two Gaussian distributions. We model $Y$ as
+a mixture of the two distributions 
+
+\begin{align*} 
+Y_{1} \sim N(\mu_{1},\sigma^{2}_{1})  \\ 
+Y_{2} \sim N(\mu_{2}, \sigma^{2}_{2}) \\
+Y = (1 - \Delta) Y_{1} + \Delta Y_{2} 
+\end{align*} 
+where $\Delta \in \{ 0,1 \}$ with $P(\Delta = 1) = \pi$. This
+\textcolor{darkgreen}{generative} representation is explicit: generate a $\Delta
+\in \{ 0,1 \}$ with probability $\pi$. Depending on the outcome $Y$ can produce
+a $Y_{1}$ or $Y_{2}$.  Let $\phi_{\theta}$ denote the normal density with
+parameters $\theta = (\mu,\sigma^{2})$. The density of $Y$ is then given as 
+
+\begin{equation*} 
+g_{Y}(Y) = (1 -\pi) \phi_{\theta_{1}}(y) + 
+\pi \phi_{\theta_{2}}(y) 
+\end{equation*} 
+
+Now we wish to fit this model to the above data by maximum likelihood. 
+The parameters are,
+\begin{equation*} 
+\theta = (\pi, \theta_{1}, \theta_{2}) 
+       = (\pi, \mu_{1},\sigma^{2}_{1}, \mu_{2}, \sigma^{2}_{2})
+\end{equation*} 
+
+Reminder of likelihood function.  
+\begin{equation*}
+L(\theta|\textbf{y}) = L(\theta_{1},...,\theta_{k}|y_{1},...,y_{n}) 
+                     = \prod^{n}_{i=1} f(y_{i}|\theta_{1},...\theta_{k})
+\end{equation*}
+
+\begin{table}[h] 
+\begin{center} 
+\begin{tabular}{|l|} 
+\hline Def 7.2.4
+(CB) . 
+For each sample point $\textbf{x}$, let $\hat{\theta}(\textbf{x})$ be a
+parameter value \\ 
+at which $L(\theta|\textbf{x})$ attains its maximum as a
+function of $\theta$, with $\textbf{x}$ held fixed. \\
+ A \textcolor{darkgreen}{maximum likelihood estimator} (MLE) of \\ the
+paramater $\theta$ based on a sample of $\textbf{X}$ is $\hat{\theta}(X)$
+\cite{StatInfer02} \\ 
+\hline 
+\end{tabular}
+\end{center} 
+\end{table} 
+So the likelihood and log-likelihood are
+\begin{align*} 
+L(\theta|\textbf{Z}) 
+&= \prod_{i=1}^{N} (1-\pi) \phi_{\theta_{1}}(y_{i}) + \pi
+\phi_{\theta_{2}}(y_{i}) \\
+\ell(\theta|\textbf{Z}) &= \sum_{i=1}^{N}\log \left[(1 - \pi)
+\phi_{\theta_{1}}(y_{i}) + \pi \phi_{\theta_{2}}(y_{i}) \right]
+\end{align*}
+
+Direct maximization of $\ell(\theta|\textbf{Z})$ is quite difficult
+numerically, because of the sum of terms inside the logarithm.  There is a
+simplier approach.  We consider unobserved latent variables $\Delta_{i}$ taking
+values 0 or 1.  If $\Delta_{i} = 1$ then $Y_{i}$ comes from model 2 otherwise it
+comes from model 1.  Suppose we knew the values for the $\Delta_{i}$'s. Then the
+log-likelihood would be
+
+\begin{align*} \ell_{0}(\theta|\textbf{Z},\bm{\Delta}) &=
+\sum^{N}_{i=1} \left[ (1-\Delta_{i}) \log \phi_{\theta_{1}} (y_{i}) +
+\Delta_{i} \log \phi_{\theta_{2}} (y_{i}) \right]\\ &+ \sum^{N}_{i=1}
+\left[ (1-\Delta_{i}) \log \pi + \Delta_{i} \log (1-\pi) \right]
+\end{align*} 
+
+and the maximum likelihood estimates of $\mu_{1}$ and $\sigma^{2}_{1}$ would be
+the sample mean and variance for those data with $\Delta_{i} = 0$ and similarly
+those for $\mu_{2}$ and $\sigma^{2}_{2}$ would be that sample mean and variance
+of the data with $\Delta_{i} = 1$.  Since the values of $\Delta_{i}$'s are
+unknown we proceed in an iterative fashion, substituting for each $\Delta_{i}$
+in the above eqn its expected value 
+
+\begin{equation*}
+\gamma_{i}(\theta) = E(\Delta_{i}|\theta,\textbf{Z}) = Pr(\Delta_{i} =
+1|\theta,\textbf{Z}) 
+\end{equation*} 
+In this implimentation of the EM algorithm (shown in Algorithm 8.1) which is a
+special case for Gaussian mixutures.  The \textcolor{darkgreen}{expectation}
+step we do a soft assignment of each observation to each model -- where the
+estimates of the parameters are used to assign respinsibilities according to the
+relative density of the training points under each model.  In the
+\textcolor{darkgreen}{maximization} step these responsibilites are used in
+weighted maximum-likelihood fits to update the estimates of the parameters.  A
+good way to construct initial guesses for $\hat{\mu}_{1}$ and $\hat{\mu}_{2}$ is
+to select two of of the $y_{i}$ at random.  Both $\hat{\sigma}^{2}_{1}$ and
+$\hat{\sigma}^{2}_{2}$ can be set equal to the overall sample variance
+$\sum^{N}_{i=1}(y_{i}-\bar{y})^{2} / N$.  The mixing proportion can be started
+at the value of 0.5.  We are looking for a good local maximum of the likelihood
+one for which $\hat{\sigma}^{2}_{1}, \hat{\sigma}^{2}_{1} > 0$.  \textbf{There
+can be more than one local maximum} having $\hat{\sigma}^{2}_{1},
+\hat{\sigma}^{2}_{1} > 0$.  In their implimention they ran the EM algorithm with
+a number of different initial guesses for the parameters, all having
+$\hat{\sigma}^{2}_{k} > 0.5$, and chose the run that gave the highest maximized
+likelihood.
+
+\begin{table}[ht!] Algorithm 8.1
+\cite{ElemStatLearn01} 
+\begin{center} \begin{tabular}{l} 
+\hline EM algorithm for two-component Gaussian mixture \\ 
+\hline 
+1.  Take initial guesses for the parameters $\hat{\mu}_{1},
+\hat{\sigma}_{1}^{2},\hat{\mu}_{2}, \hat{\sigma}_{2}^{2},\hat{\pi}$ \\
+2.  Expectation Step: compute the responsibilities \\ \ \\
+\hspace{1cm} $\hat{\gamma}_{i} = \frac{
+\hat{\pi}\phi_{\hat{\theta}_{2}} (y_{i})} {(1-\hat{\pi})
+\phi_{\hat{\theta}_{1}} (y_{i}) + \hat{\pi} \phi_{\hat{\theta}_{2}}
+(y_{i})}, i = 1,2,...,N$ \\ \ \\ 
+3.  Maximization Step: compute the
+weighted means and variances: \\ \ \\ \hspace{1cm} $\hat{\mu}_{1} =
+\frac{\sum^{N}_{i=1}(1-\hat{\gamma}_{i})(y_{i})}
+{\sum^{N}_{i=1}(1-\hat{\gamma}_{i})}$, $\hat{\sigma}^{2}_{1} =
+\frac{\sum^{N}_{i=1}(1-\hat{\gamma}_{i})(y_{i} - \hat{\mu}_{1})^{2}}
+{\sum^{N}_{i=1}(1-\hat{\gamma}_{i})}$ \\ \ \\ \hspace{1cm}
+$\hat{\mu}_{2} = \frac{\sum^{N}_{i=1}\hat{\gamma}_{i}y_{i}}
+{\sum^{N}_{i=1} \hat{\gamma}_{i}}$, $\hat{\sigma}^{2}_{2} =
+\frac{\sum^{N}_{i=1}\hat{\gamma}_{i}(y_{i} - \hat{\mu}_{2})^{2}}
+{\sum^{N}_{i=1} \hat{\gamma}_{i}}$ \\ \ \\ \hspace{0.35cm} and the mixing
+probability $\hat{\pi} = \sum^{N}_{i = 1}
+\frac{\hat{\gamma}}{N}$ \\ \ \\ 4. Iterate steps two and three until convergence
+\\ \hline \end{tabular} \end{center} \end{table}
+
+\section*{Implementation}
+
+<<label=run-em>>=
+y  = np.hstack((y1,y2))
+numIters = 20
+numRuns = 20
+verbose = True
+makePlots = True
+tcg = TwoComponentGaussian(y, numIters, numRuns,verbose=verbose)
+print 'maxLike', tcg.maxLike
+print 'bestEstimates'
+for key, item in tcg.bestEst.iteritems():
+	print key, item
+@
+
+<<label=make-plot>>=
+n, bins, patches = plt.hist(y,15,normed=1,facecolor='gray',alpha=0.75)                                                                                                              
+mu1 = 4.62
+mu2 = 1.06
+sig1 = 0.87
+sig2 = 0.77
+
+## book results
+p1 = mlab.normpdf( bins, mu1, np.sqrt(sig1))
+p2 = mlab.normpdf( bins, mu2, np.sqrt(sig2))
+l1 = plt.plot(bins, p1, 'r--', linewidth=1)
+l2 = plt.plot(bins, p2, 'r--', linewidth=1)
+
+## add a 'best fit' line
+p3 = mlab.normpdf( bins, tcg.bestEst['mu1'], np.sqrt(tcg.bestEst['sig1']))
+p4 = mlab.normpdf( bins, tcg.bestEst['mu2'], np.sqrt(tcg.bestEst['sig2']))
+l3 = plt.plot(bins, p3, 'k-', linewidth=1)
+l4 = plt.plot(bins, p4, 'k-', linewidth=1)
+
+plt.xlabel('y')
+plt.ylabel('freq')
+plt.ylim([0,0.8])
+plt.legend( (l1[0], l3[0]), ('Book Estimate', 'My Estimate') )
+plt.savefig('TwoComponentHisto.pdf')
+@
+
+\begin{figure}
+\begin{center}
+\includegraphics[ext=.pdf,scale = 0.9]{"TwoComponentHisto"}
+\end{center}
+\caption{This is the figure caption}
+\end{figure}
+
+\bibliographystyle{plain}
+\bibliography{lpEdit.bib}
+\end{document}
