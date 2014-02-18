@@ -1,0 +1,46 @@
+All prereqs must be installed
+
+* qscintilla2 
+* qt4 
+* numpy
+* matplotlib
+* sphinx
+
+
+Binary versions
+
+(1) have to have dll files available
+    http://www.microsoft.com/en-us/download/details.aspx?id=29
+    or install visual studio
+
+    copy the dlls from 
+    C:\Program Files\Microsoft Visual Studio 9.0\VC\redist\x86\Microsoft.VC90.CRT\*.*'
+    into the base dir.
+
+(2) compile the program to binary
+    C:\Python27\python.exe setup.py py2exe 
+
+(*) copy lpedit/lpedit/* to lpedit/dist/lpedit/
+
+(3) create a installer
+
+    startup Inno Setup
+       click on the wizard (if no .iss file exists)
+       set the exe to be dist\lpEditStart
+       add the folder dist\*
+       check that the version is correct
+    open the *.iss file
+    compile
+    under settings make sure it is installed as root
+    test the setup file (may have to install to Desktop)
+
+Distributables
+
+For help.
+http://docs.python.org/distutils/builtdist.html
+
+To create an msi installer
+C:\Python27\python.exe setup.py bdist_msi 
+
+To create an executable installer
+C:\Python27\python.exe setup.py bdist_wininst

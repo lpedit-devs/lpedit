@@ -31,18 +31,17 @@ Installation from source requires
   * sphinx
 """
 
-def get_files(dirPath):
-    notIncluded = ["\.pyc"]
-    allFiles = []
-    for fileName in os.listdir(dirPath):
-        include = True
-        for pat in notIncluded:
-            if re.search(pat,fileName):
-                include = False
-        if include == True:
-            allFiles.append(os.path.join(dirPath,fileName))
-    return allFiles
-
+#def get_files(dirPath):
+#    notIncluded = ["\.pyc","\~?"]
+#    allFiles = []
+#    for fileName in os.listdir(dirPath):
+#        include = True
+#        for pat in notIncluded:
+#            if re.search(pat,fileName):
+#                include = False
+#        if include == True and not os.path.isdir(os.path.join(dirPath,fileName)):
+#            allFiles.append(os.path.join(dirPath,fileName))
+#    return allFiles
 
 REQUIRES = ['numpy', 'matplotlib','PyQt4','QSciEditor','sphinx']
 DISTNAME = 'lpedit'
@@ -60,17 +59,12 @@ CLASSIFIERS = [
     'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)'
 ]
 
-FILES = ["lpedit/icons/*",
+FILES = ["lpedit/*",
+         "lpedit/icons/*",
          "lpedit/styfiles/*",
          "lpedit/sphinxfiles/*",
          "lpedit/examples/*",
          "lpedit/templates/*"]
-
-#data_files = [('icons',get_files(os.path.join('lpedit','icons'))),
-#              ('styfiles',get_files(os.path.join('lpedit','styfiles'))),
-#              ('sphinxfiles',get_files(os.path.join('lpedit','sphinxfiles'))),
-#              ('examples',get_files(os.path.join('lpedit','examples'))),
-#              ('templates',get_files(os.path.join('lpedit','templates')))],
 
 ISRELEASED = True
 VERSION = __version__
@@ -88,20 +82,24 @@ if __name__ == '__main__':
           url=URL,
           packages=['lpedit','lpedit.icons','lpedit.templates',
                     'lpedit.examples','lpedit.styfiles','lpedit.sphinxfiles'],
-          options={
-            "py2exe":{
-                "unbuffered": True,
-                "includes":["sip"],
-                "optimize": 2,}},
-          #windows=[{"script":"lpEditStart.py"}],
+          scripts=["lpeditStart.py"],
+          windows=[{"script":"lpEditStart.py"}],
           long_description=LONG_DESCRIPTION,
           classifiers=CLASSIFIERS,
+          options={"py2exe": {"skip_archive": True, "includes": ["sip"]}},
+          
+          #console=["lpEditStart.py"],
+          #options={
+          #  "py2exe":{
+          #      "unbuffered": True,
+          #      "includes":["sip"],
+          #      "optimize": 2,}},
+          #
           package_data = {'package' : FILES},
-          #package_data={'icons': ['ta/*']},
-
-          data_files = [('icons',get_files(os.path.join('lpedit','icons'))),
-                        ('styfiles',get_files(os.path.join('lpedit','styfiles'))),
-                        ('sphinxfiles',get_files(os.path.join('lpedit','sphinxfiles'))),
-                        ('examples',get_files(os.path.join('lpedit','examples'))),
-                        ('templates',get_files(os.path.join('lpedit','templates')))],
+          #data_files = [
+          #  ('icons',get_files(os.path.join('lpedit','icons'))),
+          #  ('styfiles',get_files(os.path.join('lpedit','styfiles'))),
+          #  ('sphinxfiles',get_files(os.path.join('lpedit','sphinxfiles'))),
+          #  ('examples',get_files(os.path.join('lpedit','examples'))),
+          #  ('templates',get_files(os.path.join('lpedit','templates')))],
           platforms='any')
