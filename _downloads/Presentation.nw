@@ -1,0 +1,160 @@
+%A beamer presentation template
+\documentclass[xcolor=dvipsnames]{beamer}
+\usepackage{beamerthemesplit}
+\usepackage{bm,amsmath,hyperref,color}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.50}
+\hypersetup{colorlinks=true,linkcolor=darkblue,citecolor=darkblue,urlcolor=darkblue}
+\hypersetup{pdfauthor={Author Name}, pdftitle={PDF TITLE}}
+
+%% set beamer theme and color
+\usetheme{Frankfurt}
+\usecolortheme{dolphin}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+%% beamer packages
+% other themes: AnnArbor, Antibes, Bergen, Berkeley, Berlin, Boadilla, boxes, 
+% CambridgeUS, Darmstadt, Dresden, Frankfurt, Goettingen, Hannover, Ilmenau,
+%JuanLesPins, Luebeck, Madrid, Malmoe, Marburg, Montpellier, PaloAlto,
+%Pittsburgh, Rochester, Singapore, Szeged, Warsaw
+% other colors: albatross, beaver, crane, default, dolphin, dove, fly, lily, 
+%orchid, rose, seagull, seahorse, sidebartab, structure, whale, wolverine,
+%beetle
+
+\title[Reproducible Research]{A Reproducible Presentation}
+\author[Name]{Author Name}
+\institute{An Institute}
+\date[\today]{Last updated: \today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\frame{\titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\footnotesize
+\tableofcontents
+\normalsize
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Reproducible research}
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Why are scientific studies so difficult to reproduce?}
+\begin{itemize}
+ \item Publication/Experimental bias
+ \item Rewards for `positive results'
+ \item Programming errors or data manipulation mistakes
+ \item Poorly selected statistical tests
+ \item Multiple testing, multiple looks at the data, multiple statistical analyses
+ \item Lack of easy-to-use tools
+ \end{itemize}
+}
+
+\frame{
+\frametitle{Reproducible Research}
+\begin{block}{Reproducible research consists two main components:}
+\begin{enumerate}
+\item Reproducible experiment
+\item Reproducible analysis
+\end{enumerate}
+\end{block}
+
+\begin{center}
+Lab/Experiment
+\footnotesize
+\begin{tabular}{l|c|c}
+\hline
+ Data Sharing  & Instruments, samples, buffers    & Supplemental Methods\\
+ Audit Trail   & Version control and backup       & Git, Mercurial and SVN\\
+ Documentation & All details required to reproduce& Electronic lab notebook
+\end{tabular}
+\normalsize
+\end{center}
+
+\begin{center}
+Data Analysis
+\footnotesize
+\begin{tabular}{l|c|c}
+\hline
+ Data Sharing  & raw, standards                   &public repositories, URL\\
+ Audit Trail   & Version control and backup       &Git, Mercurial and SVN\\
+ Documentation & All details required to reproduce&Literate Programming
+ \end{tabular}
+\normalsize
+\end{center}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analyis}
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{About lpEdit}
+lpEdit has two parts:
+\begin{enumerate}
+ \item An editor built specifically for literate programming. 
+ \item A webpage that contains the editor documentation, examples and acts a 
+general resource for reproducible research 
+ \end{enumerate}
+ 
+ lpEdit is
+ \begin{enumerate}
+  \item cross-platform
+  \item open source and freely available
+  \item \textbf{Easy to use}
+  \item based on QScintilla and written using PyQt4
+  \item working with both R and Python languages
+ \end{enumerate}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{syntax based on noweb}
+\begin{block}{}
+<<label=chunk1>>=
+import lpEdit
+print "lpEdit version: %s"%lpEdit.__version__
+print "Hello Python"
+@
+\end{block}
+
+In order to get code working in beamer the slide must use:
+\begin{verbatim}
+\begin{frame}[fragile]
+  <<code-block>>=
+  print 'hello'
+  @
+\end{verbatim}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+\subsection{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+ \frametitle{In the future...}
+ \begin{columns}
+ \begin{column}{5cm}
+ There are a number of things that need to be done.
+ \end{column}
+ \begin{column}{5cm}
+ \begin{itemize}
+  \item languages
+  \item examples
+  \item customizations
+  \item code folding, inline spellcheck
+ \end{itemize}
+ \end{column}
+ \end{columns}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
