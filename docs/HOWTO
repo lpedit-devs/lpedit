@@ -1,0 +1,28 @@
+This documents how to setup a Sphinx website.  These instructions are taken from the Sphinx site
+
+    http://sphinx.pocoo.org
+
+
+(1) Install Sphinx (this assumes a working version of Python is installed on your machine)
+  Under Ubuntu.
+
+    ~$ sudo apt-install python-sphinx
+
+  Under OSX and Windows.
+  Go to the Python Package index download and install 
+
+    http://pypi.python.org/pypi/Sphinx
+
+(2) Create a Sphinx project
+     
+    ~$ mkdir www
+    ~$ sphinx-quickstart
+ 
+(3) Make and view the default page
+
+    ~$ make html
+    ~$ firefox ./_build/html/index.html
+
+Then to add sphinx extension for ipython, numpy and matplotlib follow the directions here
+
+http://matplotlib.sourceforge.net/sampledoc/extensions.html

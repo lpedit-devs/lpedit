@@ -1,0 +1,373 @@
+.. a simple linear regression example 
+
+Bayesian Linear Regression
+===========================
+
+The model
+---------------------
+
+Some of this infomation and notation is borrowed from Chapter 3 of C.M. Bishops *Pattern Recognition and Machine Learning* book [Bishop06]_.  
+Lets assume that the target variable :math:`t` is a deterministic function with additive Gaussian noise.
+
+   .. math::
+      t_n = y(\mathbf{x},\mathbf{w}) + \epsilon
+
+where
+
+   .. math::
+  
+      y(\mathbf{x},\mathbf{w}) &= w_{0} + w_{1}x_{1} + \ldots + w_{D}x_{D}\\
+                               &= \sum^{M-1}_{j=1} w_{j} \phi(\mathbf{x})\\
+                               &= \mathbf{w}^{T} \bm{\phi}(\mathbf{x})
+
+The error term :math:`\epsilon` is a zero mean Gaussian random variable with precision :math:`\beta`.
+By using a basis function, :math:`\phi_{n}(\mathbf{x})` we may use non-linear transformations on the data,however, the model is still linear with respect to the weight vector :math:`w`.  For convenience we define :math:`\phi_{0}(\mathbf{x}) = 1`.  
+
+The other basis functions may be nonlinear functions like the sigmoidal function of logistic sigmoid function.  We can write the `likelihood <http://en.wikipedia.org/wiki/Likelihood_function>`_ as
+
+   .. math::
+
+      p(\mathbf{t}|\mathbf{X},\mathbf{w},\bm{\beta}) &= 
+      \prod^{N}_{n=1} \mathcal{N}(t_{n}|\mathbf{w}^{T}\phi(\mathbf{x}_{n}),\beta^{-1}) 
+
+
+We formally define the model as:
+
+   .. math::
+
+      \mathbf{w}_{0} &\sim \mathcal{N}(0,1e-04)\\
+      \mathbf{w}_{1} &\sim \mathcal{N}(0,1e-04)\\
+      \beta &\sim \textrm{Gamma}(0.001,0.001)\\
+      t &\sim \mathcal{N}(\bm{\mu},\beta^{-1})
+
+.. INCLUDE LinRegPlateDiagram.png
+
+Given the model we can visualize the joint distribution using a plate diagram for this Bayesian linear regression model.
+
+.. figure:: LinRegPlateDiagram.png
+   :scale: 25%
+   :align: center
+   :figclass: align-center 
+
+ 
+Here is a summary of te parameters and variables
+
+   +---------------------------------+------------------------------------------------------------------------------------+ 
+   | Parameter/Variable              | Description                                                                        | 
+   +=================================+====================================================================================+
+   | :math:`w_{0}`                   | *bias parameter* allows for any fixed offset in the data                           |
+   +---------------------------------+------------------------------------------------------------------------------------+
+   | :math:`w_{1} \ldots w_{M-1}`    | regression coefficients                                                            | 
+   +---------------------------------+------------------------------------------------------------------------------------+
+   | :math:`\mathbf{t}`              | :math:`t_{1},\ldots,t_{N}` - target variables                                      | 
+   +---------------------------------+------------------------------------------------------------------------------------+
+   | :math:`\mathbf{X}`              | :math:`\{ \mathbf{x}_{1} \ldots \mathbf{x}_{N} \}` - explanatory variables         | 
+   +---------------------------------+------------------------------------------------------------------------------------+
+   | :math:`\phi_{n}(\mathbf{x}_{n})`| basis functions                                                                    |
+   +---------------------------------+------------------------------------------------------------------------------------+
+   | :math:`\beta`                   | precision parameter over :math:`\mathbf{t}`                                        | 
+   +---------------------------------+------------------------------------------------------------------------------------+
+   | :math:`\mu`                     | :math:`\mathbf{w}^{T}\phi(\mathbf{x}_{n})` mean parameter over :math:`\mathbf{t}`  | 
+   +---------------------------------+------------------------------------------------------------------------------------+
+
+
+Generate data from a simple model
+-----------------------------------
+
+If for the moment we ignore the basis functions we can write the familiar form of linear regression as
+
+   .. math::
+
+      t_{n} &= w_{0} + w_{n} \mathbf{x}_{n} + \epsilon_{n}\\ 
+      \epsilon_{n} &\sim \mathcal{N}(0,\beta^{-1})
+ 
+
+Lets generate data from :math:`f(x,\mathbf{a}) = a_{0} + a_{1}x` where :math:`x \sim U(-1,1)`.  
+We assume the noise known so we set the precision  :math:`\beta = 1/(0.2)^2 = 25`.
+
+.. code-block:: python
+
+  <<draw-samples>>=
+  import numpy as np
+  np.random.seed(101)
+  
+  def draw_samples(n):
+      a0,a1 = -0.3,0.5
+      trueX =  np.random.uniform(-1,1,n)
+      trueT = a0 + (a1*trueX)    
+      return trueX, trueT + np.random.normal(0,0.2,n)
+  
+  N = 12
+  x,t = draw_samples(N)
+  print 'x = %s'%[round(_x,2) for _x in x]
+  print 't = %s'%[round(_t,2) for _t in t]
+  
+
+.. code-block:: python
+
+  x = [0.03, 0.14, -0.94, -0.66, 0.37, 0.67, -0.39, 0.79, 0.44, -0.62, 0.11, -0.3]
+  t = [-0.18, -0.35, -0.73, -0.78, -0.3, 0.22, -0.45, 0.49, 0.44, -0.47, -0.19, -0.11]
+  
+ 
+
+
+We will be using JAGS [Plummer03]_ to implement this model so we need to save the data to a file for later use.
+So we need to save the data the same way that thr `dump()` function does in R.
+
+.. code-block:: python
+
+  <<save-samples>>=
+  import re
+  fid = open('line-reg-simple-data.R','w')
+  fid.write('x <-\nc(%s)\n'%(','.join((str(_x) for _x in x))))
+  fid.write('t <-\nc(%s)\n'%(','.join((str(_t) for _t in t))))
+  fid.write('N <-\n%s\n'%(str(N)))
+  fid.close()
+  
+
+.. code-block:: python
+
+  
+ 
+
+
+Set up the rest of the files for JAGS
+---------------------------------------
+
+.. INCLUDE line-reg-simple.bug,line-reg-simple.cmd
+
+Model file
+^^^^^^^^^^^^^
+
+We take the model defination provided in the previous section and put it into the BUGS language in the form of a file.  Here are the contents of that file.
+
+.. literalinclude:: line-reg-simple.bug 
+   :linenos:
+   :language: r
+
+Download: :download:`line-reg-simple.bug<line-reg-simple.bug>`
+
+Init files
+^^^^^^^^^^^^^
+We are going to run two MCMC chains so we need to initialize two files with initial values.
+
+.. code-block:: python
+
+  <<save-init-files>>=
+  for fileName in ['line-reg-simple-inits-1.R','line-reg-simple-inits-2.R']:
+      fid = open(fileName,'w')
+      fid.write('w0 <- %s\n'%(str(np.random.uniform(0.001,1.0))))
+      fid.write('w1 <- %s\n'%(str(np.random.uniform(0.001,1.0))))
+      fid.write('beta <- %s\n'%(str(np.random.uniform(0.001,1.0))))
+      fid.close()
+  
+
+.. code-block:: python
+
+  
+ 
+
+
+Commands file
+^^^^^^^^^^^^^^^^
+
+Finally, the file specifing to JAGS which files to use and how to run the model.
+
+.. literalinclude:: line-reg-simple.cmd
+   :linenos:
+   :language: r
+
+Download: :download:`line-reg-simple.cmd<line-reg-simple.cmd>`
+
+Run the Model
+----------------
+
+.. code-block:: python
+
+  <<run-jags>>=
+  import subprocess,time
+  cmd = 'jags line-reg-simple.cmd'
+  
+  process = subprocess.Popen(cmd,shell=True,stderr=subprocess.PIPE,
+                             stdout=subprocess.PIPE)
+  time.sleep(3)
+  stdOut, stdErr = process.communicate()
+  print 'STDOUT\n',stdOut
+  print 'STDERR\n',stdErr
+  
+
+.. code-block:: python
+
+  STDOUT
+  Welcome to JAGS 3.2.0 on Tue Jun 18 11:47:55 2013
+  JAGS is free software and comes with ABSOLUTELY NO WARRANTY
+  Loading module: basemod: ok
+  Loading module: bugs: ok
+  Reading data file line-reg-simple-data.R
+  Compiling model graph
+     Resolving undeclared variables
+     Allocating nodes
+     Graph Size: 72
+  Reading parameter file line-reg-simple-inits-1.R
+  Reading parameter file line-reg-simple-inits-2.R
+  Initializing model
+  Updating 1000
+  Updating 20000
+  
+  STDERR
+  
+  
+ 
+
+
+Plot the chains
+---------------------
+
+.. INCLUDE PlottingLib.py
+
+Make a plot of the MCMC chains showing the monitored variables
+
+.. code-block:: python
+
+  <<make-mcmc-plots>>=
+  import os
+  from PlottingLib import *
+  os.rename('CODAchain1.txt', 'line-reg-simple-coda1.txt')
+  os.rename('CODAchain2.txt', 'line-reg-simple-coda2.txt')
+  os.rename('CODAindex.txt', 'line-reg-simple-index.txt')
+  chainIdx = read_chain_index('line-reg-simple-index.txt')
+  chain1 = read_chain_file('line-reg-simple-coda1.txt')
+  chain2 = read_chain_file(line-reg-simple-coda2.txt)
+  make_plots(chainIdx,chain1,chain2,figName='line-reg-simple-mcmc.png')
+  estimates = get_estimates(chainIdx,chain1,chain2)
+  
+
+.. code-block:: python
+
+  showing chain, parameter, mean, std...
+  
+ 
+
+
+
+As a reminder the values used to simulate the data were: :math:`\beta = 25, \sigma = 0.2, w_{0} = -0.3, w_{1} = 0.5`.
+
+.. figure:: line-reg-simple-mcmc.png
+   :scale: 25%
+   :align: center
+   :figclass: align-center 
+
+
+Plot the lines
+-----------------------
+
+.. code-block:: python
+
+  <<make-line-plot>>=
+  from scipy import polyval,polyfit
+  from RegressionLib import *
+  
+  # Get the fits
+  n = x.size
+  fit=polyval([0.5,-0.3],x)
+  fit1=polyval([estimates['w1'][0],estimates['w0'][0]],x)
+  fit1 += np.random.normal(0,estimates['sigma'][0])
+  mserror1 = np.sqrt(np.sum((fit1-t)**2)/n)
+  
+  print('Using Bayesian regression...')
+  print('parameters: w0=%.2f w1=%.2f \nregression: w0=%.2f w1=%.2f,std error= %.3f' % \
+       (-0.3,0.5,estimates['w0'][0],estimates['w1'][0],mserror1))
+  
+  fit2,coeffs2 = get_1D_linear_fit(x,t)
+  fit2 = fit2.flatten()
+  mserror2 = np.sqrt(np.sum((fit2-t)**2)/n)
+  
+  print('\nUsing least squares...')
+  print('parameters: w0=%.2f w1=%.2f \nregression: w0=%.2f w1=%.2f, ms error= %.3f' % \
+      (-0.3,0.5,coeffs2[0],coeffs2[1],mserror2))
+  
+  (ar,br)=polyfit(x,t,1)
+  fit3=polyval([ar,br],x)
+  mserror3 = np.sqrt(np.sum((fit3-t)**2)/n)
+  
+  print('\nUsing scipy.polyfit...')
+  print('parameters: w0=%.2f w1=%.2f \nregression: w0=%.2f w1=%.2f, ms error= %.3f' % \
+      (-0.3,0.5,br,ar,mserror3))
+  
+  # determine the credible interval
+  sampleSize = 5000
+  w0Pst = get_posterior_sample(chainIdx,chain1,chain2,'w0',sampleSize)
+  w1Pst = get_posterior_sample(chainIdx,chain1,chain2,'w1',sampleSize)
+  sigmaPst = get_posterior_sample(chainIdx,chain1,chain2,'sigma',sampleSize)
+  lower,upper = [],[]
+  xx = np.linspace(x.min(),x.max(),10)
+  for _xx in xx:
+      tt = (w0Pst + (w1Pst * _xx))
+      lower.append(np.percentile(tt, 2.5))
+      upper.append(np.percentile(tt, 97.5))
+  
+  # plot
+  fig = plt.figure()
+  ax1 = fig.add_subplot(121)
+  ax1.plot(x,t,'o')
+  p1 = ax1.plot(x,fit,color='#000000',linestyle=':',linewidth=2.0)
+  p2 = ax1.plot(x,fit1,'#FF5500',linestyle='-',linewidth=2.0)
+  p3 = ax1.plot(x,fit2,color='#0055FF',linestyle='-',linewidth=2.0)
+  
+  ax1.legend([p1[0],p2[0],p3[0]],['Original','Bayesian','Least Sqrs'], loc='upper left')
+  ax1.set_ylim([-1.2,1])
+  ax1.set_xlim([-1.2,1])
+  ax1.set_aspect(1./ax1.get_data_ratio())
+  
+  ax2 = fig.add_subplot(122,aspect='equal')
+  ax2.plot(x,t,'o')
+  p4 = ax2.plot(x,fit1,'#FF5500',linestyle='-',linewidth=2.0)
+  p5 = ax2.plot(xx,lower,'#FF5500',linestyle=':',linewidth=2.0)
+  p6 = ax2.plot(xx,upper,'#FF5500',linestyle=':',linewidth=2.0)
+  
+  ax2.legend([p4[0],p5[0]],['Bayesian','Cred. Inter.'], loc='upper left')
+  ax2.set_ylim([-1.2,1])
+  ax2.set_xlim([-1.2,1])
+  ax2.set_aspect(1./ax2.get_data_ratio())
+  fig.savefig('line-reg-simple-lines.png',dpi=200)
+  
+
+.. code-block:: python
+
+  Using Bayesian regression...
+  parameters: w0=-0.30 w1=0.50 
+  regression: w0=-0.20 w1=0.65,std error= 0.196
+  
+  Using least squares...
+  parameters: w0=-0.30 w1=0.50 
+  regression: w0=-0.18 w1=0.65, ms error= 0.195
+  
+  Using scipy.polyfit...
+  parameters: w0=-0.30 w1=0.50 
+  regression: w0=-0.18 w1=0.65, ms error= 0.195
+  
+ 
+
+
+.. figure:: line-reg-simple-lines.png
+   :scale: 45%
+   :align: center
+   :figclass: align-center 
+
+
+Note that unlike a frequentist confidence interval the credible interval can be interpreted probabilistically.  
+For example, we can say that given the data there is a 95% chance that the parameter falls within the shown interval. 
+
+The additional functions are in:
+
+   * :download:`PlottingLib.py`
+   * :download:`RegressionLib.py`
+
+
+Literature
+---------------
+
+.. [Bishop06] C. M. Bishop. *Pattern Recognition and Machine Learning*, 
+	Springer, August 2006.
+.. [Plummer03] M. Plummer. *JAGS: A Program for Analysis of Bayesian Graphical Models Using Gibbs Sampling*, 
+   Proceedings of the 3rd International Workshop on Distributed Statistical Computing, March 2003.

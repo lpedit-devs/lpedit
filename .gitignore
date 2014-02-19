@@ -31,6 +31,9 @@ lpedit/examples/_latex/
 lpedit/examples/_sphinx/
 lpedit/examples/index.rst
 
+## docs
+docs/_build/*
+docs/_static/*
 
 
 # C extensions
