@@ -5,10 +5,4 @@ lpEdit is a editor for literate programming in R and Python through the use of L
 
 See the documentation for instructions on installation.
 
-lpEdit may be started in a couple of ways:
-
-  1. from a terminal
-     ~$ python -c 'from lpedit import Main; Main()'
-     ~$ cd /<path to repo>/lpedit/ && python lpEditStart.py
-
-  2. from python
+After installation lpedit may simple be started from the terminal with the command 'lpEdit.py'.

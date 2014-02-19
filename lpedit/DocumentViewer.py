@@ -14,6 +14,11 @@ class DocumentViewer(QtGui.QWidget):
     def __init__(self, filePath, mainWindow=None):
         QtGui.QWidget.__init__(self)
 
+        ## variables
+        self.filePath = filePath
+        self.mainWindow = mainWindow
+        self.setWindowTitle(self.filePath)
+
         ## error checking
         if os.path.exists(filePath) == False:
             errMsg = "Cannot open document viewer: invalid file path"
@@ -22,12 +27,6 @@ class DocumentViewer(QtGui.QWidget):
             else:
                 print errMsg
             return
-
-        ## variables
-        self.filePath = filePath
-        self.mainWindow = mainWindow
-        self.setWindowTitle(self.filePath)
-
 
         ## create screen part
         self.allLines = []

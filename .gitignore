@@ -23,6 +23,15 @@ DS_Store
 _latex/*
 _sphinx/*
 
+## examples
+lpedit/examples/BasicPython.pdf
+lpedit/examples/BasicSweave.pdf
+lpedit/examples/Untitled.pdf
+lpedit/examples/_latex/
+lpedit/examples/_sphinx/
+lpedit/examples/index.rst
+
+
 
 # C extensions
 *.so

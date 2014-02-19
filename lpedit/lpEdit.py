@@ -8,7 +8,7 @@ A. Richards
 
 import sys, getopt, os, re
 from PyQt4 import QtGui
-from MainWindow import MainWindow
+from lpedit import MainWindow
 
 ## check for the debug flag
 try:

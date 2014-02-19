@@ -1,7 +1,6 @@
 import sys,os
 
 ## files requiring no other dep
-from Main import Main
 from version import __version__
 from basedir import __basedir__
 from SphinxLogger import SphinxLogger
@@ -15,3 +14,4 @@ from TextScreen import TextScreen
 from ButtonDock import ButtonDock
 from QSciEditor import QSciEditor
 from MainWindow import MainWindow
+from lpEdit import Main

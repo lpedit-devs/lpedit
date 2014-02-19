@@ -1,15 +1,18 @@
 #!/usr/bin/env python
                 
 import os,sys,re
+from distutils.sysconfig import get_python_lib
+from shutil import copytree
 
-from distutils.core import setup
+#from distutils.core import setup
+from numpy.distutils.core import setup
+
 try:
     from py2exe.build_exe import py2exe
 except:
     pass
 
-from numpy import get_include
-
+## get version
 sys.path.append("lpedit")
 from version import __version__
 
@@ -17,8 +20,9 @@ DESCRIPTION = "Cross-platform editor to facilitate literate programming"
 LONG_DESCRIPTION = """
 lpEdit is an application written in PyQt4 that and based on QScintilla.
 
-It implements a simple framework for writing Sweave documents.  The project
-will be extended to other literate programming paradigms in the near future.
+The environment enables a simple framework for writing reST or LaTeX documents that have  
+either R or Python code embedded within.  These documents are
+compilied and the code and results are integrated into the output document in a reproducible manner.
 
 Notes
 -----
@@ -31,17 +35,19 @@ Installation from source requires
   * sphinx
 """
 
-#def get_files(dirPath):
-#    notIncluded = ["\.pyc","\~?"]
-#    allFiles = []
-#    for fileName in os.listdir(dirPath):
-#        include = True
-#        for pat in notIncluded:
-#            if re.search(pat,fileName):
-#                include = False
-#        if include == True and not os.path.isdir(os.path.join(dirPath,fileName)):
-#            allFiles.append(os.path.join(dirPath,fileName))
-#    return allFiles
+def get_files(dirPath):
+    notIncluded = ["\.pyc"]
+    allFiles = []
+    for fileName in os.listdir(dirPath):
+        include = True
+        for pat in notIncluded:
+            if re.search(pat,fileName):
+                include = False
+        filePath = os.path.join(dirPath,fileName)
+        if include == True and os.path.isfile(filePath):
+            allFiles.append(os.path.realpath(filePath))
+            
+    return allFiles
 
 REQUIRES = ['numpy', 'matplotlib','PyQt4','QSciEditor','sphinx']
 DISTNAME = 'lpedit'
@@ -59,12 +65,14 @@ CLASSIFIERS = [
     'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)'
 ]
 
-FILES = ["lpedit/*",
-         "lpedit/icons/*",
-         "lpedit/styfiles/*",
-         "lpedit/sphinxfiles/*",
-         "lpedit/examples/*",
-         "lpedit/templates/*"]
+DATADIRS = ["icons","styfiles","sphinxfiles","examples","templates"]
+
+FILES = {'': [os.path.join("lpedit","*.py")],
+         'icons': [os.path.join("lpedit","icons","*.png")],
+         'styfiles': [os.path.join("lpedit","styfiles","*.sty")],
+         'sphinxfiles': [os.path.join("lpedit","sphinxfiles","*.py *.rst")],
+         'examples': [os.path.join("lpedit","examples","*.rnw *.nw *.rst")],
+         'templates':[os.path.join("lpedit","templates","*.rnw *.nw *.rst")]}
 
 ISRELEASED = True
 VERSION = __version__
@@ -80,26 +88,18 @@ if __name__ == '__main__':
           version=FULLVERSION,
           license=LICENSE,
           url=URL,
-          packages=['lpedit','lpedit.icons','lpedit.templates',
-                    'lpedit.examples','lpedit.styfiles','lpedit.sphinxfiles'],
-          scripts=["lpeditStart.py"],
-          windows=[{"script":"lpEditStart.py"}],
+          packages=['lpedit'],
+          scripts=[os.path.join("lpedit","lpEdit.py")],
+          windows=[{"script":os.path.join("lpedit","lpEdit.py")}],
           long_description=LONG_DESCRIPTION,
           classifiers=CLASSIFIERS,
           options={"py2exe": {"skip_archive": True, "includes": ["sip"]}},
-          
-          #console=["lpEditStart.py"],
-          #options={
-          #  "py2exe":{
-          #      "unbuffered": True,
-          #      "includes":["sip"],
-          #      "optimize": 2,}},
-          #
-          package_data = {'package' : FILES},
-          #data_files = [
-          #  ('icons',get_files(os.path.join('lpedit','icons'))),
-          #  ('styfiles',get_files(os.path.join('lpedit','styfiles'))),
-          #  ('sphinxfiles',get_files(os.path.join('lpedit','sphinxfiles'))),
-          #  ('examples',get_files(os.path.join('lpedit','examples'))),
-          #  ('templates',get_files(os.path.join('lpedit','templates')))],
+          package_data= FILES,
+         
+          data_files = [
+            (os.path.join('lpedit','icons'),get_files(os.path.join('lpedit','icons'))),
+            (os.path.join('lpedit','styfiles'),get_files(os.path.join('lpedit','styfiles'))),
+            (os.path.join('lpedit','sphinxfiles'),get_files(os.path.join('lpedit','sphinxfiles'))),
+            (os.path.join('lpedit','examples'),get_files(os.path.join('lpedit','examples'))),
+            (os.path.join('lpedit','templates'),get_files(os.path.join('lpedit','templates')))],
           platforms='any')
