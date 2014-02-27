@@ -11,7 +11,7 @@ Reproducibility in research can be divided into experimental and analytic compon
 This project is community-based and to learn more visit the :doc:`Contributors` page.
 
 Main Contents:
-__________________
+----------------
 
 .. toctree::
    :maxdepth: 1

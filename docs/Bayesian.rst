@@ -16,3 +16,11 @@ What can you do to prepare?
   4. Install :doc:`lpEdit` [optional]
 
 But this is not essential as there will be time to do this in the first class.
+
+Course Materials
+--------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   BayesianDay1
