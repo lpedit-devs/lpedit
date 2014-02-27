@@ -8,12 +8,12 @@ Python plot in a LaTeX document
 ________________________________
 
 
-This file is included as a template in :doc:`/lpEdit`.  The file runs only in the editor.
+This file is included as a template in :doc:`/lpedit`.  The file runs only in the editor.
 
-.. literalinclude:: /../lpEdit/templates/PlotsInPython.nw
+.. literalinclude:: /../lpedit/templates/PlotsInPython.nw
    :language: latex
 
-Download: :download:`PlotsInPython.nw  </../lpEdit/templates/PlotsInPython.nw>`
+Download: :download:`PlotsInPython.nw  </../lpedit/templates/PlotsInPython.nw>`
 
 Output
 ______

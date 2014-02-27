@@ -13,10 +13,10 @@ See the :doc:`/Sweave` page for more information. This file is
 included as a template in :doc:`/lpEdit`.
 
 
-.. literalinclude:: /../lpEdit/templates/PlotsInSweave.rnw
+.. literalinclude:: /../lpedit/templates/PlotsInSweave.rnw
    :language: latex
 
-Download: :download:`PlotsInSweave.rnw  </../lpEdit/templates/PlotsInSweave.rnw>`
+Download: :download:`PlotsInSweave.rnw  </../lpedit/templates/PlotsInSweave.rnw>`
 
 
 Output

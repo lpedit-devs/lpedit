@@ -11,10 +11,10 @@ __________________________________
 
 This file is included as a template in :doc:`/lpEdit`.  The file runs only in the editor.
 
-.. literalinclude:: /../lpEdit/templates/BasicPython.nw
+.. literalinclude:: /../lpedit/templates/BasicPython.nw
    :language: latex
 
-Download: :download:`BasicPython.nw  </../lpEdit/templates/BasicPython.nw>`
+Download: :download:`BasicPython.nw  </../lpedit/templates/BasicPython.nw>`
 
 Output
 ______

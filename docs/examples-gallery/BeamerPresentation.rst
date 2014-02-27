@@ -11,7 +11,7 @@ __________________________________
 
 This file is included as a template in :doc:`/lpEdit`.  The file runs only in the editor.
 
-.. literalinclude:: /../lpEdit/templates/Presentation.nw
+.. literalinclude:: /../lpedit/templates/Presentation.nw
    :language: latex
 
-Download: :download:`Presentation.nw  </../lpEdit/templates/Presentation.nw>`
+Download: :download:`Presentation.nw  </../lpedit/templates/Presentation.nw>`

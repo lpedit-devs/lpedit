@@ -29,6 +29,8 @@ class NewProject(QtGui.QWidget):
                 continue
             if re.search("\.DS",tname):
                 continue
+            if tname == ("__init__.py"):
+                continue
             templatesList.append(tname)
 
         ## arg variables
