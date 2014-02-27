@@ -14,4 +14,4 @@ from TextScreen import TextScreen
 from ButtonDock import ButtonDock
 from QSciEditor import QSciEditor
 from MainWindow import MainWindow
-from lpEdit import Main
+#from lpEdit import lpEdit

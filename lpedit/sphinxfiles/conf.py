@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was auto-generated using lpEdit
 import sys, os, time, ast
-from lpEdit import SphinxLogger
+from lpedit import SphinxLogger
 
 currentFilePath = os.path.realpath(__file__)
 logFilePath = os.path.join(os.path.split(currentFilePath)[0],'sphinx.log')

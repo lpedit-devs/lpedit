@@ -31,7 +31,7 @@ if filePath != None and os.path.exists(filePath) != True:
     print "ERROR: invalid input file path starting with no input file"
     filePath = None
 
-class Main():
+class lpEdit():
     def __init__(self):
         app = QtGui.QApplication(sys.argv)
         app.setApplicationName("lpEdit")
@@ -42,4 +42,4 @@ class Main():
         app.exec_()
 
 if __name__ == '__main__':
-    main = Main()
+    lpEdit = lpEdit()

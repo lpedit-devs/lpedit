@@ -34,7 +34,7 @@ lpedit/examples/index.rst
 ## docs
 docs/_build/*
 docs/_static/*
-
+docs/_sphinx/*
 
 # C extensions
 *.so
