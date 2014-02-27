@@ -7,30 +7,21 @@ lpEdit
 About lpEdit
 ============
 
-lpEdit is a software editor created for biologists and other
-researchers in order to help document analyses---the aim being to
-ultimately make analyses more reproducible.  From simple statistical tests to
-complicated pipelines involving many gigabytes of data, this tool offers a
-unified way to document analyses in a transparent way. 
+.. INCLUDE ./images/lpEdit-screenshot1.png, ./images/lpEdit-screenshot2.png
 
-There are many tools available that encompass the ideas of
-:doc:`Literate Programming <LiterateProgramming>`.  However, the
-challenge of getting the majority of researchers to adopt these
-practices still remains.  This editor offers a simple means to mix
-code and prose in order to produce reports, presentations and
-webpages.
+lpEdit is a software editor created for biologists and other researchers in order to help document analyses---the aim being to ultimately make analyses more reproducible.  From simple statistical tests to complicated pipelines involving many gigabytes of data, this tool offers a unified way to document analyses in a transparent way. 
+
+There are many tools available that encompass the ideas of :doc:`Literate Programming <LiterateProgramming>`.  However, the challenge of getting the majority of researchers to adopt these practices still remains.  This editor offers a simple means to mix code and prose in order to produce reports, presentations and webpages.
 
 Here are some screenshots from lpEdit.
 
-.. figure:: ./images/lpEdit-screenshot1.png
+.. figure:: lpEdit-screenshot1.png
    :scale: 20%
    :align: center
    :alt: lpEdit screenshot 1
    :figclass: align-center
 
-
-
-.. figure:: ./images/lpEdit-screenshot2.png
+.. figure:: lpEdit-screenshot2.png
    :scale: 20%
    :align: center
    :alt: lpEdit screenshot 2

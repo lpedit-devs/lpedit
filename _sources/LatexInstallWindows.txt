@@ -28,7 +28,7 @@ package interface to install the following packages:
   8. upquote
   9. mptopdf.
 
-These packages are required to run the examples in the :doc:`/Tutorial`.
+These are the most commonly used packages.
 
 Resources
 _________

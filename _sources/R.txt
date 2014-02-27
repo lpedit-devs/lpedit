@@ -7,13 +7,9 @@ R
 About R
 =======
 
-The `R <http://www.r-project.org>`_ computing environment is the
-*Lingua franca* for the statistics community.  R is already adapted to
-reproducible research, most commonly through the use of :doc:`Sweave`
-and the R community is actively addressing the problem of
-`reprodubibility <http://en.wikipedia.org/wiki/Reproducibility>`_ as
-evidenced by the `number of packages in CRAN
-<cran.r-project.org/web/views/ReproducibleResearch.html>`_.
+The `R <http://www.r-project.org>`_ computing environment is the *Lingua franca* for the statistics community.  R is already adapted to
+reproducible research, most commonly through the use of :doc:`Sweave` and the R community is actively addressing the problem of
+`reprodubibility <http://en.wikipedia.org/wiki/Reproducibility>`_ as evidenced by the number of `reproducible research packages in CRAN <cran.r-project.org/web/views/ReproducibleResearch.html>`_.
 
 Installation
 ============

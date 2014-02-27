@@ -1,4 +1,5 @@
-.. reproducible research tutorial file, created by ARichards
+.. sweave
+
 
 ======
 Sweave
@@ -8,16 +9,12 @@ Sweave
 What is Sweave
 ______________
 
-`Sweave <http://www.statistik.lmu.de/~leisch/Sweave>`_ is a tool that
-enables users to embed `R <http://www.r-project.org>`_ code into
-reports.  It is a powerful tool for :doc:`LiterateProgramming` that is
-the focus of this web-resource, however there are
+`Sweave <http://www.statistik.lmu.de/~leisch/Sweave>`_ is a tool that enables users to embed `R <http://www.r-project.org>`_ code into
+reports.  It is a powerful tool for :doc:`LiterateProgramming` that is the focus of this web-resource, however there are
 :ref:`sweave-alternatives` for the R statistical environment.
 
-Before getting started with Sweave there are a few essentials that you
-must be familar with.  If you have not yet visited any of the
-following pages then we strongly encourage you do so before
-proceeding.
+Before getting started with Sweave there are a few essentials that you must be familar with.  If you have not yet visited any of the
+following pages then we strongly encourage you do so before proceeding.
 
 .. toctree::
    :maxdepth: 1
@@ -50,10 +47,10 @@ Open an :doc:`editor <Editor>` and save the following as
 FishersExactTest.Rnw otherwise use the download link below.
 
 
-.. literalinclude:: /../lpedit/examples/FishersExactTest.Rnw
+.. literalinclude:: /../../lpedit/examples/FishersExactTest.Rnw
    :language: latex
 
-Download: :download:`FishersExactTest.Rnw  </../lpedit/examples/FishersExactTest.Rnw>`
+Download: :download:`FishersExactTest.Rnw </../../lpedit/examples/FishersExactTest.Rnw>`
 
 Now visit the following to get more familar with the example that you just ran.
 

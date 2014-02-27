@@ -1,35 +1,28 @@
 .. reproducible research tutorial file, created by ARichards
+.. INCLUDE ./tutorials/LatexInstallWindows.rst
+.. INCLUDE ./tutorials/LatexInstallOSX.rst
+.. INCLUDE ./tutorials/LatexInstallLinux.rst
+.. INCLUDE example-latex.pdf
 
-=====
+
 LaTeX
 =====
 
-About LaTeX
-===========
-
-:math:`\textrm{\LaTeX}` is a typesetting language.  Reports, articles,
-journal articles, dissertations, presentations and books are commonly
-written in :math:`\textrm{\LaTeX}`.  As a scientist
-:math:`\textrm{\LaTeX}` is the standard for carrying out research in a
-reproducible way.  Word processors tend to use binary format, which
-inhibit the use of technologies that help with :doc:`auditing
-<AuditTrail>`.  Moreover, word processors have compatibility issues
-between versions and between comparable programs.  Most, importantly,
-:math:`\textrm{\LaTeX}` is freely available and produces high quality
-attractive documents.
+:math:`\textrm{\LaTeX}` is a typesetting language.  Reports, articles, journal articles, dissertations, presentations and books are commonly written in :math:`\textrm{\LaTeX}`.  As a scientist :math:`\textrm{\LaTeX}` is the standard for carrying out research in a reproducible way.  Word processors tend to use binary format, which inhibit the use of technologies that help with :doc:`auditing <AuditTrail>`.  Moreover, word processors have compatibility issues between versions and between comparable programs.  Most, importantly, :math:`\textrm{\LaTeX}` is freely available and produces high quality attractive documents.
 
 Installation
-============
+-------------
 
 .. toctree::
     :maxdepth: 1
 
-    tutorials/LatexInstallWindows
-    tutorials/LatexInstallOSX
-    tutorials/LatexInstallLinux
+    LatexInstallWindows
+    LatexInstallOSX
+    LatexInstallLinux
 
 Example Document
-================
+-----------------
+
 An example document written in :math:`\textrm{\LaTeX}`.
 
     .. code-block:: tex
@@ -77,4 +70,3 @@ Resources
     * `Main LaTeX page <http://www.latex-project.org/>`_
     * `Help with LaTeX <http://www.latex-project.org/help.html>`_
     * `Getting started with LaTeX <http://www.maths.tcd.ie/~dwilkins/LaTeXPrimer>`_
-
