@@ -1,4 +1,4 @@
-.. reproducible-research Version Control file, created by ARichards
+.. reproducible-research latex install osx, created by ARichards
 
 =======================
 LaTeX Installation OS X

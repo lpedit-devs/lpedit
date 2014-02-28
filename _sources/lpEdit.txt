@@ -39,7 +39,10 @@ or for those who wish to install from source the following works on Debian-based
 
     ~$  sudo apt-get install python-qscintilla2 python-qt4 python-numpy python-matplotlib python-sphinx
     ~$  sudo apt-get install r-base
-    ~$  hg clone https://bitbucket.org/ajrichards/reproducible-research
-    ~$  cd reproducible-research
+    ~$  git clone https://github.com/lpedit-devs/lpedit.git
+    ~$  cd lpedit
     ~$  sudo python setup.py install
-    ~$  python lpEdit.py
+    ~$  python lpEditStart.py
+
+For Windows and OSX check the `lpedit releases <https://github.com/lpedit-devs/lpedit/releases>`_.
+

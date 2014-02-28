@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Search &mdash; lpEdit - 0.4.0</title>
+    <title>Learning R &mdash; lpEdit - 0.4.0</title>
     
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,15 +25,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <link rel="top" title="lpEdit - 0.4.0" href="index.html" />
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
-   
-
+    <link rel="up" title="Bayesian short course - day 1" href="BayesianDay1.html" />
+    <link rel="next" title="Plots in Sweave" href="SweavePlots.html" />
+    <link rel="prev" title="Sweave example walkthrough" href="SweaveExampleWalkthrough.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -44,6 +39,10 @@
         <div class="headertitle"><a
           href="index.html">lpEdit - 0.4.0</a></div>
         <div class="rel">
+          <a href="SweaveExampleWalkthrough.html" title="Sweave example walkthrough"
+             accesskey="P">previous</a> |
+          <a href="SweavePlots.html" title="Plots in Sweave"
+             accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -58,29 +57,45 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <h1 id="search-documentation">Search</h1>
-  <div id="fallback" class="admonition warning">
-  <script type="text/javascript">$('#fallback').hide();</script>
-  <p>
-    Please activate JavaScript to enable the search
-    functionality.
-  </p>
-  </div>
-  <p>
-    From here you can search these documents. Enter your search
-    words into the box below and click "search". Note that the search
-    function will automatically search for all of the words. Pages
-    containing fewer words won't appear in the result list.
-  </p>
-  <form action="" method="get">
-    <input type="text" name="q" value="" />
-    <input type="submit" value="search" />
-    <span id="search-progress" style="padding-left: 10px"></span>
-  </form>
-  
-  <div id="search-results">
-  
-  </div>
+  <div class="section" id="learning-r">
+<h1>Learning R<a class="headerlink" href="#learning-r" title="Permalink to this headline">¶</a></h1>
+<p>Learning R can be a career long endeavor.  The best advise is to use it every chance you get.  And do not be afraid to ask questions&#8211; R is a very common language and many people can help you.</p>
+<p>Useful resource:
+<a class="reference download internal" href="_downloads/RQuickReference.pdf"><tt class="xref download docutils literal"><span class="pre">RQuickReference.pdf</span></tt></a></p>
+<blockquote>
+<div><ul class="simple">
+<li>Exit R &#8211; Type &#8216;q()&#8217;</li>
+<li>Get help &#8211; ?mean or help(mean)</li>
+</ul>
+</div></blockquote>
+<p class="rubric">predefined-variables</p>
+<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>pi<span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python"><pre>[1] "..."
+[1] 3.141593</pre>
+</div>
+<p>Declaring variables.</p>
+<p class="rubric">other-varialbes</p>
+<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span><span class="s">&quot;I am a String&quot;</span><span class="p">)</span>
+a <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
+print<span class="p">(</span>a<span class="p">)</span>
+print<span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-python"><pre>[1] "..."
+[1] "I am a String"
+ [1]  1  2  3  4  5  6  7  8  9 10
+ [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</pre>
+</div>
+<ol class="arabic simple">
+<li>What does the command &#8216;seq&#8217; do?</li>
+<li>Wha about 1:10 + 5?</li>
+</ol>
+</div>
+
 
           </div>
         </div>
@@ -95,7 +110,7 @@
 </ul>
 
           <h3 style="margin-top: 1.5em;">Search</h3>
-          <form class="search" action="#" method="get">
+          <form class="search" action="search.html" method="get">
             <input type="text" name="q" />
             <input type="submit" value="Go" />
             <input type="hidden" name="check_keywords" value="yes" />
@@ -112,8 +127,15 @@
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
+          <a href="SweaveExampleWalkthrough.html" title="Sweave example walkthrough"
+             >previous</a> |
+          <a href="SweavePlots.html" title="Plots in Sweave"
+             >next</a> |
           <a href="genindex.html" title="General Index"
              >index</a>
+            <br/>
+            <a href="_sources/LearningR.txt"
+               rel="nofollow">Show Source</a>
         </div>
 
         <div class="right">

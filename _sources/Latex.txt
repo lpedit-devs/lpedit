@@ -1,7 +1,4 @@
 .. reproducible research tutorial file, created by ARichards
-.. INCLUDE ./tutorials/LatexInstallWindows.rst
-.. INCLUDE ./tutorials/LatexInstallOSX.rst
-.. INCLUDE ./tutorials/LatexInstallLinux.rst
 .. INCLUDE example-latex.pdf
 
 
@@ -57,7 +54,7 @@ To view the output of the above document as a PDF.
     
 
 LaTeX Editors
-=============
+^^^^^^^^^^^^^^^
 
     * `TeXnicCenter <http://www.texniccenter.org>`_
     * `Texmaker <http://www.xm1math.net/texmaker>`_
@@ -65,7 +62,7 @@ LaTeX Editors
     * `Wiki's comparison of TeX editors <http://en.wikipedia.org/wiki/Comparison_of_TeX_editors>`_
 
 Resources
-=========
+^^^^^^^^^^^^^^
 
     * `Main LaTeX page <http://www.latex-project.org/>`_
     * `Help with LaTeX <http://www.latex-project.org/help.html>`_

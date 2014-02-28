@@ -5,7 +5,7 @@ LaTeX Installation Windows
 ==========================
 
 Basic installation
-__________________
+----------------------
 
 On Windows in order to install LaTeX you will need the TeX
 distribution which comes as a bundle called `MiKTeX
@@ -31,7 +31,7 @@ package interface to install the following packages:
 These are the most commonly used packages.
 
 Resources
-_________
+---------------
 
   * `proTeX an alternative to MikiTeX <http://www.tug.org/protext>`_
   * `MiKTeX project page <http://miktex.org>`_ 
