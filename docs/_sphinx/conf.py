@@ -11,7 +11,7 @@ sl = SphinxLogger(logFilePath)
 ## these variables can be overwritten here or edited using lpEdit
 projectName = "lpEdit - %s"%__version__
 authors  = sl.log['authors']
-extensions = sl.log['extensions']
+extensions = ['sphinx.ext.pngmath','sphinx.ext.doctest','sphinx.ext.graphviz']
 version = sl.log['version']
 release = sl.log['release']
 htmlTitle = "lpEdit - %s"%__version__

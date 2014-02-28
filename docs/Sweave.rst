@@ -1,30 +1,18 @@
 .. sweave
 
 
-======
 Sweave
 ======
 
-
-What is Sweave
-______________
+What is Sweave?
+-----------------------
 
 `Sweave <http://www.statistik.lmu.de/~leisch/Sweave>`_ is a tool that enables users to embed `R <http://www.r-project.org>`_ code into
 reports.  It is a powerful tool for :doc:`LiterateProgramming` that is the focus of this web-resource, however there are
 :ref:`sweave-alternatives` for the R statistical environment.
 
-Before getting started with Sweave there are a few essentials that you must be familar with.  If you have not yet visited any of the
-following pages then we strongly encourage you do so before proceeding.
-
-.. toctree::
-   :maxdepth: 1
-
-   Latex
-   R
-   Editor
-
 Installing Sweave
-_________________
+-------------------
 
 The Sweave package is part of `R <http://www.r-project.org>`_.  If you
 do not already have R installed on your machine then visit the :doc:`R
@@ -36,7 +24,7 @@ Finally, before we get into the essentials of Sweave you will have be
 familiar with and have handy your :doc:`programming editor <Editor>`.
 
 A simple example
-________________
+--------------------
 
 Sometimes in programming it is easiest for learning to jump right in
 with and example then to go back through that exampled and try to
@@ -50,7 +38,7 @@ FishersExactTest.Rnw otherwise use the download link below.
 .. literalinclude:: /../../lpedit/examples/FishersExactTest.Rnw
    :language: latex
 
-Download: :download:`FishersExactTest.Rnw </../../lpedit/examples/FishersExactTest.Rnw>`
+
 
 Now visit the following to get more familar with the example that you just ran.
 
@@ -84,12 +72,12 @@ Sweave files look a lot like  :math:`\textrm{\LaTeX}` files.  Running the next f
         ~$ adobereader FishersExactTest.pdf
 
 Alternatively, we have created a tool (:doc:`lpEdit`) that uses Sweave
-syntax, but does not require the user to enter the command line.
+syntax, but does not require the user to enter the command line.  RStudio will also run Sweave documents.
 
 .. _sweave-alternatives:
 
 Alternatives to Sweave
-______________________
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * `decumar <https://github.com/hadley/decumar>`_
 * `knitr <http://yihui.name/knitr>`_

@@ -1,6 +1,5 @@
 .. reproducible research tutorial file, created by ARichards
 
-==========================
 Sweave example walkthrough
 ==========================
 

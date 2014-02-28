@@ -7,7 +7,7 @@ LaTeX Installation GNU/Linux
 Basic installation
 __________________
 
-On OS X in order to install LaTeX there are a couple of options.
+It is quite a simple install on linux machines though this will take a few minutes as it installs many languages.
 
 Debian/Ubuntu
 ^^^^^^^^^^^^^
