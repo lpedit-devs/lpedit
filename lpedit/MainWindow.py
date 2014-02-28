@@ -237,9 +237,9 @@ class MainWindow(QtGui.QMainWindow):
         """
 
         defaultDir = os.getcwd()
+        if os.path.split(defaultDir)[1] in ["_sphinx","_latex"]:
+            defaultDir = os.path.split(defaultDir)[0]
 
-        
-        
         fileFilter = "*.rst;;*.rnw;;*.nw;;*"
 
         inputFilePath = QtGui.QFileDialog.getOpenFileName(self,'Open file(s)',defaultDir,fileFilter)

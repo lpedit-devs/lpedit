@@ -127,7 +127,7 @@ class CustomLexer(Qsci.QsciLexerCustom):
             return QtGui.QColor(self.lang2Color)
         elif style == self.CodeBorder:
             return QtGui.QColor(self.codeBorderColor)
-        elif style == self.Math:
+        elif style == self.Math and  self.language1 in ['latex']:
             return QtGui.QColor(self.mathColor)
         return Qsci.QsciLexerCustom.defaultColor(self, style)
 

@@ -81,6 +81,10 @@ def get_label(_linja,chunk):
 for linja in outResultsHandle:
     label = get_label(linja,chunk)
 
+    ## remove leading spaces in R output
+    if re.search("^\s\[[0-9]+\]",linja):
+        linja = linja[1:]
+
     if label == 'end':
         chunkLabel = None
     elif label != None:
@@ -121,6 +125,6 @@ for linja in inFileHandle:
 
     ## add any results from included code
     if label == 'end':
-        outFileHandle.write("\n\n%s:: \n\n  %s \n\n"%('Output',outResults[oldLabel]))
-    
+        outFileHandle.write("\n\n%s \n\n  %s \n\n"%('.. code-block:: none',outResults[oldLabel]))
+        
 print 'assemble complete.'

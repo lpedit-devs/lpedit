@@ -11,14 +11,25 @@ researchers of many backgrounds could incorportate literate programming into the
 
 This is a document.  And the goal is to be able to embed code that is run when the document is created.  For example if I cannot remember how do write a recursive function.
 
-<<for-example>>=
-def factorial(n):
-    if n == 0:
-        return 1
-    else:
-        return n * factorial(n - 1)
-print(factorial(10))
-@
+
+.. rubric:: for-example
+
+.. code-block:: python 
+
+  def factorial(n):
+      if n == 0:
+          return 1
+      else:
+          return n * factorial(n - 1)
+  print(factorial(10))
+
+
+.. code-block:: none 
+
+  ...
+  3628800
+   
+
 
 We can be sure the function works because an error would not allow the document to be made.
 

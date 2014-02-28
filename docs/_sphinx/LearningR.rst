@@ -10,18 +10,42 @@ Learning R can be a career long endeavor.  The best advise is to use it every ch
   * Exit R -- Type 'q()'
   * Get help -- ?mean or help(mean)
   
-<<predefined-variables>>=
-print(pi)
-@
+
+.. rubric:: predefined-variables
+
+.. code-block:: r 
+
+  print(pi)
+
+
+.. code-block:: none 
+
+  [1] "..."
+  [1] 3.141593
+   
+
 
 Declaring variables.
 
-<<other-varialbes>>=
-print("I am a String")
-a <- 1:10
-print(a)
-print(a>5)
-@
+
+.. rubric:: other-varialbes
+
+.. code-block:: r 
+
+  print("I am a String")
+  a <- 1:10
+  print(a)
+  print(a>5)
+
+
+.. code-block:: none 
+
+  [1] "..."
+  [1] "I am a String"
+  [1]  1  2  3  4  5  6  7  8  9 10
+  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+   
+
 
 1. What does the command 'seq' do?
 2. Wha about 1:10 + 5?

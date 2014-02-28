@@ -43,10 +43,21 @@ Also there is a `Windows install FAQ <http://cran.r-project.org/bin/windows/rw-F
 Running R
 ------------
 
-<<calculator>>=
-ans <- 2 + 5
-print(ans)
-@
+
+.. rubric:: calculator
+
+.. code-block:: r 
+
+  ans <- 2 + 5
+  print(ans)
+
+
+.. code-block:: none 
+
+  [1] "..."
+  [1] 7
+   
+
 
 R can be thought of as a calculator that does a great many things.  It is important to understand that R can be run **interactively** or as a **script**.
 
