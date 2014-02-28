@@ -1,11 +1,11 @@
 .. reproducible-research Version Control file, created by ARichards
 
-
+==========================
 LaTeX Installation Windows
 ==========================
 
 Basic installation
-----------------------
+__________________
 
 On Windows in order to install LaTeX you will need the TeX
 distribution which comes as a bundle called `MiKTeX
@@ -28,10 +28,10 @@ package interface to install the following packages:
   8. upquote
   9. mptopdf.
 
-These are the most commonly used packages.
+These packages are required to run the examples in the :doc:`/Tutorial`.
 
 Resources
----------------
+_________
 
   * `proTeX an alternative to MikiTeX <http://www.tug.org/protext>`_
   * `MiKTeX project page <http://miktex.org>`_ 

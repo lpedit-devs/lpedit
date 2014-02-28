@@ -1,0 +1,14 @@
+.. master file, created automatically by lpEdit
+
+Contents
+=========================
+
+.. toctree::
+   :maxdepth: 1
+
+   lpEdit
+   Contributors
+   Bayesian
+   R
+   Latex
+   LiterateProgramming

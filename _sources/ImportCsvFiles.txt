@@ -50,7 +50,7 @@ Download: :download:`ExampleInDataFile.csv <ExampleInDataFile.csv>`
   apply(inData, 1, process_file,outfile=outfileName)
 
 
-Output:: 
+.. code-block:: none 
 
   [1] "..."
   [1] "a,15.05,2012-01-15,12:01"
@@ -85,7 +85,7 @@ So now lets read in the file and play with it:
   print(mean(x$value))
 
 
-Output:: 
+.. code-block:: none 
 
   [1] "..."
   [1] "a,15.05,2012-01-15,12:01"

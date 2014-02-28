@@ -30,12 +30,12 @@ Documentation
 ^^^^^^^^^^^^^^^^^^
 
   * `XEmacs documentation <http://www.xemacs.org/Documentation/index.html>`_
-  * For Aquamacs there is a manual in the *Help Menu* and a `wiki <http://www.emacswiki.org/cgi-bin/wiki/AquamacsEmacs>`_
+  * For Aquamacs there is a manual in the ``Help Menu`` and a `wiki <http://www.emacswiki.org/cgi-bin/wiki/AquamacsEmacs>`_
 
 Getting started
 ^^^^^^^^^^^^^^^^^^^^
 
-To create a new file click on **buffers**.  Then click on **Go To Buffer** and enter the file name.
+To create a new file click on ``buffers``.  Then click on ``Go To Buffer`` and enter the file name.
 
 Resources
 ^^^^^^^^^^^^^

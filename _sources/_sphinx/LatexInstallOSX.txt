@@ -1,11 +1,11 @@
-.. reproducible-research latex install osx, created by ARichards
+.. reproducible-research Version Control file, created by ARichards
 
-
+=======================
 LaTeX Installation OS X
 =======================
 
 Basic installation
------------------------
+__________________
 
 On OS X in order to install LaTeX there are a couple of options.
 
@@ -32,7 +32,7 @@ the installer.
 
 
 Resources
-^^^^^^^^^^^^
+_________
 
   * `Guide from Macrumors <http://guides.macrumors.com/Installing_LaTeX_on_a_Mac>`_ 
   * `MacTex <http://www.tug.org/mactex>`_

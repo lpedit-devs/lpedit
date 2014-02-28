@@ -20,7 +20,7 @@ Day 1 is all about promoting good analysis habits.  We should be able to look ba
   print("\n")
 
 
-Output:: 
+.. code-block:: none 
 
   ...
   0  1  1  2  3  5  8  13  21  34  55  89  144  233  377  610  987  
@@ -30,13 +30,13 @@ Output::
    
 
 
-This example shows by that using the tool :doc:`lpEdit` we can embed Python or R code into these documents and the code will executed when the website is created. 
+This example shows by that using the tool :doc:`lpEdit` we can embed Python or R code into these documents and the code will be executed when the website is created.
 
 Reproducible research
 ----------------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    ReproducibleResearch
    LiterateProgramming 
@@ -48,16 +48,16 @@ Getting started with Sweave
 -----------------------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    Sweave
    SweaveExampleWalkhrough
 
-Learning both R and :math:`\textrm{\LaTeX}` with Sweave
+Learning both R and LaTeX with Sweave
 ---------------------------------------------------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
  
    LearningR
    SweavePlots
