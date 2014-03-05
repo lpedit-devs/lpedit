@@ -1,10 +1,10 @@
 .. Reproducible Research About.rst
 
-Contributers
+Contributors
 ============
 
 We would like to thank our contributors, whose efforts make these
-resouces possible.  
+resources possible.  
 
 Importantly, these groups have generously provided funding.
 

@@ -14,7 +14,7 @@ The most commonly used version control systems used today are:
 
 This is by no means a complete list.  Wiki maintains a `more comprehensive list <http://en.wikipedia.org/wiki/List_of_revision_control_software>`_ for those who are interested. Version control systems are software that help us manage documents (i.e. code or manuscripts) that change through time.  They may be used through graphical user interfaces or via the command line.  Although these systems may be installed locally it is more common to see them used along with a place to store the documents.
 
-The most commony web-based hosting services for revision control are:
+The most commonly used web-based hosting services for revision control are:
 
   * `GitHub <https://github.com>`_
   * `Bitbucket <https://bitbucket.org>`_

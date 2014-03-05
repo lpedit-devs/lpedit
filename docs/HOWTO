@@ -33,7 +33,7 @@ Using github pages
 
 (5) commit and push to github
 
-    ~$ git add * .nojeckyll
+    ~$ git add * .nojekyll
     ~$ git commit -m 'first docs commit'
     ~$ git push origin gh-pages
 

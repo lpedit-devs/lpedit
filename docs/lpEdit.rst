@@ -15,13 +15,13 @@ There are many tools available that encompass the ideas of :doc:`Literate Progra
 
 Here are some screenshots from lpEdit.
 
-.. figure:: lpEdit-screenshot1.png
+.. figure:: ../images/lpEdit-screenshot1.png
    :scale: 20%
    :align: center
    :alt: lpEdit screenshot 1
    :figclass: align-center
 
-.. figure:: lpEdit-screenshot2.png
+.. figure:: ../images/lpEdit-screenshot2.png
    :scale: 20%
    :align: center
    :alt: lpEdit screenshot 2

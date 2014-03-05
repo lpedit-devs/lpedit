@@ -5,7 +5,7 @@
 Importing a CSV File
 ==========================
 
-Some practices when we carry out analyses simply do not feel reproducible or they lend themselves too easily to human error.  Copy and paste for example.  Taking two columns from a spreadsheet and makeing a new one is fairly easy, but would you make a mistake after 100 times?  People have `lost their jobs <http://www.economist.com/node/21528593>`_ and worse because of carelessness in spreadsheet manipulation.
+Some practices when we carry out analyses simply do not feel reproducible or they lend themselves too easily to human error.  Copy and paste for example.  Taking two columns from a spreadsheet and making a new one is fairly easy, but would you make a mistake after 100 times?  People have `lost their jobs <http://www.economist.com/node/21528593>`_ and worse because of carelessness in spreadsheet manipulation.
 
 So let the computer do it for you.
 

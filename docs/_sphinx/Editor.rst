@@ -8,7 +8,7 @@ What is a text editor?
 
 An editor is a `text editor <http://en.wikipedia.org/wiki/Text_editor>`_ that is used to write computer code.  If you do not already have a favorite text editor we have created on :doc:`lpEdit <lpEdit>` as it was written by our team and designed exactly for the purposes of :doc:`literate programming <LiterateProgramming>`.  
 
-If you are only interested in using R and :math:`\textrm{\LaTeX}` then install .  Otherwise if you are looking for a bit more flexibility there are plenty of other editors out there.
+If you are only interested in using R and :math:`\textrm{\LaTeX}` then install `RStudio <https://www.rstudio.com>`_.  Otherwise if you are looking for a bit more flexibility there are plenty of other editors out there.
 
 Alternative editors that may be useful are the easy-to-use versions of `Emacs <http://www.gnu.org/software/emacs/>`_.  For Windows and GNU/Linux this is `XEmacs <www.xemacs.org>`_ and in the OS X world it is `Aquamacs <http://aquamacs.org>`_.  There many are different editors available, just be sure that you understand the distinction between a text editor and a word processor before you select one.  XEmacs and Aquamacs are free, open-source, stable and have all the same shortcuts that Windows and OS X users are accustomed to.
 
