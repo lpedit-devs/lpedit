@@ -37,7 +37,7 @@ Getting started with Sweave
    :maxdepth: 1
 
    Sweave
-   SweaveExampleWalkThrough
+   SweaveExampleWalkthrough
 
 Learning both R and LaTeX with Sweave
 ---------------------------------------------------------
