@@ -3,7 +3,7 @@
 Sweave example walkthrough
 ==========================
 
-The example file can be downloaded:: :download:`FishersExactTest.Rnw  </../lpedit/examples/FishersExactTest.Rnw>`
+The example file can be downloaded:: :download:`FishersExactTest.Rnw  <../../lpedit/examples/FishersExactTest.Rnw>`
 
 This first section is the preable to your LaTeX document.  Do not forget to include the highlighted package in 
 your Sweave document.

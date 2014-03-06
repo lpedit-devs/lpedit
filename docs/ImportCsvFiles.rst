@@ -1,5 +1,4 @@
 .. sweave
-.. INCLUDE ExampleInDataFile.csv
 
 
 Importing a CSV File
@@ -9,7 +8,7 @@ Some practices when we carry out analyses simply do not feel reproducible or the
 
 So let the computer do it for you.
 
-Download: :download:`ExampleInDataFile.csv <ExampleInDataFile.csv>`
+Download: :download:`ExampleInDataFile.csv <../ExampleInDataFile.csv>`
 
 <<import-csv-example>>=
 # (1) read in a csv file where one field is a date
