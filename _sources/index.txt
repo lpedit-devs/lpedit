@@ -1,5 +1,4 @@
 .. main file for lpedit documentation
-.. INCLUDE ./images/logo.png
 
 lpEdit - towards reproducible research
 =============================================
@@ -16,7 +15,35 @@ Main Contents:
 .. toctree::
    :maxdepth: 1
 
-   lpEdit
-   Bayesian
+   lpEdit - an editor for literate programming <lpEdit>
+   Bayesian short course <Bayesian>
    Contributors
     
+How to use these documents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It can be helpful to install locally these documents because there are so many examples.
+
+   1. `install Git <http://git-scm.com/book/en/Getting-Started-Installing-Git>`_
+   2. `install the Python package `Sphinx <http://sphinx-doc.org>`_
+   3. Clone the repository either through the GUI or by
+
+      .. code-block:: bash
+       
+         ~$ git clone https://github.com/lpedit-devs/lpedit.git
+
+   4. build the documents with either ``latex`` or ``html`` 
+
+      .. code-block:: bash
+         
+         ~$ cd lpedit/docs/_sphinx 
+         ~$ sphinx-build -b html . _build
+
+The documents are now available in _build.  To update to the latest version of the repository use:
+
+   .. code-block:: bash
+
+      ~$ git pull
+
+Then rebuild the documents
+ 

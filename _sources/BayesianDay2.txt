@@ -1,0 +1,12 @@
+.. main file for lpedit documentation
+
+Bayesian short course - day 2
+=============================================
+
+Introduction to Bayesian statistics
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   BUGS

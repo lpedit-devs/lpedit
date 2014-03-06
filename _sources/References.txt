@@ -1,0 +1,11 @@
+.. lpedit works cited file, created by ARichards
+
+Works Cited
+==============
+
+
+Gilks, W. R., Thomas, A., & Spiegelhalter, D. J. (1994). A language and program for complex Bayesi
+an modelling. The Statistician,43(1), 169-177.
+
+Lunn, D., Spiegelhalter, D., Thomas, A., & Best, N. (2009). The BUGS project: Evolution, critique and
+future directions. Statistics in Medicine, 28, 3049-3967. 

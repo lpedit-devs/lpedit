@@ -62,10 +62,40 @@
 <h2>Main Contents:<a class="headerlink" href="#main-contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="lpEdit.html">lpEdit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lpEdit.html">lpEdit - an editor for literate programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayesian.html">Bayesian short course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
 </ul>
+</div>
+<div class="section" id="how-to-use-these-documents">
+<h3>How to use these documents<a class="headerlink" href="#how-to-use-these-documents" title="Permalink to this headline">¶</a></h3>
+<p>It can be helpful to install locally these documents because there are so many examples.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first"><a class="reference external" href="http://git-scm.com/book/en/Getting-Started-Installing-Git">install Git</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="http://sphinx-doc.org">install the Python package `Sphinx</a></p>
+</li>
+<li><p class="first">Clone the repository either through the GUI or by</p>
+<div class="highlight-bash"><div class="highlight"><pre>~<span class="nv">$ </span>git clone https://github.com/lpedit-devs/lpedit.git
+</pre></div>
+</div>
+</li>
+<li><p class="first">build the documents with either <tt class="docutils literal"><span class="pre">latex</span></tt> or <tt class="docutils literal"><span class="pre">html</span></tt></p>
+<div class="highlight-bash"><div class="highlight"><pre>~<span class="nv">$ </span><span class="nb">cd </span>lpedit/docs/_sphinx
+~<span class="nv">$ </span>sphinx-build -b html . _build
+</pre></div>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>The documents are now available in _build.  To update to the latest version of the repository use:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>~<span class="nv">$ </span>git pull
+</pre></div>
+</div>
+</div></blockquote>
+<p>Then rebuild the documents</p>
 </div>
 </div>
 </div>
@@ -78,7 +108,7 @@
         <div class="sidebar">
           <h3>Table Of Contents</h3>
           <ul>
-<li class="toctree-l1"><a class="reference internal" href="lpEdit.html">lpEdit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lpEdit.html">lpEdit - an editor for literate programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayesian.html">Bayesian short course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
 </ul>
@@ -114,7 +144,7 @@
           
     <div class="footer">
         &copy; Copyright 2014,lpEdit development team.
-      Last updated on Feb 28, 2014.
+      Last updated on Mar 06, 2014.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
         </div>

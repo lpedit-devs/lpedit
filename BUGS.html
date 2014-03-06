@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Learning R &mdash; lpEdit - 0.4.0</title>
+    <title>Gibbs samplers &mdash; lpEdit - 0.4.0</title>
     
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="lpEdit - 0.4.0" href="index.html" />
-    <link rel="up" title="Bayesian short course - day 1" href="BayesianDay1.html" />
-    <link rel="next" title="Plots in Sweave" href="SweavePlots.html" />
-    <link rel="prev" title="Sweave example walkthrough" href="SweaveExampleWalkthrough.html" /> 
+    <link rel="up" title="Bayesian short course - day 2" href="BayesianDay2.html" />
+    <link rel="next" title="Contributors" href="Contributors.html" />
+    <link rel="prev" title="Bayesian short course - day 2" href="BayesianDay2.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -39,9 +39,9 @@
         <div class="headertitle"><a
           href="index.html">lpEdit - 0.4.0</a></div>
         <div class="rel">
-          <a href="SweaveExampleWalkthrough.html" title="Sweave example walkthrough"
+          <a href="BayesianDay2.html" title="Bayesian short course - day 2"
              accesskey="P">previous</a> |
-          <a href="SweavePlots.html" title="Plots in Sweave"
+          <a href="Contributors.html" title="Contributors"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -57,51 +57,48 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="learning-r">
-<h1>Learning R<a class="headerlink" href="#learning-r" title="Permalink to this headline">¶</a></h1>
-<p>Learning R can be a career long endeavor.  The best advise is to use it every chance you get.  And do not be afraid to ask questions&#8211; R is a very common language and many people can help you.</p>
+  <div class="section" id="gibbs-samplers">
+<h1>Gibbs samplers<a class="headerlink" href="#gibbs-samplers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-a-gibbs-sampler">
+<h2>What is a Gibbs sampler<a class="headerlink" href="#what-is-a-gibbs-sampler" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Gibbs_sampling">Gibbs sampling</a> is a <a class="reference external" href="http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo algorithm</a> for obtaining samples from a distribution.</p>
+<p>BUGS means Bayesian Inference Under Gibbs Sampling.</p>
+</div>
+<div class="section" id="on-windows">
+<h2>On windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h2>
+<p>You have the choice.  There are several Gibbs samplers that work well on windows.</p>
 <blockquote>
 <div><ul class="simple">
-<li>Exit R &#8211; Type &#8216;q()&#8217;</li>
-<li>Get help &#8211; ?mean or help(mean)</li>
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">winBUGS</a></li>
+<li><a class="reference external" href="http://www.openbugs.info/w/FrontPage">OpenBUGS</a></li>
+<li><a class="reference external" href="http://mcmc-jags.sourceforge.net">JAGS</a></li>
 </ul>
 </div></blockquote>
-<p class="rubric">predefined-variables</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>pi<span class="p">)</span>
+<p>I am not actively tesing on window so here are a couple of websites that might help you get started with BUGS going on your machine.  It is apparently different if you have a 32 or 64 bit machine.  The second link has quite a lot of details on installation.  The examples in this website are tested using JAGS.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.stat.cmu.edu/~brian/463/install-winbugs.html">http://www.stat.cmu.edu/~brian/463/install-winbugs.html</a></li>
+<li><a class="reference external" href="http://faculty.washington.edu/jmiyamot/p548/installing.bugs.jags.pdf">http://faculty.washington.edu/jmiyamot/p548/installing.bugs.jags.pdf</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="on-gnu-linux">
+<h2>On GNU/Linux<a class="headerlink" href="#on-gnu-linux" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>~<span class="nv">$ </span>sudo apt-get install jags
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
-[1] 3.141593
-</pre></div>
-</div>
-<p>Declaring variables.</p>
-<p class="rubric">other-varialbes</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span><span class="s">&quot;I am a String&quot;</span><span class="p">)</span>
-a <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
-print<span class="p">(</span>a<span class="p">)</span>
-print<span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
-[1] &quot;I am a String&quot;
-[1]  1  2  3  4  5  6  7  8  9 10
-[1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
-</pre></div>
-</div>
-<ol class="arabic simple">
-<li>What does the command &#8216;seq&#8217; do?</li>
-<li>Wha about 1:10 + 5?</li>
-</ol>
+</div></blockquote>
+<p>For non-debian based distros use the <a class="reference external" href="http://mcmc-jags.sourceforge.net">sourceforge page</a> for more information.  For OSX users there are dmg installation images available.</p>
 <div class="section" id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference download internal" href="_downloads/RQuickReference.pdf"><tt class="xref download docutils literal"><span class="pre">RQuickReference</span> <span class="pre">(pdf)</span></tt></a> - very handy summary of R functions by <a class="reference external" href="http://www.stat.fsu.edu/people/faculty.php?id=40">Elizabeth Slate</a></li>
-<li><a class="reference download internal" href="_downloads/RBasics-I-v2.pdf"><tt class="xref download docutils literal"><span class="pre">RBasics</span> <span class="pre">Part</span> <span class="pre">I</span> <span class="pre">(pdf)</span></tt></a> - short course on R by <a class="reference external" href="http://www.queensu.ca/biology/undergrad/courses/undergradthesis/537projects/MontgomerieR.html">R. Montgomerie</a></li>
-<li><a class="reference download internal" href="_downloads/RBasics-II-v2.pdf"><tt class="xref download docutils literal"><span class="pre">RBasics</span> <span class="pre">Part</span> <span class="pre">II</span> <span class="pre">(pdf)</span></tt></a> - short course on R part II</li>
-<li>An <a class="reference external" href="http://www.stat.wisc.edu/~larget/r.html">R primer for introductory statistics</a></li>
+<li><a class="reference external" href="http://mcmc-jags.sourceforge.net">JAGS</a> - sourceforge website</li>
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">winbugs</a> - official winbugs site</li>
 </ul>
 </div></blockquote>
+</div>
 </div>
 </div>
 
@@ -136,14 +133,14 @@ print<span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="SweaveExampleWalkthrough.html" title="Sweave example walkthrough"
+          <a href="BayesianDay2.html" title="Bayesian short course - day 2"
              >previous</a> |
-          <a href="SweavePlots.html" title="Plots in Sweave"
+          <a href="Contributors.html" title="Contributors"
              >next</a> |
           <a href="genindex.html" title="General Index"
              >index</a>
             <br/>
-            <a href="_sources/LearningR.txt"
+            <a href="_sources/BUGS.txt"
                rel="nofollow">Show Source</a>
         </div>
 
@@ -151,7 +148,7 @@ print<span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span
           
     <div class="footer">
         &copy; Copyright 2014,lpEdit development team.
-      Last updated on Mar 05, 2014.
+      Last updated on Mar 06, 2014.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
         </div>
