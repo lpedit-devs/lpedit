@@ -74,6 +74,14 @@ Sweave files look a lot like  :math:`\textrm{\LaTeX}` files.  Running the next f
 Alternatively, we have created a tool (:doc:`lpEdit`) that uses Sweave
 syntax, but does not require the user to enter the command line.  RStudio will also run Sweave documents.
 
+Sweave.sty not found?
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In some distributions or operating systems it is possible that the ``Sweave.sty`` file will not be found.  Ideally, the style file should be installed and included in the system paths so that LaTeX can find it.  An alternative short term solution is to download the file and include it in the same directory as your ``*.rnw`` file.
+
+   * :download:`Sweave.sty<Sweave.sty>` - version that comes with lpEdit 
+   * `R source <http://svn.r-project.org/R/trunk/share/texmf/tex/latex/>`_ - can also find it in the R source
+
 .. _sweave-alternatives:
 
 Alternatives to Sweave
