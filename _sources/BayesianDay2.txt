@@ -5,8 +5,17 @@ Bayesian short course - day 2
 
 Introduction to Bayesian statistics
 --------------------------------------
+.. toctree::
+   :maxdepth: 1
+
+   BayesianIntro
+   BUGS
+
+Linear Regression
+---------------------
 
 .. toctree::
    :maxdepth: 1
 
-   BUGS
+   BayesLinReg
+   BayesLinRegExercises

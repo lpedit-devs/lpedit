@@ -1,0 +1,7 @@
+.. a simple linear regression example 
+
+Bayesian Linear Regression Exercises
+=====================================
+
+The model
+---------------------

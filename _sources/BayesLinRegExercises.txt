@@ -1,0 +1,100 @@
+.. a simple linear regression example 
+
+Bayesian Linear Regression Exercises
+=====================================
+
+Using the :doc:`Bayesian linear regression <BayesLinReg>` example as a tool lets recreate the analysis in R.
+
+Create a sweave file complete with pseudo-code
+------------------------------------------------
+
+Generally each analysis should have its own directory-- it make sense if we want to bundle the methods, data and report.
+
+   1. Create a template and use R to print ``"Hello World"``
+
+   2. Add a few sentences about linear regression complete with the following formula
+
+      .. math::
+  
+         t_{n} &= w_{0} + w_{1}x_{1}\\
+               &= \sum^{M-1}_{j=1} w_{j} \mathbf{x}\\
+               &= \mathbf{w}^{T} \mathbf{x}
+
+      Here are the commands you will need:
+         * ``\usepackage{amsmath}``
+         * subscript ``x_{i}`` superscript ``x^{i}`` 
+         * ``\sum^{}_{}``
+         * ``\mathbf{}``
+
+         * .. code-block:: tex
+
+              \begin{align}
+                 x^{2}      &= x \times x \\
+                 e^{\ln(2)} &= 2
+              \end{align}
+
+         .. note:: what if you use ``align*``?  or if you put the ``&`` at the beginning of each line?
+
+   3. Use pseudo-code to list the rest of the steps
+      * Simulate data
+      * Save the data to file
+      * Edit your model file (``*.bug``)
+      * Edit your inits file or create your inits file within R and ``dump``
+      * Edit your cmds file (``*.cmd``)
+      * Run your sampler
+      * Plot the Chains
+      * Plot the Lines
+
+   4. Simulate the data
+
+      * use ``rnorm`` and ``runif`` to generate random numbers for the normal and uniform distributions
+      * look at the ``FishersExactTest.rnw`` example for how to make functions
+
+   5. Save the data to file.  The following code will help you figure it out
+
+      .. code-block:: r
+         
+         x <- rnorm(10)
+         t <- rnorm(10)
+         xt <- data.frame(x,t)
+       
+         dump("xt",file="xt.R")
+         rm(xt)
+ 
+         source(file="xt.R")
+         xt
+
+
+   6. Edit/create your model, inits and command files
+
+      First try this with the provided files.  Then if you wish the model and command files can be written to file from your sweave documents using the ``cat`` and ``sink`` commands. The inits file can be written with ``dump``. 
+
+      .. code-block:: r
+
+         sink("example-sink.txt")
+         cat("model{
+             # priors
+             for (i in1:nGroups){
+                 w0[i] ~ dnorm(0,0.001)
+                 w1[i] ~ dnorm(0,0.001)
+             }  
+         }
+         ",fill=TRUE)
+         sink()
+
+   7. Run your sampler
+
+      .. code-block:: bash
+
+         ~$ jags line-reg-simple.cmd
+
+
+   8. Plot the chains and plot the lines
+
+      This one is for you.
+
+Resources
+^^^^^^^^^^^^^^^^^^^^^
+
+   * `A dump example <http://people.reed.edu/~jones/141/dump.html>`_
+

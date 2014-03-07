@@ -27,8 +27,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="lpEdit - 0.4.0" href="index.html" />
     <link rel="up" title="Bayesian short course - day 2" href="BayesianDay2.html" />
-    <link rel="next" title="Contributors" href="Contributors.html" />
-    <link rel="prev" title="Bayesian short course - day 2" href="BayesianDay2.html" /> 
+    <link rel="next" title="Bayesian Linear Regression" href="BayesLinReg.html" />
+    <link rel="prev" title="Brief introduction to Bayesian statistics" href="BayesianIntro.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -39,9 +39,9 @@
         <div class="headertitle"><a
           href="index.html">lpEdit - 0.4.0</a></div>
         <div class="rel">
-          <a href="BayesianDay2.html" title="Bayesian short course - day 2"
+          <a href="BayesianIntro.html" title="Brief introduction to Bayesian statistics"
              accesskey="P">previous</a> |
-          <a href="Contributors.html" title="Contributors"
+          <a href="BayesLinReg.html" title="Bayesian Linear Regression"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -61,15 +61,21 @@
 <h1>Gibbs samplers<a class="headerlink" href="#gibbs-samplers" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="what-is-a-gibbs-sampler">
 <h2>What is a Gibbs sampler<a class="headerlink" href="#what-is-a-gibbs-sampler" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://en.wikipedia.org/wiki/Gibbs_sampling">Gibbs sampling</a> is a <a class="reference external" href="http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo algorithm</a> for obtaining samples from a distribution.</p>
-<p>BUGS means Bayesian Inference Under Gibbs Sampling.</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Gibbs_sampling">Gibbs sampling</a> is a <a class="reference external" href="http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo algorithm</a> for obtaining samples from a posterior distribution.  We can think of the Gibbs sampler in simple terms as the tool to carry out the <a class="reference external" href="http://en.wikipedia.org/wiki/Mathematical_optimization">mathematical optimization</a> step for our model.  Most biologists do not understand the algorithms behind the <tt class="docutils literal"><span class="pre">glm</span></tt> function in R so by that logic it is not necessary to understand everything about MCMC.  That being said our MCMC samplers will be providing a chain of samples that we need to be familar with.  As you get better interfacing with your MCMC sampler it is in your best interest to dig in and learn a bit more.</p>
+<p>BUGS means Bayesian Inference Under Gibbs Sampling.  The BUGs language was developed in the 1990&#8217;s <a class="reference internal" href="References.html#gilks94">[Gilks94]</a>. A place for more information is the <a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/">BUGS project</a>.  Much of the work on BUGS has been for a variant specifically designed for windows called WinBUGS <a class="reference internal" href="References.html#lunn09">[Lunn09]</a>.</p>
+<div class="section" id="why-why-why">
+<h3>Why why why??<a class="headerlink" href="#why-why-why" title="Permalink to this headline">¶</a></h3>
+<p>The BUGS language is our key to the Bayesian world.  It allows us to specify almost arbitrarily complex statistical models using a fairly simple model defination language.  We can describe <a class="reference external" href="http://en.wikipedia.org/wiki/Deterministic_system">deterministic</a> and <a class="reference external" href="http://en.wikipedia.org/wiki/Stochastic">stochastic</a> variables for all <strong>observed</strong> and <strong>unobserved</strong> variables.  We specify the full model including <a class="reference external" href="http://en.wikipedia.org/wiki/Prior_probability">priors</a>, provide the data, and the sampler does the rest.  That is it collects some number of samples from the <a class="reference external" href="http://en.wikipedia.org/wiki/Joint_probability_distribution">joint probability distribution</a>.</p>
 </div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="on-windows">
-<h2>On windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h2>
+<h3>On windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h3>
 <p>You have the choice.  There are several Gibbs samplers that work well on windows.</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">winBUGS</a></li>
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">WinBUGS</a></li>
 <li><a class="reference external" href="http://www.openbugs.info/w/FrontPage">OpenBUGS</a></li>
 <li><a class="reference external" href="http://mcmc-jags.sourceforge.net">JAGS</a></li>
 </ul>
@@ -83,19 +89,21 @@
 </div></blockquote>
 </div>
 <div class="section" id="on-gnu-linux">
-<h2>On GNU/Linux<a class="headerlink" href="#on-gnu-linux" title="Permalink to this headline">¶</a></h2>
+<h3>On GNU/Linux<a class="headerlink" href="#on-gnu-linux" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><div class="highlight-bash"><div class="highlight"><pre>~<span class="nv">$ </span>sudo apt-get install jags
 </pre></div>
 </div>
 </div></blockquote>
 <p>For non-debian based distros use the <a class="reference external" href="http://mcmc-jags.sourceforge.net">sourceforge page</a> for more information.  For OSX users there are dmg installation images available.</p>
+</div>
 <div class="section" id="resources">
 <h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="http://mcmc-jags.sourceforge.net">JAGS</a> - sourceforge website</li>
-<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">winbugs</a> - official winbugs site</li>
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">WinBUGS</a> - official winbugs site</li>
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/">BUGS project</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -113,6 +121,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lpEdit.html">lpEdit - an editor for literate programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bayesian.html">Bayesian short course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">Works Cited</a></li>
 </ul>
 
           <h3 style="margin-top: 1.5em;">Search</h3>
@@ -133,9 +142,9 @@
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="BayesianDay2.html" title="Bayesian short course - day 2"
+          <a href="BayesianIntro.html" title="Brief introduction to Bayesian statistics"
              >previous</a> |
-          <a href="Contributors.html" title="Contributors"
+          <a href="BayesLinReg.html" title="Bayesian Linear Regression"
              >next</a> |
           <a href="genindex.html" title="General Index"
              >index</a>
@@ -148,7 +157,7 @@
           
     <div class="footer">
         &copy; Copyright 2014,lpEdit development team.
-      Last updated on Mar 06, 2014.
+      Last updated on Mar 07, 2014.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
         </div>

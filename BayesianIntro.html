@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Bayesian short course - day 2 &mdash; lpEdit - 0.4.0</title>
+    <title>Brief introduction to Bayesian statistics &mdash; lpEdit - 0.4.0</title>
     
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="lpEdit - 0.4.0" href="index.html" />
-    <link rel="up" title="Bayesian short course" href="Bayesian.html" />
-    <link rel="next" title="Brief introduction to Bayesian statistics" href="BayesianIntro.html" />
-    <link rel="prev" title="Importing a CSV File" href="ImportCsvFiles.html" /> 
+    <link rel="up" title="Bayesian short course - day 2" href="BayesianDay2.html" />
+    <link rel="next" title="Gibbs samplers" href="BUGS.html" />
+    <link rel="prev" title="Bayesian short course - day 2" href="BayesianDay2.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -39,9 +39,9 @@
         <div class="headertitle"><a
           href="index.html">lpEdit - 0.4.0</a></div>
         <div class="rel">
-          <a href="ImportCsvFiles.html" title="Importing a CSV File"
+          <a href="BayesianDay2.html" title="Bayesian short course - day 2"
              accesskey="P">previous</a> |
-          <a href="BayesianIntro.html" title="Brief introduction to Bayesian statistics"
+          <a href="BUGS.html" title="Gibbs samplers"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -57,25 +57,41 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="bayesian-short-course-day-2">
-<h1>Bayesian short course - day 2<a class="headerlink" href="#bayesian-short-course-day-2" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction-to-bayesian-statistics">
-<h2>Introduction to Bayesian statistics<a class="headerlink" href="#introduction-to-bayesian-statistics" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="BayesianIntro.html">Brief introduction to Bayesian statistics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="BUGS.html">Gibbs samplers</a></li>
+  <div class="section" id="brief-introduction-to-bayesian-statistics">
+<h1>Brief introduction to Bayesian statistics<a class="headerlink" href="#brief-introduction-to-bayesian-statistics" title="Permalink to this headline">¶</a></h1>
+<p>This is mostly borrowed from Marc Kery&#8217;s book.</p>
+<div class="section" id="advantages-of-the-bayesian-approach">
+<h2>Advantages of the Bayesian approach<a class="headerlink" href="#advantages-of-the-bayesian-approach" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Numerical Tractability &#8211; Classical statistical methods do not always work</li>
+<li>Absence of Asymptotics &#8211; What is a large number?</li>
+<li>Ease of Error Propagation &#8211; Dealing in uncertainty</li>
+<li>Formal framework for combining information &#8211; prior</li>
+<li>Intuitive appeal &#8211; intrepretation is more intuitive</li>
+<li>Coherence and intellectual beauty</li>
 </ul>
+</div></blockquote>
 </div>
-</div>
-<div class="section" id="linear-regression">
-<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="BayesLinReg.html">Bayesian Linear Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="BayesLinRegExercises.html">Bayesian Linear Regression Exercises</a></li>
+<div class="section" id="why-isn-t-everyone-a-bayesian">
+<h2>Why isn&#8217;t everyone a Bayesian<a class="headerlink" href="#why-isn-t-everyone-a-bayesian" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Perceived subjectivity</li>
+<li>Bayesian methods are amazing for complex models, but are they necessary for simpler ones?</li>
+<li>Many of the books out there are difficult reads</li>
+<li>Requires a deeper understanding of your model to implement</li>
+<li>Implementation...</li>
+<li>Easy to grasp examples...</li>
 </ul>
+</div></blockquote>
 </div>
+<div class="section" id="bayes-theorem">
+<h2>Bayes Theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this headline">¶</a></h2>
+<p><img class="math" src="_images/math/fa6db170797b6a7be7ec8d2804535515563b4c40.png" alt="P(A|B) = \frac{P(B|A)P(A)}{P(B)}"/></p>
+<p><img class="math" src="_images/math/49d602ecdc06e78d580e6ecfb4947aab76091a25.png" alt="P(\theta|x) = \frac{P(x|\theta)P(\theta)}{P(x)}"/></p>
+<p>The <strong>posterior</strong> is proportional to the <strong>likelihood</strong> times the <strong>prior</strong> distribution</p>
+<p>Bayesian inference works by combining information about parameter <img class="math" src="_images/math/52e8ed7a3ba22130ad3984eb2cd413406475a689.png" alt="\theta"/> contained in the observed data <img class="math" src="_images/math/26eeb5258ca5099acf8fe96b2a1049c48c89a5e6.png" alt="x"/> as quantified in the likelihood function <img class="math" src="_images/math/a1ceb7738368484957fc365270047e90d0a14ee8.png" alt="p(x|\theta)"/>.  Classical statistics works by making inference about a single point, while Bayesian inference works on the whole distribution.  Parameters through the Bayesian lens are treated as random variables described by distributions.</p>
 </div>
 </div>
 
@@ -111,14 +127,14 @@
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="ImportCsvFiles.html" title="Importing a CSV File"
+          <a href="BayesianDay2.html" title="Bayesian short course - day 2"
              >previous</a> |
-          <a href="BayesianIntro.html" title="Brief introduction to Bayesian statistics"
+          <a href="BUGS.html" title="Gibbs samplers"
              >next</a> |
           <a href="genindex.html" title="General Index"
              >index</a>
             <br/>
-            <a href="_sources/BayesianDay2.txt"
+            <a href="_sources/BayesianIntro.txt"
                rel="nofollow">Show Source</a>
         </div>
 
