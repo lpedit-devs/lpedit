@@ -46,7 +46,7 @@ class BasicTemplates(unittest.TestCase):
         self.nga.compile_pdf(verbose=self.verbose)
         pdfFilePath = os.path.join(self.examplesDir,self.baseFileName+".pdf")
         self.assertTrue(os.path.exists(pdfFilePath))
-        os.path.remove(pdfFilePath)
+        os.remove(pdfFilePath)
 
     def testNwR(self):
         '''
@@ -65,7 +65,7 @@ class BasicTemplates(unittest.TestCase):
         self.nga.compile_pdf(verbose=self.verbose)
         pdfFilePath = os.path.join(self.examplesDir,self.baseFileName+".pdf")
         self.assertTrue(os.path.exists(pdfFilePath))
-        os.path.remove(pdfFilePath)
+        os.remove(pdfFilePath)
 
     def testNwPython(self):
         '''
@@ -84,7 +84,7 @@ class BasicTemplates(unittest.TestCase):
         self.nga.compile_pdf(verbose=self.verbose)
         pdfFilePath = os.path.join(self.examplesDir,self.baseFileName+".pdf")
         self.assertTrue(os.path.exists(pdfFilePath))
-        os.path.remove(pdfFilePath)
+        os.remove(pdfFilePath)
 
         latex2htmlPath = self.controller.get_latex2html_path()
         if latex2htmlPath == None:
@@ -96,7 +96,7 @@ class BasicTemplates(unittest.TestCase):
         time.sleep(1)
         htmlFilePath = os.path.join(self.examplesDir,"_latex",self.baseFileName,"index.html")
         self.assertTrue(os.path.exists(htmlFilePath))
-        os.path.remove(htmlFilePath)
+        os.remove(htmlFilePath)
 
     def testRstPython(self):
         '''
@@ -117,13 +117,13 @@ class BasicTemplates(unittest.TestCase):
         pdfFileName = sl.log['project_name'] + ".pdf"
         pdfFilePath = os.path.join(self.examplesDir,pdfFileName)
         self.assertTrue(os.path.exists(pdfFilePath))
-        os.path.remove(pdfFilePath)
+        os.remove(pdfFilePath)
 
         ## test compile html
         self.nga.compile_html(verbose=self.verbose)
         indexFilePath = os.path.join(self.projectDir,"_build","index.html")
         self.assertTrue(os.path.exists(indexFilePath))
-        os.path.remove(indexFilePath)
+        os.remove(indexFilePath)
 
     def testRstR(self):
         '''
@@ -144,13 +144,13 @@ class BasicTemplates(unittest.TestCase):
         pdfFileName = sl.log['project_name'] + ".pdf"
         pdfFilePath = os.path.join(self.examplesDir,pdfFileName)
         self.assertTrue(os.path.exists(pdfFilePath))
-        os.path.remove(pdfFilePath)
+        os.remove(pdfFilePath)
 
         ## test compile html
         self.nga.compile_html(verbose=self.verbose)
         indexFilePath = os.path.join(self.projectDir,"_build","index.html")
         self.assertTrue(os.path.exists(indexFilePath))
-        os.path.remove(indexFilePath)
+        os.remove(indexFilePath)
 
 ### Run the tests
 if __name__ == '__main__':

@@ -14,7 +14,7 @@ USAGE:
 NOTE: this script preserves the order of the code chunks
 """
 
-import getopt,sys,os,re
+import getopt,sys,os,re,shutil
 
 ## parse inputs 
 if len(sys.argv) < 5:
@@ -86,36 +86,44 @@ for linja in outResultsHandle:
         toWrite = re.sub("\n[\s]+\[[\d|\d\d]\]","",toWrite)
         outResults[chunkLabel] += toWrite
 
-## open an outfile
+## check that there is code present otherwise just create tex file
 texFileName = re.sub("\.nw",".tex",inFileName,flags=re.IGNORECASE)
-outFileHandle = open(texFileName,'w')
-inFileHandle = open(inFileName,'r')
+if len(outResults) == 0:
+    shutil.copy(inFileName,texFileName)
+else:
+    ## open an outfile
+    outFileHandle = open(texFileName,'w')
+    inFileHandle = open(inFileName,'r')
 
-for linja in inFileHandle:
-    label = get_label(linja,chunk)
+    for linja in inFileHandle:
+        label = get_label(linja,chunk)
 
-    ## handle end label
-    if label == 'end':
-        if chunkLabel != None:
-            oldLabel = chunkLabel
-        chunkLabel = None
-    elif label != None:
-        chunkLabel = label
+        ## handle end label
+        if label == 'end':
+            if chunkLabel != None:
+                oldLabel = chunkLabel
+            chunkLabel = None
+        elif label != None:
+            chunkLabel = label
 
-    ## code start
-    if label != 'end' and label != None:
-        outFileHandle.write("\n\\begin{verbatim}\n")
+        ## code start
+        if label != 'end' and label != None:
+            outFileHandle.write("\n\\begin{verbatim}\n")
 
-    ## write the document text
-    if label == 'end' or label != None:
-        pass
-    elif chunkLabel == None:
-        outFileHandle.write(linja) # text 
-    else:
-        outFileHandle.write(linja) # code
+        ## write the document text
+        if label == 'end' or label != None:
+            pass
+        elif chunkLabel == None:
+            outFileHandle.write(linja) # text 
+        else:
+            outFileHandle.write(linja) # code
 
-    ## add any results from included code
-    if label == 'end':
-        outFileHandle.write("\n\end{verbatim}\n")
-        outFileHandle.write("\\begin{verbatim}\n\n%s"%outResults[oldLabel])
-        outFileHandle.write("\n\end{verbatim}\n")
+        ## add any results from included code
+        if label == 'end':
+            outFileHandle.write("\n\end{verbatim}\n")
+            outFileHandle.write("\\begin{verbatim}\n\n%s"%outResults[oldLabel])
+            outFileHandle.write("\n\end{verbatim}\n")
+
+## clean up
+inFileHandle.close()
+outFileHandle.close()
