@@ -13,12 +13,12 @@ from lpedit import NoGuiAnalysis
 
 def print_help():
     print "\n"
-    print sys.argv[0] + " -f -c -l"
-    print "filePath (-f) flag to run the editor with a given input file"
-    print "language (-l) usually 'python' or 'r'"
-    print "compile-type (-c) either pdf or html"
-    print "\nfor example..."
-    print "\n$~ python lpEditRun.py -f foo.rst -c html -l python"
+    print "ARGS"
+    print "    filePath (-f) flag to run the editor with a given input file"
+    print "    language (-l) usually 'python' or 'r'"
+    print "    compile-type (-c) either pdf or html"
+    print "    \n    for example..."
+    print "    \n    $~ python lpEditRun.py -f foo.rst -c html -l python"
     print "\n"
 
 ## check for the debug flag
@@ -47,34 +47,33 @@ for o, a in optlist:
 
 ## error checking
 if filePath == None:
-    print "\nSYNTAX ERROR:" + sys.argv[0] + " -f -c -l"
-    print "\tfilePath (-f) is a required input\n"
+    print "\nERROR: missing filePath argument"
+    print_help()
     sys.exit()
 if compileType != None:
     compileType = compileType.lower()
 if compileType not in ['pdf','html']:
-    print "\nSYNTAX ERROR:" + sys.argv[0] + " -f -c"
-    print "\tcompileType (-c) is a required input and must be either 'pdf' or 'html'"
-    print "\t'%s' is invalid\n"%str(compileType)
+    print "\nERROR bad compileType:"
+    print_help()
     sys.exit()
 if filePath != None and os.path.exists(filePath) != True:
-    print "\nSYNTAX ERROR: invalid input file path specified -- does not exist"
+    print "\nERROR: invalid input file path specified -- does not exist"
     sys.exit()
 if language != None:
     language = language.lower()
 if language not in ['r','python']:
-    print "\nSYNTAX ERROR: invalid language specified"
+    print "\nERROR: invalid language specified"
+    print_help()
     sys.exit()
     
 if __name__ == '__main__':
    nga = NoGuiAnalysis()
    nga.load_file(filePath,fileLang=language)
    goFlag = nga.build()
-   print goFlag
-
-   if goFlag != True:
-       print "Skipping output compile."
-       sys.exit()
+   #print goFlag
+   #if goFlag != True:
+   #    print "Skipping output compile."
+   #    sys.exit()
 
    if compileType == 'pdf':
        nga.compile_pdf()

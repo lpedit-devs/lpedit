@@ -121,8 +121,8 @@ else:
         ## add any results from included code
         if label == 'end':
             outFileHandle.write("\end{code}\n")
-            outFileHandle.write("\\begin{code}\n%s"%outResults[oldLabel])
-            outFileHandle.write("\end{code}\n")
+            outFileHandle.write("\\begin{codeout}\n%s"%outResults[oldLabel])
+            outFileHandle.write("\end{codeout}\n")
 
         ## augment the preamble
         if re.search("documentclass",linja):
@@ -132,11 +132,24 @@ else:
 \definecolor{verbgray}{gray}{0.9}
 \lstnewenvironment{code}{%
 \lstset{backgroundcolor=\color{verbgray},
+language=python,
 frame=single,
 framerule=0pt,
-basicstyle=\\ttfamily,
+breaklines=true,
+basicstyle=\\ttfamily\scriptsize,
+keywordstyle=\color{blue}\\ttfamily,
+stringstyle=\color{red}\\ttfamily,
+commentstyle=\color{green}\\ttfamily,
 columns=fullflexible}}{}
 \definecolor{shadecolor}{rgb}{.9, .9, .9}
+
+\lstnewenvironment{codeout}{%
+\lstset{backgroundcolor=\color{verbgray},
+frame=single,
+framerule=0pt,
+breaklines=true,
+basicstyle=\\ttfamily\scriptsize,
+columns=fullflexible}}{}
             """
             outFileHandle.write("\n%s\n"%preamble)
 
