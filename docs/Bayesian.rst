@@ -14,7 +14,8 @@ What you will Need
  2. :doc:`R` - a current version of the statistical language R
  3. :doc:`Editor` - an editor that compiles :doc:`Sweave`
  4. :doc:`BUGS` - Either `winbugs <http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml>`_ or `JAGS <http://mcmc-jags.sourceforge.net>`_
-
+ 5. See the :doc:`BUGS` page about the R packages that  
+ 
 .. note::
 
    As an editor it will be easiest to use `RStudio <https://www.rstudio.com>`_.  However, :doc:`lpEdit` may be used for those looking to use languages other than R.  It is also possible for those who are inclined to avoid graphical interfaces entirely.  Something like `Emacs <http://www.gnu.org/software/emacs/>`_ or another such editor could be used so that the examples are run from the command line.
@@ -26,3 +27,4 @@ Course Contents
    :maxdepth: 2
 
    BayesianDay1
+   BayesianDay2

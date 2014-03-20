@@ -18,6 +18,7 @@ Main Contents:
    lpEdit - an editor for literate programming <lpEdit>
    Bayesian short course <Bayesian>
    Contributors
+   References
     
 How to use these documents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -25,7 +26,7 @@ How to use these documents
 It can be helpful to install locally these documents because there are so many examples.
 
    1. `install Git <http://git-scm.com/book/en/Getting-Started-Installing-Git>`_
-   2. `install the Python package `Sphinx <http://sphinx-doc.org>`_
+   2. install the Python package `Sphinx <http://sphinx-doc.org>`_
    3. Clone the repository either through the GUI or by
 
       .. code-block:: bash
@@ -39,11 +40,21 @@ It can be helpful to install locally these documents because there are so many e
          ~$ cd lpedit/docs/_sphinx 
          ~$ sphinx-build -b html . _build
 
-The documents are now available in _build.  To update to the latest version of the repository use:
+The documents are now available in ``_build``.  
+
+To update to the latest version of the repository use:
 
    .. code-block:: bash
 
       ~$ git pull
 
-Then rebuild the documents
- 
+Then rebuild the documents.
+
+It is also possible to use :doc:`lpEdit` to compile the documents.  In this case:
+
+      .. code-block:: bash
+         
+         ~$ cd lpedit/docs
+         ~$ lpedit -f index.html
+
+The ``Build``, ``Compile`` and ``View``.
