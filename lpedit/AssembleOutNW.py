@@ -108,7 +108,7 @@ else:
 
         ## code start
         if label != 'end' and label != None:
-            outFileHandle.write("\n\\begin{verbatim}\n")
+            outFileHandle.write("\n\\begin{code}\n")
 
         ## write the document text
         if label == 'end' or label != None:
@@ -120,9 +120,25 @@ else:
 
         ## add any results from included code
         if label == 'end':
-            outFileHandle.write("\n\end{verbatim}\n")
-            outFileHandle.write("\\begin{verbatim}\n\n%s"%outResults[oldLabel])
-            outFileHandle.write("\n\end{verbatim}\n")
+            outFileHandle.write("\end{code}\n")
+            outFileHandle.write("\\begin{code}\n%s"%outResults[oldLabel])
+            outFileHandle.write("\end{code}\n")
+
+        ## augment the preamble
+        if re.search("documentclass",linja):
+            
+            preamble = """
+\usepackage{listings,color}
+\definecolor{verbgray}{gray}{0.9}
+\lstnewenvironment{code}{%
+\lstset{backgroundcolor=\color{verbgray},
+frame=single,
+framerule=0pt,
+basicstyle=\\ttfamily,
+columns=fullflexible}}{}
+\definecolor{shadecolor}{rgb}{.9, .9, .9}
+            """
+            outFileHandle.write("\n%s\n"%preamble)
 
 ## clean up
 inFileHandle.close()
