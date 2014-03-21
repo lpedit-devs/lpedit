@@ -3,7 +3,7 @@
 Bayesian short course - day 2
 =======================================
 
-Today is about getting a feel for the pipeline that is involved with the analysis of a model using Bayesian inference.
+Today is about getting a feel for the pipeline that is involved with the analysis of a model using Bayesian inference.  We are going to dig into the *how* of Bayesian inference.
 
 An brief introduction
 ----------------------
