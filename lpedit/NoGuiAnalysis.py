@@ -40,7 +40,7 @@ class NoGuiAnalysis():
         self.parsePath = os.path.join(self.controller.baseDir,"ParseEmbedded.py")
         self.latex2htmlPath = self.controller.get_latex2html_path()
 
-    def build(self,verbose=False):
+    def build(self,fileName=None,verbose=False):
         """
         generic command to build a rst,nw or rnw document
         """
@@ -49,7 +49,13 @@ class NoGuiAnalysis():
         self.goFlag = False
         if self.mainWindow != None:
             self.mainWindow.ensure_tab_is_current()
-        currentIdx = self.controller.currentFileIndex
+        
+        ## if a fileName is specified the set the current index
+        if fileName != None and fileName in self.controller.fileNameList:
+            currentIdx = self.controller.fileNameList.index(fileName)
+        else:
+            currentIdx = self.controller.currentFileIndex
+
         filePath = self.controller.filePathList[currentIdx]
         fileName = self.controller.fileNameList[currentIdx]
         fileLanguage = self.controller.fileLangList[currentIdx]
@@ -86,9 +92,6 @@ class NoGuiAnalysis():
         ## save file
         if self.mainWindow != None:
             self.mainWindow.file_save(display=False)
-
-        ## ensure we are inside the correct directory
-        os.chdir(os.path.split(filePath)[0])
 
         ## run the appropriate builder
         if re.search("\.rst",fileName,flags=re.IGNORECASE):
@@ -245,12 +248,6 @@ class NoGuiAnalysis():
             builder = 'sweave'
         else:
             builder = 'nw'
-
-        ## create a directory for the materials and move into it
-        try:
-            cwd = os.getcwd()
-        except:
-            print "WARNING: could not find cwd"
         
         ## copy target file to dir
         targetFilePath = os.path.join(dirPath,fileName)
@@ -271,9 +268,6 @@ class NoGuiAnalysis():
             if os.path.exists(os.path.join(dirPath,styfile)) == False:
                 shutil.copy(os.path.join(styfilesDir,styfile),os.path.join(dirPath,styfile))
 
-        ## change into project dir
-        os.chdir(dirPath)
-
         ## paths
         if fileLanguage == 'python':
             chunksFilePath = os.path.join(dirPath,"chunks.py")
@@ -293,6 +287,12 @@ class NoGuiAnalysis():
             self.output_text('BUILDING WITH SWEAVE...')
             compileCmd = '"%s" CMD Sweave "%s"'%(self.rPath,targetFilePath)
             self.run_subprocess(compileCmd)
+
+            ## move the output to build directory
+            tmpTex = os.path.join(os.getcwd(),texFileName)
+            if os.path.exists(tmpTex):
+                shutil.move(tmpTex,os.path.join(dirPath,texFileName))
+
         elif builder == 'nw':
             ## extract the code
             self.output_text("EXTRACTING CODE...")
@@ -330,7 +330,7 @@ class NoGuiAnalysis():
                 return False
                 
         ## check that we have a valid build
-        self.goFlag = self.ensure_valid_build(texFileName)    
+        self.goFlag = self.ensure_valid_build(os.path.join(dirPath,texFileName))
 
     def check_standard_error(self,stdErr):
         """
@@ -387,7 +387,6 @@ class NoGuiAnalysis():
         self.controller.initialize_sphinx_project(dirPath,filePath)
         self.sphinxLog = SphinxLogger(os.path.join(dirPath,'sphinx.log'))
         self.sphinxLog.write()
-        os.chdir(dirPath)
 
         ## compile
         if fileLanguage == 'python':
@@ -465,13 +464,13 @@ class NoGuiAnalysis():
             print "WARNING: Build did not complete correctly"
         return
        
-    def ensure_valid_build(self,texFileName):
+    def ensure_valid_build(self,texFilePath):
         """
         ensure build completed correctly
         """
 
         currentIdx = self.controller.currentFileIndex
-        if not os.path.exists(os.path.join('.',texFileName)):
+        if not os.path.exists(texFilePath):
             self.show_error()
             return False
         else:
@@ -627,14 +626,12 @@ class NoGuiAnalysis():
 
         ## compile
         ## with errors nonstopmode will do its best to compile, batchmode will supress pdf output
-        latexCompileCmd = '"%s" -interaction=nonstopmode "%s"'%(self.latexPath,texFileName)
-
-        ## move into directory
-        if re.search("\.rnw|\.nw",fileName,flags=re.IGNORECASE):
-            os.chdir(dirPath)
+        if projectType == 'nw':
+            texOut = dirPath
         else:
-            os.chdir(os.path.join(dirPath,"_build"))
-            
+            texOut = os.path.join(dirPath,'_build')
+        latexCompileCmd = '"%s" -interaction=nonstopmode -output-directory %s "%s"'%(self.latexPath,texOut,texFilePath)
+ 
         ## remove pdf files
         for fname in [pdfFilePath]:
             if os.path.exists(fname):
@@ -733,10 +730,8 @@ class NoGuiAnalysis():
             self.output_text("BUILDING WITH SPHINX (Sphinx)...")
             sl = SphinxLogger(os.path.join(dirPath,'sphinx.log'))
             
-            os.chdir(dirPath)
             compileCmd = "%s -b html %s %s"%(self.sphinxPath,dirPath,os.path.join(dirPath,"_build"))
             self.run_subprocess(compileCmd)
-            os.chdir(filePathBase)
         else:
             htmlFileName =  re.sub("\.rnw|\.nw",".html",fileName,flags=re.IGNORECASE)
             htmlFilePath =  os.path.join(dirPath,htmlFileName)
@@ -756,11 +751,9 @@ class NoGuiAnalysis():
                     print errMsg
                 return
 
-            os.chdir(dirPath)
             targetFilePath = os.path.join(dirPath,fileName)
             compileCmd = '"%s" "%s"'%(self.latex2htmlPath,targetFilePath)
             self.run_subprocess(compileCmd)
-            os.chdir(filePathBase)
 
             ## point to main html file
             fileNameBase = re.sub("\.rnw|\.nw","",fileName,flags=re.IGNORECASE)

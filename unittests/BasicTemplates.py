@@ -28,7 +28,7 @@ class BasicTemplates(unittest.TestCase):
         self.nga = NoGuiAnalysis(self.controller)
         self.nga.clean_file(filePath)
         self.nga.load_file(filePath,fileLang=fileLang)
-        
+
     def testSweave(self):
         '''
         generic test script for files in the examples folder
@@ -47,7 +47,7 @@ class BasicTemplates(unittest.TestCase):
         pdfFilePath = os.path.join(self.examplesDir,self.baseFileName+".pdf")
         self.assertTrue(os.path.exists(pdfFilePath))
         os.remove(pdfFilePath)
-
+   
     def testNwR(self):
         '''
         generic test script for files in the examples folder
