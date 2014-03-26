@@ -384,7 +384,8 @@ class NoGuiAnalysis():
                 shutil.copy(os.path.join(styfilesDir,styfile),os.path.join(dirPath,styfile))
 
         ## initialize a sphinx project
-        self.controller.initialize_sphinx_project(dirPath,filePath)
+        self.controller.initialize_sphinx_project(filePath)
+        self.controller.copy_sphinx_files()
         self.sphinxLog = SphinxLogger(os.path.join(dirPath,'sphinx.log'))
         self.sphinxLog.write()
 
@@ -653,7 +654,7 @@ class NoGuiAnalysis():
                 bibFilePath = os.path.join(filePathBase,bibFileName)
         fid.close()
 
-        ## if there was a bib 
+        ## if there was a bib
         if bibFilePath != None:
             if os.path.exists(pdfFilePath):
                 bibtexPath = re.sub('pdflatex','bibtex',self.latexPath)

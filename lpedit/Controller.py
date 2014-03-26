@@ -43,6 +43,7 @@ class Controller:
 
         self.log = Logger()
         self.currentFileIndex = 0
+        self.sphinxProjectBase = None
         self.fileNameList = [None for i in range(self.maxDocuments)]
         self.filePathList = [None for i in range(self.maxDocuments)]
         self.fileLangList = [None for i in range(self.maxDocuments)]
@@ -83,6 +84,10 @@ class Controller:
         else:
             self.fileLangList[self.currentFileIndex] = 'Python'
 
+        ## set the sphinx project path
+        if self.sphinxProjectBase == None:
+            self.sphinxProjectBase = os.path.split(filePath)[0]
+          
         return True
 
     def remove_file(self,fileName):
@@ -382,17 +387,21 @@ class Controller:
                 
     def ensure_dir_present(self,filePath):
         '''
-        given a file path create a dir next to the Rnw or otherwise valid file
+        Given a file path create a dir next to the Rnw or otherwise valid file
+        It is assumed that the same root used for all open rst files
+
         '''
 
-        filePathBase = os.path.split(filePath)[0]
         fileName = os.path.split(filePath)[-1]
         if re.search("\.rnw|\.nw",fileName,flags=re.IGNORECASE):
             lpDirName = "_latex"
+            filePathBase = os.path.split(filePath)[0] 
         elif re.search("\.rst",fileName,flags=re.IGNORECASE):
             lpDirName = "_sphinx"
+            filePathBase = self.sphinxProjectBase
+
         lpDirPath = os.path.join(filePathBase,lpDirName)
-        
+
         ## create the directory if necessary
         if os.path.isdir(lpDirPath) == False:
             os.mkdir(lpDirPath)
@@ -433,7 +442,7 @@ class Controller:
         sphinxfilesDir = os.path.realpath(os.path.join(self.baseDir,'sphinxfiles'))
         return sphinxfilesDir
 
-    def initialize_sphinx_project(self,dirPath,filePath):
+    def initialize_sphinx_project(self,filePath):
         """
         the dirPath is the path where the rst project resides
         Use existing *.rst and conf.py files
@@ -446,40 +455,24 @@ class Controller:
 
         ## check to see if index.rst and conf.py need to be created
         for fName in ["conf.py"]:
-            fPath = os.path.join(dirPath,fName)
+            fPath = os.path.join(self.sphinxProjectBase,fName)
             if os.path.exists(fPath) == False:
                 shutil.copy(os.path.join(sphinxDir,fName),fPath)
 
         createIndex = False
         for fName in ["index.rst"]:
-            fPath = os.path.join(dirPath,fName)
+            fPath = os.path.join(self.sphinxProjectBase,fName)
             if os.path.exists(fPath) == False:
                 createIndex = True
             
         ## create the _build and _source dirs if necessary
         for dirName in ["_build", "_source","_static",]:
-            if os.path.isdir(os.path.join(dirPath,dirName)) == False:
-                os.mkdir(os.path.join(dirPath,dirName))
-
-        ## move all source files into target dir unless already present 
-        rstFilesList = []
-        for fName in os.listdir(filePathBase):
-            if re.search("\.rst",fName,flags=re.IGNORECASE):
-                if re.search("\~$",fName):
-                    continue
-
-                rstFilesList.append(fName)
-
-        ## copy project files that are not alread present
-        for rstFile in rstFilesList:
-            sourceFilePath = os.path.join(filePathBase,rstFile)
-            targetFilePath = os.path.join(dirPath,rstFile)
-            if os.path.exists(targetFilePath) == False:
-                shutil.copy(sourceFilePath,targetFilePath)
+            if os.path.isdir(os.path.join(self.sphinxProjectBase,'_sphinx',dirName)) == False:
+                os.mkdir(os.path.join(self.sphinxProjectBase,'_sphinx',dirName))
 
         ## add to any newly created index.rst if one does not exist
         if createIndex == True:
-            indexFilePath = os.path.join(filePathBase,'index.rst')
+            indexFilePath = os.path.join(self.sphinxProjectBase,'index.rst')
             fid = open(indexFilePath,'w')
             fid.write(".. master file, created automatically by lpEdit\n")
             fid.write("\nContents\n=========================\n\n")
@@ -490,6 +483,49 @@ class Controller:
                 fid.write("   %s\n"%re.sub("\.rst","",rstFile,flags=re.IGNORECASE))
             fid.close()
             shutil.copy(indexFilePath,os.path.join(dirPath,'index.rst'))
+
+    def copy_sphinx_files(self):
+        """
+        move all source files into target dir unless already present 
+        sphinx files can exist in a directory without a leading underscore
+        directory trees can be only 1 subdirectory deep however
+
+        """
+        
+        dirRoot = self.sphinxProjectBase
+        for fName in os.listdir(dirRoot):
+            if re.search("\.rst",fName,flags=re.IGNORECASE):
+                if re.search("\~$|\.backup",fName):
+                    continue
+
+                sourceFilePath = os.path.join(dirRoot,fName)
+                targetFilePath = os.path.join(dirRoot,'_sphinx',fName)
+                
+                if os.path.exists(targetFilePath) == False:
+                    shutil.copy(sourceFilePath,targetFilePath)
+
+            if os.path.isdir(fName) and fName[0] != '_':
+                subdirRoot = os.path.join(self.sphinxProjectBase,fName)
+
+                ## create subdir if needed
+                subdirName = fName
+                if not os.path.isdir(os.path.join(dirRoot,'_sphinx',subdirName)):
+                    os.mkdir(os.path.join(dirRoot,'_sphinx',subdirName))
+
+                for ffName in os.listdir(subdirRoot):
+                    if re.search("\.rst",ffName,flags=re.IGNORECASE):
+                        if re.search("\~$|\.backup",ffName):
+                            continue
+                
+                        sourceFilePath = os.path.join(subdirRoot,ffName)
+                        subdirName = os.path.basename(os.path.dirname(sourceFilePath))
+                        targetFilePath = os.path.join(dirRoot,'_sphinx',subdirName,ffName)
+                
+                        print 'source', sourceFilePath
+                        print 'target', targetFilePath
+
+                    if os.path.exists(targetFilePath) == False:
+                        shutil.copy(sourceFilePath,targetFilePath)
 
     def language_quickcheck(self,chunksFilePath,fileLanguage):
         """

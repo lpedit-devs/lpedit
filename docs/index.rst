@@ -16,7 +16,7 @@ Main Contents:
    :maxdepth: 1
 
    lpEdit - an editor for literate programming <lpEdit>
-   Bayesian short course <Bayesian>
+   Bayesian short course <BayesianCourse>
    Contributors
    References
     
@@ -37,10 +37,10 @@ It can be helpful to install locally these documents because there are so many e
 
       .. code-block:: bash
          
-         ~$ cd lpedit/docs/_sphinx 
-         ~$ sphinx-build -b html . _build
+         ~$ cd lpedit/docs
+         ~$ python initDocs.py
 
-The documents are now available in ``_build``.  
+The documents are now available in ``./_sphinx/_build``.  
 
 To update to the latest version of the repository use:
 
@@ -50,7 +50,7 @@ To update to the latest version of the repository use:
 
 Then rebuild the documents.
 
-It is also possible to use :doc:`lpEdit` to compile the documents.  In this case:
+It is also possible to use the editor component of :doc:`lpEdit` to compile the documents.  In this case:
 
       .. code-block:: bash
          

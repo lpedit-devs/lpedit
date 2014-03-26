@@ -9,6 +9,7 @@ import os,shutil
 from lpedit import NoGuiAnalysis
 
 
+## note that you have to load a file from the main project directory first
 files = [('index.rst',None),
          (os.path.join('bayesian-course','BayesianDay1.rst'),'python')
          ]
@@ -28,5 +29,3 @@ for fileName,language in files:
     if language != None:
         nga.build(fileName=fileName)
 
-## initial build
-nga.build()
