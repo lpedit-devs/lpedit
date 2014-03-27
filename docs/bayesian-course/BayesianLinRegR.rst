@@ -120,7 +120,7 @@ The intercept has little meaning as it says that a snake of length 0 weight -5.6
    \textrm{svl} = svl - mean(svl)
      
 <<linear-reg-adjusted-intercept-in-R>>=
-msvl = svl - mean(svl)
+msvl <- svl - mean(svl)
 print(lm(mass~msvl))
 @
 
