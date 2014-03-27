@@ -1,6 +1,6 @@
 %A Sweave template demonstrating plots
 \documentclass[a4paper]{article}
-\usepackage{amsmath,pgf,graphicx,textcomp}
+\usepackage{amsmath,graphicx,textcomp}
 \usepackage[utf8]{inputenc}
 
 \title{Title of Document}

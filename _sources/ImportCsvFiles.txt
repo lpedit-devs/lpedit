@@ -8,7 +8,7 @@ Some practices when we carry out analyses simply do not feel reproducible or the
 
 So let the computer do it for you.
 
-Download: :download:`ExampleInDataFile.csv <../ExampleInDataFile.csv>`
+Download: :download:`ExampleInDataFile.csv <ExampleInDataFile.csv>`
 
 
 .. rubric:: import-csv-example
@@ -35,7 +35,7 @@ Download: :download:`ExampleInDataFile.csv <../ExampleInDataFile.csv>`
   ## create a function to play with the columns
   dayOne <- as.Date("1979-11-19")
   process_file <- function(x, outfile) {
-      group <- x[1] 
+      group <- x[1]
       value <- x[2]
       date  <- x[3]
       time  <- x[4]

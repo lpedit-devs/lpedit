@@ -10,7 +10,9 @@ Works Cited
 .. [Gilks94] W. R. Gilks, A Thomas, & D. J. Spiegelhalter. *A language and program for complex Bayesian modelling*,
    The Statistician, 43(1), 169-177 (1994).
 
-
+.. [Kery10] M. Kery. *Introduction to WinBUGS for Ecologists*,
+   Elsevier Academic Press, 2010.
+   
 .. [Lunn09] D. Lunn, D. Spiegelhalter, A. Thomas, & N. Best. *The BUGS project: Evolution, critique and future directions*,
    Statistics in Medicine, 28, 3049-3967 (2009). 
 

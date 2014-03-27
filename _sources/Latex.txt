@@ -67,3 +67,5 @@ Resources
     * `Main LaTeX page <http://www.latex-project.org/>`_
     * `Help with LaTeX <http://www.latex-project.org/help.html>`_
     * `Getting started with LaTeX <http://www.maths.tcd.ie/~dwilkins/LaTeXPrimer>`_
+    * `Formula help <http://fr.wikipedia.org/wiki/Aide:Formules_TeX>`_
+    * `A reference card <http://www.math.brown.edu/~jhs/ReferenceCards/LaTeXRefCard.v2.0.pdf>`_

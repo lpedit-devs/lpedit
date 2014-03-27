@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Gibbs samplers &mdash; lpEdit - 0.4.0</title>
+    
+    <link rel="stylesheet" href="../_static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="lpEdit - 0.4.0" href="../index.html" />
+    <link rel="up" title="Bayesian short course - day 2" href="BayesianDay2.html" />
+    <link rel="next" title="About the basic analysis pipeline" href="BayesianPipeline.html" />
+    <link rel="prev" title="Brief introduction to Bayesian statistics" href="BayesianIntro.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="../index.html">
+            <img class="logo" src="../_static/logo.png" alt="Logo"/>
+          </a></p>
+        <div class="headertitle"><a
+          href="../index.html">lpEdit - 0.4.0</a></div>
+        <div class="rel">
+          <a href="BayesianIntro.html" title="Brief introduction to Bayesian statistics"
+             accesskey="P">previous</a> |
+          <a href="BayesianPipeline.html" title="About the basic analysis pipeline"
+             accesskey="N">next</a> |
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="gibbs-samplers">
+<h1>Gibbs samplers<a class="headerlink" href="#gibbs-samplers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-a-gibbs-sampler">
+<h2>What is a Gibbs sampler<a class="headerlink" href="#what-is-a-gibbs-sampler" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Gibbs_sampling">Gibbs sampling</a> is a <a class="reference external" href="http://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo algorithm</a> for obtaining samples from a posterior distribution.  We can think of the Gibbs sampler in simple terms as the tool to carry out the <a class="reference external" href="http://en.wikipedia.org/wiki/Mathematical_optimization">mathematical optimization</a> step for our model.  Most biologists do not understand the algorithms behind the <tt class="docutils literal"><span class="pre">glm</span></tt> function in R so by that logic it is not necessary to understand everything about MCMC.  That being said our MCMC samplers will be providing a chain of samples that we need to be familiar with.  As you get better interfacing with your MCMC sampler it is in your best interest to dig in and learn a bit more.</p>
+<p>BUGS means Bayesian Inference Under Gibbs Sampling.  The BUGs language was developed in the 1990&#8217;s <a class="reference internal" href="../References.html#gilks94">[Gilks94]</a>. A place for more information is the <a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/">BUGS project</a>.  Much of the work on BUGS has been for a variant specifically designed for windows called WinBUGS <a class="reference internal" href="../References.html#lunn09">[Lunn09]</a>.</p>
+<div class="section" id="why-why-why">
+<h3>Why why why??<a class="headerlink" href="#why-why-why" title="Permalink to this headline">¶</a></h3>
+<p>The BUGS language is our key to the Bayesian world.  It allows us to specify almost arbitrarily complex statistical models using a fairly simple model definition language.  We can describe <a class="reference external" href="http://en.wikipedia.org/wiki/Deterministic_system">deterministic</a> and <a class="reference external" href="http://en.wikipedia.org/wiki/Stochastic">stochastic</a> variables for all <strong>observed</strong> and <strong>unobserved</strong> variables.  We specify the full model including <a class="reference external" href="http://en.wikipedia.org/wiki/Prior_probability">priors</a>, provide the data, and the sampler does the rest.  That is it collects some number of samples from the <a class="reference external" href="http://en.wikipedia.org/wiki/Joint_probability_distribution">joint probability distribution</a>.</p>
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>For the purposes of the class all examples will be using JAGS.  JAGS works on all platforms, it is well maintained and there are R packages to simplify your life.  WinBUGS and OpenBUGS may work for you system, but it is up to you to learn how to get things going.  They are all for practical purposes basically the same.</p>
+<div class="section" id="on-windows">
+<h3>On windows<a class="headerlink" href="#on-windows" title="Permalink to this headline">¶</a></h3>
+<p>You have the choice.  There are several Gibbs samplers that work well on windows.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">WinBUGS</a></li>
+<li><a class="reference external" href="http://www.openbugs.info/w/FrontPage">OpenBUGS</a></li>
+<li><a class="reference external" href="http://mcmc-jags.sourceforge.net">JAGS</a></li>
+</ul>
+</div></blockquote>
+<p>I am not actively tesing on window so here are a couple of websites that might help you get started with BUGS going on your machine.  It is apparently different if you have a 32 or 64 bit machine.  The second link has quite a lot of details on installation.  The examples in this website are tested using JAGS.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.stat.cmu.edu/~brian/463/install-winbugs.html">http://www.stat.cmu.edu/~brian/463/install-winbugs.html</a></li>
+<li><a class="reference external" href="http://faculty.washington.edu/jmiyamot/p548/installing.bugs.jags.pdf">http://faculty.washington.edu/jmiyamot/p548/installing.bugs.jags.pdf</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="osx">
+<h3>OSX<a class="headerlink" href="#osx" title="Permalink to this headline">¶</a></h3>
+<p>To install <a class="reference external" href="http://mcmc-jags.sourceforge.net">JAGS</a> click on the <a class="reference external" href="http://sourceforge.net/projects/mcmc-jags/files/latest/download?source=files">sourceforge link</a></p>
+</div>
+<div class="section" id="on-gnu-linux">
+<h3>On GNU/Linux<a class="headerlink" href="#on-gnu-linux" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>~<span class="nv">$ </span>sudo apt-get install jags
+</pre></div>
+</div>
+</div></blockquote>
+<p>For non-debian based distros use the <a class="reference external" href="http://mcmc-jags.sourceforge.net">sourceforge page</a> for more information.</p>
+</div>
+<div class="section" id="r2jags">
+<h3>R2jags<a class="headerlink" href="#r2jags" title="Permalink to this headline">¶</a></h3>
+<p>JAGS is a standalone program meaning that it can be run alone.  However, it is common that people use packages in R to interface with JAGS.  This is because we read, manipulate and plot data in R so it is convenient if we can input directly from R.  Also, JAGS, like all MCMC samplers tends to produce a lot of output so a package with that reads these data is useful.</p>
+<p>Open an R terminal and type the following.</p>
+<blockquote>
+<div><div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;rjags&quot;</span><span class="p">,</span> dependencies<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="o">&gt;</span> install.packages<span class="p">(</span><span class="s">&quot;R2jags&quot;</span><span class="p">,</span> dependencies<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>To check that it worked go into R and type</p>
+<blockquote>
+<div><div class="highlight-r"><div class="highlight"><pre><span class="o">&gt;</span> library<span class="p">(</span>rjags<span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://mcmc-jags.sourceforge.net">JAGS</a> - sourceforge website</li>
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">WinBUGS</a> - official winbugs site</li>
+<li><a class="reference external" href="http://www.mrc-bsu.cam.ac.uk/bugs/">BUGS project</a></li>
+<li><a class="reference external" href="http://andrewgelman.com/2009/02/08/our_new_r_packa/">Andrew Gelman&#8217;s page</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <ul>
+<li class="toctree-l1"><a class="reference internal" href="../lpEdit.html">lpEdit - an editor for literate programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BayesianCourse.html">Bayesian short course</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">Works Cited</a></li>
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="../search.html" method="get">
+            <input type="text" name="q" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="BayesianIntro.html" title="Brief introduction to Bayesian statistics"
+             >previous</a> |
+          <a href="BayesianPipeline.html" title="About the basic analysis pipeline"
+             >next</a> |
+          <a href="../genindex.html" title="General Index"
+             >index</a>
+            <br/>
+            <a href="../_sources/bayesian-course/BUGS.txt"
+               rel="nofollow">Show Source</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2014,lpEdit development team.
+      Last updated on Mar 27, 2014.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>
