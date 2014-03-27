@@ -16,7 +16,7 @@ Main Contents:
    :maxdepth: 1
 
    lpEdit - an editor for literate programming <lpEdit>
-   Bayesian short course <BayesianCourse>
+   Bayesian short course <bayesian-course/BayesianCourse>
    Contributors
    References
     

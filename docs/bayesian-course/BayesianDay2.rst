@@ -11,9 +11,9 @@ An brief introduction
 .. toctree::
    :maxdepth: 1
 
-   BUGS
    BayesianIntro
-   BasicBayesianPipeline 
+   BUGS
+   BayesianPipeline 
     
 
 Linear Regression

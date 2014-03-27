@@ -82,5 +82,3 @@ Resources
 
   * `Decent blog about Bayesian inference in R <http://blogs.uoregon.edu/bayesclub/tag/r2jags>`_
   * `JAGS tutorial <http://jkarreth.myweb.uga.edu/bayes/jags.tutorial.pdf>`_ - a pdf
-  
-Next :doc:`BasicBayesianPipeline`

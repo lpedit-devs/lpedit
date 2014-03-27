@@ -1,6 +1,6 @@
 %A LaTeX template demonstrating plots in Python
 \documentclass[a4paper]{article}
-\usepackage{amsmath,pgf,graphicx,textcomp}
+\usepackage{amsmath,graphicx,textcomp}
 \usepackage[utf8]{inputenc}
 
 \title{Title of Document}

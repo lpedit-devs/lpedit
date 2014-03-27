@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage{amsmath,graphicx}
+\title{Bayesian Linear Regression}
+\date{\today}
+\author{S. Gamgee}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\maketitle
+
+\section{Snake data}
+The snake data are borrowed from \cite{Kery10} (page 68).  This is where we discuss the data a bit.
+
+\scriptsize
+<<read-data>>=
+## read in the data
+data <- read.csv("snakes.csv",header=TRUE,sep=',')
+attach(data)
+print(names(data))
+print(summary(data))
+
+## use factors where values are not quantitative
+pop <- as.factor(pop)
+region <- as.factor(region)
+hab <- as.factor(hab)
+@
+\normalsize
+
+Several of the variables are categorical (nominal).  
+We tell R about this by converting them to a factor with the function \texttt{as.factor}.
+Remember that any functions can be looked up with a preceeding \texttt{?}.
+
+\scriptsize
+<<plot-mass-vs-svl>>=
+## plot it
+pdf("snakes-mass-svl.pdf",height=6,width=6)
+plot(mass~svl,col='blue',main="mass vs svl",type='p')
+dev.off()
+@
+\normalsize
+
+\begin{figure}
+\begin{center}
+\includegraphics[ext=.pdf,scale = 0.3]{"snakes-mass-svl"}
+\end{center}
+\caption{a caption}
+\end{figure}
+
+\section{Simple Linear Regression}
+
+\begin{equation}
+\textrm{mass}_{i} = w_{0} + w_{1} \textrm{ svl}_{i} + \epsilon_{i}
+\end{equation}
+
+\scriptsize
+<<write-model>>=
+## specify the model
+cat("model{
+    # priors
+
+    sigma ~ dunif(0,100)           # populaiton sd
+    tau <- 1 / sigma * sigma       # Precision = 1 / variance
+    w0 ~ dnorm(0.0,1.0E-4)
+    w1 ~ dnorm(0.0,1.0E-4)
+    
+    # likelihood
+    for(i in 1:N){
+        mu[i] <- w0 + w1*(x[i])
+        mass[i] ~ dnorm(mu[i],tau)
+     }
+    }
+",fill=TRUE,file="linear-regression.txt")
+
+# bundle data
+jagsData <- list(mass=mass,x=svl,N=length(mass))
+@
+\normalsize
+
+\scriptsize
+<<mcmc-setup>>=
+# inits function
+inits <- function(){list(w0=rnorm(0,2),
+                         w1=rnorm(0,2),
+                         sigma=runif(1,1,30))}
+
+# Parameters to estimate
+params <- c("w0","w1","mu","sigma")
+
+## parameters for MCMC sampling
+nc <- 3       # Number of Chains
+ni <- 5000    # Number of draws from posterior (for each chain)
+nb <- 200     # Number of draws to discard as burn in
+nt <- 2       # Thinning rate
+@
+\normalsize
+
+\scriptsize
+<<model-fit-mcmc>>=
+## run it
+library(R2jags)
+jagsfit <- jags(jagsData,inits=inits,parameters.to.save=params,
+                  model.file="linear-regression.txt",n.thin=nt,
+                  n.chains=nc,n.burnin=nb,n.iter=ni)
+@
+\normalsize
+
+
+\scriptsize
+<<plots-and-output>>=
+## plot the chains
+jagsfit.mcmc <- as.mcmc(jagsfit)
+
+pdf("linear-regression-chains.pdf")
+xyplot(jagsfit.mcmc)
+dev.off()
+
+pdf("linear-regression-densities.pdf")
+densityplot(jagsfit.mcmc)
+dev.off()
+
+## print results
+print(jagsfit['BUGSoutput'])
+print(lm(mass~svl))
+msvl = svl - mean(svl)
+print(lm(mass~msvl))
+@
+\normalsize
+
+\begin{thebibliography}{1}
+  \bibitem{Kery10} M. Kery. {\em Introduction to WinBUGS for Ecologists}, Elsevier Academic Press, 2010.
+\end{thebibliography}
+
+\end{document}

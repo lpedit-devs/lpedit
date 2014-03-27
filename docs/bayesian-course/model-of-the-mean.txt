@@ -1,0 +1,14 @@
+model{
+    # priors
+
+    mu ~ dunif(0,5000)             # populaiton mean
+    sigma ~ dunif(0,100)           # populaiton sd
+    tau <- 1 / sigma * sigma       # Precision = 1 / variance
+
+
+    # likelihood
+    for(i in 1:N){
+        mass[i] ~ dnorm(mu,tau)
+     }
+    }
+

@@ -53,8 +53,9 @@ class NoGuiAnalysis():
         ## if a fileName is specified the set the current index
         if fileName != None and fileName in self.controller.fileNameList:
             currentIdx = self.controller.fileNameList.index(fileName)
-        else:
-            currentIdx = self.controller.currentFileIndex
+            self.controller.currentFileIndex = currentIdx
+        
+        currentIdx = self.controller.currentFileIndex
 
         filePath = self.controller.filePathList[currentIdx]
         fileName = self.controller.fileNameList[currentIdx]
@@ -66,7 +67,7 @@ class NoGuiAnalysis():
             editor = self.mainWindow.controller.editorList[currentIdx] 
             editor.clear_messages()
         
-        self.output_text("BUILDING...")
+        self.output_text("BUILDING... %s"%fileName)
 
         ## error checking
         isClean = self.controller.sanitize_check(filePath)
@@ -170,8 +171,6 @@ class NoGuiAnalysis():
                     print msg
                 return False
 
-            #print 'copying', includedFilePath, newFilePath
-            #shutil.copy(includedFilePath,newFilePath)
             if os.path.islink(newFilePath):
                 os.remove(newFilePath)
             if os.path.exists(newFilePath):
@@ -372,9 +371,6 @@ class NoGuiAnalysis():
             self.display_error(errMsg)
             return
 
-        ## ensure the current file is copied
-        shutil.copy(filePath,os.path.join(dirPath,fileName))
-
         ## move a copy of each sty file into the dir
         styfilesDir = self.controller.get_styfiles_dir()
         for styfile in os.listdir(styfilesDir):
@@ -388,6 +384,19 @@ class NoGuiAnalysis():
         self.controller.copy_sphinx_files()
         self.sphinxLog = SphinxLogger(os.path.join(dirPath,'sphinx.log'))
         self.sphinxLog.write()
+
+        ## ensure the current file is copied
+        fileBase = os.path.split(filePath)[0]
+
+        if fileBase != self.controller.sphinxProjectBase:
+            subdirName = os.path.basename(os.path.dirname(filePath))
+            targetFilePath = os.path.join(dirPath,subdirName,fileName)
+        else:
+            targetFilePath = os.path.join(dirPath,fileName)
+
+        print 'copying...', targetFilePath
+
+        shutil.copy(filePath,targetFilePath)
 
         ## compile
         if fileLanguage == 'python':
@@ -427,7 +436,7 @@ class NoGuiAnalysis():
 
         ## reassemble the *.rst file with code results
         if os.path.exists(outFilePath):
-            self.output_text("REASSEMBLING CODE AND RESULTS...")   
+            self.output_text("\nREASSEMBLING CODE AND RESULTS...")   
             compileCmd = '"%s" "%s" -i "%s" -o "%s" -l %s'%(self.pythonPath,
                                                             assemblePath,
                                                             filePath,
@@ -440,7 +449,7 @@ class NoGuiAnalysis():
         
         ## overwrite the old rst file
         if os.path.exists(tmpFilePath):
-            shutil.move(tmpFilePath,os.path.join(dirPath,fileName))
+            shutil.move(tmpFilePath,targetFilePath)
             self.goFlag = True
             self.output_text("BUILD COMPLETED SUCCESFULLY.")
             if self.mainWindow != None:

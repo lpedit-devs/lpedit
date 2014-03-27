@@ -2,19 +2,25 @@
 # This file was auto-generated using lpEdit
 import sys, os, time, ast
 from lpedit import SphinxLogger
+from lpedit import __version__
 
 currentFilePath = os.path.realpath(__file__)
 logFilePath = os.path.join(os.path.split(currentFilePath)[0],'sphinx.log')
 sl = SphinxLogger(logFilePath) 
 
 ## these variables can be overwritten here or edited using lpEdit
-projectName = sl.log['project_name']
+projectName = "lpEdit - %s"%__version__
 authors  = sl.log['authors']
-extensions = sl.log['extensions']
+extensions = ['sphinx.ext.pngmath',
+              'sphinx.ext.doctest',
+              'sphinx.ext.graphviz',
+              'sphinx.ext.todo',
+              'sphinx.ext.viewcode']
+
 version = sl.log['version']
 release = sl.log['release']
-htmlTitle = sl.log['html_title']
-htmlTheme = sl.log['html_theme']
+htmlTitle = "lpEdit - %s"%__version__
+htmlTheme = "agogo"
 htmlShowCopyright = ast.literal_eval(sl.log['html_show_copyright'])
 paperSize = sl.log['latex_papersize']
 pointSize = sl.log['latex_pointsize']
@@ -56,7 +62,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'%s'%projectName
-copyright = u'%s,%s'%(time.localtime().tm_year,authors)
+copyright = u'%s,%s'%(time.localtime().tm_year,'lpEdit development team')
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -106,7 +112,11 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = htmlTheme
+html_theme = htmlTheme  # default,nature,haiku,agogo
+##3333CC
+html_theme_options = {
+    "headerbg": "#001A57",
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -125,7 +135,7 @@ html_title = htmlTitle
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-#html_logo = None
+html_logo = os.path.join("images","logo.png")
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32

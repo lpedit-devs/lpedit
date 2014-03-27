@@ -8,7 +8,9 @@ R is more than a calculator.  It is a full graphics environment.
 
 :download:`PlotsInSweave.rnw </../../lpedit/templates/PlotsInSweave.rnw>`
 
-
+.. literalinclude:: /../../lpedit/templates/PlotsInSweave.rnw
+   :language: latex
+ 
 Lets do a few things to this file
 
   1. Can you change the size of the matrix?
@@ -21,7 +23,8 @@ What about math?
 
 :math:`P(A|B) = \frac{P(B|A)P(A)}{P(B)}`
 
-To make the above formula use ``\frac{}{}``.  If you don't know what `that formula <http://en.wikipedia.org/wiki/Bayes%27_theorem>`_ is you will.
+To make the above formula use ``\frac{}{}``.  Do yo recognize `that formula <http://en.wikipedia.org/wiki/Bayes%27_theorem>`_?
+
 
 Resources
 ^^^^^^^^^^^^^^

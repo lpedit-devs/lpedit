@@ -16,7 +16,7 @@ fib(1000)
 print("\n")
 @
 
-This example shows by that using the tool :doc:`lpEdit` we can embed Python or R code into these documents and the code will be executed when the website is created.
+This example shows by that using the tool :doc:`lpEdit </lpEdit>` we can embed Python or R code into these documents and the code will be executed when the website is created.
 
 Reproducible research
 ----------------------
@@ -24,11 +24,11 @@ Reproducible research
 .. toctree::
    :maxdepth: 1
 
-   ReproducibleResearch
-   LiterateProgramming 
-   Latex
-   R
-   Editor
+   /ReproducibleResearch
+   /LiterateProgramming 
+   /Latex
+   /R
+   /Editor
     
 Getting started with Sweave
 -----------------------------
@@ -36,8 +36,8 @@ Getting started with Sweave
 .. toctree::
    :maxdepth: 1
 
-   Sweave
-   SweaveExampleWalkthrough
+   /Sweave
+   /SweaveExampleWalkthrough
 
 Learning both R and LaTeX with Sweave
 ---------------------------------------------------------
@@ -45,6 +45,6 @@ Learning both R and LaTeX with Sweave
 .. toctree::
    :maxdepth: 1
  
-   LearningR
-   SweavePlots
-   ImportCsvFiles
+   /LearningR
+   /SweavePlots
+   /ImportCsvFiles

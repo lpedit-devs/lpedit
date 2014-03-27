@@ -1,0 +1,11 @@
+latex_preamble,"\usepackage{bm,amsmath}"
+html_title,Untitled
+project_name,Untitled
+latex_pointsize,11pt
+latex_papersize,a4paper
+release,1.0
+authors,author names
+version,1.0
+extensions,['sphinx.ext.pngmath']
+html_theme,default
+html_show_copyright,True

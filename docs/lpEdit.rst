@@ -28,14 +28,14 @@ Here are some screenshots from lpEdit.
    :figclass: align-center
 
 Installation
-____________
+--------------
 
 To download lpEdit visit the `application page
 <https://bitbucket.org/ajrichards/reproducible-research/wiki/Home>`_.
 
 or for those who wish to install from source the following works on Debian-based distros.
 
-.. code-block:: none
+.. code-block:: bash
 
     ~$  sudo apt-get install python-qscintilla2 python-qt4 python-numpy python-matplotlib python-sphinx
     ~$  sudo apt-get install r-base

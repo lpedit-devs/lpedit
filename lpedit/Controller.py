@@ -338,6 +338,10 @@ class Controller:
         return None
         
     def find_adobe_path_windows(self):
+        """
+        finds the adobe acrobat program file path in windows
+        """
+
         dirsToTry = ["C:/Program Files/Adobe","C:/Program Files (x86)/Adobe"]
         adobe_path = None
         for abaseDir in dirsToTry:
@@ -353,9 +357,10 @@ class Controller:
         return adobe_path
 
     def get_pdfviewer_path(self,mainWindow=None):
-        '''
+        """
         finds the pdfviewer path (on windows it looks for adobe)
-        '''
+
+        """
         
         if self.log.log['pdfviewer_path'] != None:
             pdfviewerPath = self.log.log['pdfviewer_path']
@@ -386,11 +391,11 @@ class Controller:
         return None
                 
     def ensure_dir_present(self,filePath):
-        '''
+        """
         Given a file path create a dir next to the Rnw or otherwise valid file
         It is assumed that the same root used for all open rst files
 
-        '''
+        """
 
         fileName = os.path.split(filePath)[-1]
         if re.search("\.rnw|\.nw",fileName,flags=re.IGNORECASE):
@@ -431,22 +436,33 @@ class Controller:
             return True
 
     def get_templates_dir(self):
+        """
+        return the directory path for templates
+        """
+
         templatesDir = os.path.realpath(os.path.join(self.baseDir,'templates'))
         return templatesDir
 
     def get_styfiles_dir(self):
+        """
+        return the directory path for sty files
+        """
+
         styfilesDir = os.path.realpath(os.path.join(self.baseDir,'styfiles'))
         return styfilesDir
 
     def get_sphinx_files_dir(self):
+        """
+        return the directory path for sphinx files
+        """
+
         sphinxfilesDir = os.path.realpath(os.path.join(self.baseDir,'sphinxfiles'))
         return sphinxfilesDir
 
     def initialize_sphinx_project(self,filePath):
         """
-        the dirPath is the path where the rst project resides
-        Use existing *.rst and conf.py files
-        If necessary create index.rst and conf.py
+        If necessary create index.rst and conf.py and subdirectories
+        
         """
 
         ## variables
@@ -486,46 +502,58 @@ class Controller:
 
     def copy_sphinx_files(self):
         """
-        move all source files into target dir unless already present 
+        Move all source files into target dir unless already present 
         sphinx files can exist in a directory without a leading underscore
         directory trees can be only 1 subdirectory deep however
 
         """
         
+        def create_link(source,target):
+            if os.path.islink(target):
+                return
+            
+            os.symlink(source,target)
+
         dirRoot = self.sphinxProjectBase
+
         for fName in os.listdir(dirRoot):
+            sourceFilePath = os.path.join(dirRoot,fName)
+            targetFilePath = os.path.join(dirRoot,'_sphinx',fName)
+                
             if re.search("\.rst",fName,flags=re.IGNORECASE):
                 if re.search("\~$|\.backup",fName):
                     continue
 
-                sourceFilePath = os.path.join(dirRoot,fName)
-                targetFilePath = os.path.join(dirRoot,'_sphinx',fName)
-                
                 if os.path.exists(targetFilePath) == False:
                     shutil.copy(sourceFilePath,targetFilePath)
 
-            if os.path.isdir(fName) and fName[0] != '_':
+            elif os.path.isdir(fName) and fName[0] != '_':
                 subdirRoot = os.path.join(self.sphinxProjectBase,fName)
-
+                
                 ## create subdir if needed
                 subdirName = fName
                 if not os.path.isdir(os.path.join(dirRoot,'_sphinx',subdirName)):
                     os.mkdir(os.path.join(dirRoot,'_sphinx',subdirName))
 
                 for ffName in os.listdir(subdirRoot):
+                    sourceFilePath = os.path.join(subdirRoot,ffName)
+                    subdirName = os.path.basename(os.path.dirname(sourceFilePath))
+                    targetFilePath = os.path.join(dirRoot,'_sphinx',subdirName,ffName)
+                
                     if re.search("\.rst",ffName,flags=re.IGNORECASE):
                         if re.search("\~$|\.backup",ffName):
                             continue
                 
-                        sourceFilePath = os.path.join(subdirRoot,ffName)
-                        subdirName = os.path.basename(os.path.dirname(sourceFilePath))
-                        targetFilePath = os.path.join(dirRoot,'_sphinx',subdirName,ffName)
+                        if os.path.exists(targetFilePath) == False:
+                            shutil.copy(sourceFilePath,targetFilePath)
+            
+                    elif not os.path.isdir(sourceFilePath):
+                        create_link(sourceFilePath,targetFilePath)
+            else:
+                if re.search("\~$|\.backup|^\.",fName) or fName[0] == '_':
+                    continue
                 
-                        print 'source', sourceFilePath
-                        print 'target', targetFilePath
-
-                    if os.path.exists(targetFilePath) == False:
-                        shutil.copy(sourceFilePath,targetFilePath)
+                create_link(sourceFilePath,targetFilePath)
 
     def language_quickcheck(self,chunksFilePath,fileLanguage):
         """
