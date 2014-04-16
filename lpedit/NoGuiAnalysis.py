@@ -665,18 +665,17 @@ class NoGuiAnalysis():
 
         ## if there was a bib
         if bibFilePath != None:
-            if os.path.exists(pdfFilePath):
-                bibtexPath = re.sub('pdflatex','bibtex',self.latexPath)
-                compileCmd = '"%s" "%s"'%(bibtexPath,texFileName[:-4])
-                self.run_subprocess(compileCmd)
-            else:
-                self.output_text("EXITING EARLY... there was a problem compiling latex")
-                return False
+            cwd = os.getcwd()
+            os.chdir(texOut)
+            bibtexPath = re.sub('pdflatex','bibtex',self.latexPath)
+            compileCmd = '"%s" "%s"'%(bibtexPath,texFileName[:-4])
+            self.run_subprocess(compileCmd)
+            os.chdir(cwd)
 
             ## compile twice for bib
-            if os.path.exists(pdfFilePath):
-                self.run_subprocess(latexCompileCmd)
-                self.run_subprocess(latexCompileCmd)
+            #if os.path.exists(pdfFilePath):
+            self.run_subprocess(latexCompileCmd)
+            #self.run_subprocess(latexCompileCmd)
                 
         ## check to see that everything worked
         goFlag = self.check_pdf_compile(pdfFilePath)
