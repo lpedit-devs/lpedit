@@ -63,7 +63,7 @@ def get_label(_linja,chunk):
             label = 'chunk'+str(chunk)
         return label
 
-    if re.search('^@',linja):
+    if re.search("^\@[\s|$]",linja):
         return 'end'
 
     return None

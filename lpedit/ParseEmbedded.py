@@ -67,10 +67,10 @@ for linja in inFileHandle:
         if re.search('^<<.+>>=',linja):
             outFileHandle.write("print('%s')\n"%re.sub("\s+","",linja))
             outFileHandle.write("print('...')\n")
-        elif re.search('^@',linja):
+        elif re.search('^\@[\s|$]',linja):
             outFileHandle.write("print('%s')\n"%re.sub("\s+","",linja))
         else:
             outFileHandle.write(linja)
         
-    if re.search('^\@',linja):
+    if re.search("^\@[\s|$]",linja):
         isNoweb = False
