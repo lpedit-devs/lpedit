@@ -493,7 +493,9 @@ class Controller:
             fid.write(".. master file, created automatically by lpEdit\n")
             fid.write("\nContents\n=========================\n\n")
             fid.write(".. toctree::\n   :maxdepth: 1\n\n")
-            for rstFile in rstFilesList:
+            for rstFile in os.listdir(dirPath):
+                if not re.search("\.rst",rstFile):
+                    continue
                 if rstFile == 'index.rst':
                     continue
                 fid.write("   %s\n"%re.sub("\.rst","",rstFile,flags=re.IGNORECASE))
