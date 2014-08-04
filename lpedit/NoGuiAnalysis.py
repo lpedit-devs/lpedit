@@ -110,8 +110,11 @@ class NoGuiAnalysis():
         use the controller to load a specified file
         '''
 
+        filePath = os.path.realpath(filePath)
+
         if os.path.exists(filePath) == False:
-            print "ERROR: invalid file path specified for load"
+            print("ERROR: invalid file path specified for load")
+            print("... %s"%filePath)
             return
         
         isValid = self.controller.load_file(filePath,fileLang=fileLang)
