@@ -3,6 +3,18 @@
 
 import os,subprocess, threading
 
+def run_subprocess(cmd):
+    proc = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stdin=subprocess.PIPE)
+    while True:
+        try:
+            next_line = proc.stdout.readline()
+            proc.wait()
+            if next_line == '' and proc.poll() != None:
+                break
+        except:
+            proc.wait()
+            break
+
 class RunSubprocess(object):
     """
     a generic class 
