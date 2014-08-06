@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 
 """
 (1) takes an outfile (i.e. out.txt) and using the original file 
@@ -51,9 +52,17 @@ outResultsHandle = open(outFileName,'r')
 outResults = {}
 chunk = 0
 
+def str_check(text):
+    """
+    removes non acsii characters
+    """
+    return ''.join(i for i in text if ord(i)<128)
+
 def get_label(_linja,chunk):
     linja = re.sub('"',"",_linja)
     linja = re.sub("\[\d+\]\s+","",linja)
+    linja = str_check(linja)
+
     if re.search('^<<.+>>=',linja):
         chunk+=1
         label = re.sub("\s+","",linja)
@@ -70,6 +79,7 @@ def get_label(_linja,chunk):
 
 ## write the results of each chunk to a dictionary
 for linja in outResultsHandle:
+    linja = str_check(linja)
     label = get_label(linja,chunk)
 
     if label == 'end':
@@ -96,6 +106,7 @@ else:
     inFileHandle = open(inFileName,'r')
 
     for linja in inFileHandle:
+        linja = str_check(linja)
         label = get_label(linja,chunk)
 
         ## handle end label

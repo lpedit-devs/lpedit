@@ -493,7 +493,7 @@ class Controller:
             fid.write(".. master file, created automatically by lpEdit\n")
             fid.write("\nContents\n=========================\n\n")
             fid.write(".. toctree::\n   :maxdepth: 1\n\n")
-            for rstFile in os.listdir(dirPath):
+            for rstFile in os.listdir(os.path.join(self.sphinxProjectBase)):
                 if not re.search("\.rst",rstFile):
                     continue
                 if rstFile == 'index.rst':

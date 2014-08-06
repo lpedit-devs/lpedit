@@ -1,6 +1,6 @@
 %A minimial Sweave template
 \documentclass[a4paper]{article}
-\usepackage{amsmath,pgf,graphicx,textcomp}
+\usepackage{amsmath,graphicx,textcomp}
 \usepackage[utf8]{inputenc}
 
 \title{A Basic Sweave Example}

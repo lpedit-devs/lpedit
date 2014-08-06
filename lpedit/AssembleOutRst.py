@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 
 """
 (1) takes an outfile (i.e. out.txt) and using the original file 
@@ -61,9 +62,17 @@ outResultsHandle = open(outFileName,'r')
 outResults = {}
 chunk = 0
 
+def str_check(text):
+    """                                                                                                                                                                                                           
+    removes non acsii characters  
+    """
+    return ''.join(i for i in text if ord(i)<128)
+
+
 def get_label(_linja,chunk):
     linja = re.sub('"',"",_linja)
     linja = re.sub("\[\d+\]\s+","",linja)
+    linja = str_check(linja)
     if re.search('^<<.+>>=',linja):
         chunk+=1
         label = re.sub("\s+","",linja)
@@ -80,6 +89,7 @@ def get_label(_linja,chunk):
 
 for linja in outResultsHandle:
     label = get_label(linja,chunk)
+    linja = str_check(linja)
 
     ## remove leading spaces in R output
     if re.search("^\s\[[0-9]+\]",linja):
@@ -105,7 +115,7 @@ chunkLabel = None
 
 for linja in inFileHandle:
     label = get_label(linja,chunk)
-    
+    linja = str_check(linja)
     ## grab and highlight the included code
     if label == 'end':
         if chunkLabel != None:
