@@ -147,6 +147,14 @@ class NoGuiAnalysis():
         """
         
         baseDir = os.path.split(filePath)[0]
+        
+        ## adjust for subdirectories
+        if os.path.split(baseDir)[1] != os.path.split(os.path.split(dirPath)[0])[1]:
+            subdir = os.path.split(baseDir)[1]
+            targetDir = os.path.join(dirPath,subdir)
+        else:
+            targetDir = baseDir
+            subdir = None
 
         fid = open(filePath,'r')
         includedFiles = []
@@ -158,15 +166,17 @@ class NoGuiAnalysis():
                 found = True
                 linja = re.split(",",linja)
                 for includedFile in linja:
-                     includedFiles.append(os.path.realpath(includedFile))
+                    includedFilePath = os.path.join(baseDir,includedFile)
+                    includedFiles.append(os.path.realpath(includedFilePath))
 
         for includedFilePath in includedFiles:
+            includedFilePath = includedFilePath
             includedFileName = os.path.split(includedFilePath)[-1]
-            newFilePath = os.path.join(dirPath,includedFileName)
+            includedFileDir = os.path.split(includedFilePath)[-1]
+            newFilePath = os.path.join(targetDir,includedFileName)
 
-            if os.path.exists(includedFilePath) == False:
-                msg = "Invalid INCLUDE path...<p>"         
-                msg += "%s<p>Path could not be found <p>"%includedFileName
+            if not os.path.exists(includedFilePath):
+                msg = "Invalid INCLUDE path...\n"         
                 msg += includedFilePath
                 if self.mainWindow != None:
                     self.mainWindow.display_warning(msg)

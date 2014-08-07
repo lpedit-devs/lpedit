@@ -68,7 +68,6 @@ def str_check(text):
     """
     return ''.join(i for i in text if ord(i)<128)
 
-
 def get_label(_linja,chunk):
     linja = re.sub('"',"",_linja)
     linja = re.sub("\[\d+\]\s+","",linja)

@@ -3,17 +3,24 @@
 
 import os,subprocess, threading
 
-def run_subprocess(cmd):
+def run_subprocess(cmd,sourceDir=None):
+    
+    if sourceDir != None:
+        os.chdir(sourceDir)
+
+    output = ""
     proc = subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stdin=subprocess.PIPE)
     while True:
         try:
             next_line = proc.stdout.readline()
+            output+=next_line
             proc.wait()
             if next_line == '' and proc.poll() != None:
                 break
         except:
             proc.wait()
             break
+    return output
 
 class RunSubprocess(object):
     """
