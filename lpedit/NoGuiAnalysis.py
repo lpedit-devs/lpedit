@@ -153,7 +153,7 @@ class NoGuiAnalysis():
             subdir = os.path.split(baseDir)[1]
             targetDir = os.path.join(dirPath,subdir)
         else:
-            targetDir = baseDir
+            targetDir = dirPath
             subdir = None
 
         fid = open(filePath,'r')
