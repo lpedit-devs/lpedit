@@ -139,10 +139,10 @@ else:
         if re.search("documentclass",linja):
             
             preamble = """
-\usepackage{listings,color}
-\definecolor{verbgray}{gray}{0.9}
+\usepackage{listings,color,xcolor}
+\definecolor{shadecolor}{rgb}{.9, .9, .9}
 \lstnewenvironment{code}{%
-\lstset{backgroundcolor=\color{verbgray},
+\lstset{backgroundcolor=\color{shadecolor},
 language=python,
 frame=single,
 framerule=0pt,
@@ -152,10 +152,9 @@ keywordstyle=\color{blue}\\ttfamily,
 stringstyle=\color{red}\\ttfamily,
 commentstyle=\color{green}\\ttfamily,
 columns=fullflexible}}{}
-\definecolor{shadecolor}{rgb}{.9, .9, .9}
 
 \lstnewenvironment{codeout}{%
-\lstset{backgroundcolor=\color{verbgray},
+\lstset{backgroundcolor=\color{shadecolor},
 frame=single,
 framerule=0pt,
 breaklines=true,
