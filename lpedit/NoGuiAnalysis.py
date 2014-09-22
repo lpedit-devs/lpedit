@@ -188,6 +188,9 @@ class NoGuiAnalysis():
                 os.remove(newFilePath)
             if os.path.exists(newFilePath):
                 os.remove(newFilePath)
+
+            print("INCLUDE: %s \n...%s"%(includedFilePath,newFilePath))
+
             os.symlink(includedFilePath,newFilePath)
 
         return True
