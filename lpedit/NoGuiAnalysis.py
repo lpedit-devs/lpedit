@@ -166,8 +166,11 @@ class NoGuiAnalysis():
                 found = True
                 linja = re.split(",",linja)
                 for includedFile in linja:
-                    includedFilePath = os.path.join(baseDir,includedFile)
-                    includedFiles.append(os.path.realpath(includedFilePath))
+                    if os.path.exists(includedFile):
+                        includedFiles.append(os.path.realpath(includedFile))
+                    else:
+                        includedFilePath = os.path.join(baseDir,includedFile)
+                        includedFiles.append(os.path.realpath(includedFilePath))
 
         for includedFilePath in includedFiles:
             includedFilePath = includedFilePath
