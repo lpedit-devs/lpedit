@@ -70,7 +70,7 @@ def get_label(_linja,chunk):
 
         if label == None or label == '' or label == 'chunk':
             label = 'chunk'+str(chunk)
-        return label
+        return re.sub("label","",label)
 
     if re.search("^\@[\s|$]",linja):
         return 'end'
@@ -116,10 +116,15 @@ else:
             chunkLabel = None
         elif label != None:
             chunkLabel = label
-
+            if re.search('snip',chunkLabel):
+                snip = True
+            else:
+                snip = False
+    
         ## code start
         if label != 'end' and label != None:
-            outFileHandle.write("\n\\begin{code}\n")
+            if not snip:
+                outFileHandle.write("\n\\begin{code}\n")
 
         ## write the document text
         if label == 'end' or label != None:
@@ -127,11 +132,13 @@ else:
         elif chunkLabel == None:
             outFileHandle.write(linja) # text 
         else:
-            outFileHandle.write(linja) # code
+            if not snip:
+                outFileHandle.write(linja) # code
 
         ## add any results from included code
         if label == 'end':
-            outFileHandle.write("\end{code}\n")
+            if not snip:
+                outFileHandle.write("\end{code}\n")
             outFileHandle.write("\\begin{codeout}\n%s"%outResults[oldLabel])
             outFileHandle.write("\end{codeout}\n")
 

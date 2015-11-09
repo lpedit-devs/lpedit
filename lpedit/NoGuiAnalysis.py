@@ -582,7 +582,7 @@ class NoGuiAnalysis():
 
         waitThread.start()
 
-    def compile_pdf(self,verbose=True):
+    def compile_pdf(self,verbose=True,recompile=False):
         """
         uses system calls to compile the latex code to pdf
         """
@@ -671,6 +671,10 @@ class NoGuiAnalysis():
         goFlag = self.check_pdf_compile(pdfFilePath)
         if goFlag == False:
             return
+
+        ## recompile if specified
+        if recompile:
+            self.run_subprocess(latexCompileCmd)
 
         ## check to see if there was a bib file
         bibFilePath = None
