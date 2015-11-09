@@ -56,9 +56,9 @@ class NoGuiAnalysis():
             self.controller.currentFileIndex = currentIdx
         
         currentIdx = self.controller.currentFileIndex
-
-        filePath = self.controller.filePathList[currentIdx]
         fileName = self.controller.fileNameList[currentIdx]
+        filePath = self.controller.filePathList[currentIdx]
+
         fileLanguage = self.controller.fileLangList[currentIdx]
         self.reload_program_paths()
         goFlag = None
@@ -112,7 +112,7 @@ class NoGuiAnalysis():
 
         filePath = os.path.realpath(filePath)
 
-        if os.path.exists(filePath) == False:
+        if not os.path.exists(filePath):
             print("ERROR: invalid file path specified for load")
             print("... %s"%filePath)
             return

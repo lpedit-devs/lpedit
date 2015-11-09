@@ -140,19 +140,23 @@ else:
             
             preamble = """
 \usepackage{listings,color,xcolor}
+\usepackage[utf8]{inputenc}
 \definecolor{shadecolor}{rgb}{.9, .9, .9}
 \lstnewenvironment{code}{%
 \lstset{backgroundcolor=\color{shadecolor},
+showstringspaces=false,
 language=python,
 frame=single,
 framerule=0pt,
+keepspaces=true,
 breaklines=true,
+basicstyle=\ttfamily,
+keywordstyle=\bfseries,
 basicstyle=\\ttfamily\scriptsize,
 keywordstyle=\color{blue}\\ttfamily,
 stringstyle=\color{red}\\ttfamily,
 commentstyle=\color{green}\\ttfamily,
 columns=fullflexible}}{}
-
 \lstnewenvironment{codeout}{%
 \lstset{backgroundcolor=\color{shadecolor},
 frame=single,
