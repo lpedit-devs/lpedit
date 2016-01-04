@@ -340,8 +340,8 @@ class NoGuiAnalysis():
             ## reassemble the *.tex file with code results
             if os.path.exists(outFilePath):
                 self.output_text("REASSEMBLING CODE AND RESULTS...")
-                compileCmd = '"%s" "%s" -i "%s" -o "%s"'%(self.pythonPath,assemblePath,
-                                                          targetFilePath,outFilePath)
+                compileCmd = '"%s" "%s" -i "%s" -o "%s" -l "%s"'%(self.pythonPath,assemblePath,
+                                                                  targetFilePath,outFilePath,fileLanguage)
                 self.run_subprocess(compileCmd)
             else:
                 self.output_text("EXITING EARLY... there was a problem running the embedded code")

@@ -19,34 +19,41 @@ import getopt,sys,os,re,shutil
 
 ## parse inputs 
 if len(sys.argv) < 5:
-    print "INPUT ERROR", sys.argv[0] + " -i inFileName -o outFileName"
+    print "INPUT ERROR", sys.argv[0] + " -i inFileName -o outFileName -l language"
     sys.exit()
 
 try:
-    optlist, args = getopt.getopt(sys.argv[1:],'i:o:')
+    optlist, args = getopt.getopt(sys.argv[1:],'i:o:l:')
 except getopt.GetoptError:
     print getopt.GetoptError
-    print "INPUT ERROR:", sys.argv[0] + "-i inFileName -o outFileName"
+    print "INPUT ERROR:", sys.argv[0] + "-i inFileName -o outFileName -l language"
     sys.exit()
 
 inFileName = None
 outFileName = None
+language = None
 
 for o, a in optlist:
     if o == '-i':
         inFileName = a
     if o == '-o':
         outFileName = a
-
+    if o == '-l':
+        language = a.lower()
+        
 ## error checking
 if os.path.exists(inFileName) == False:
-    print "INPUT ERROR:", sys.argv[0], inFileName, "does not exist"
+    print("INPUT ERROR: %s %s does not exist"%(sys.argv[0],inFileName))
     sys.exit()
 
-if not re.search("\.nw",inFileName,flags=re.IGNORECASE):
-    print "INPUT ERROR:", sys.argv[0], inFileName, "in file not of type *.nw"
+if not re.search("\.nw|.NW",inFileName,flags=re.IGNORECASE):
+    print("INPUT ERROR: %s %s fn file not of type *.nw"%(sys.argv[0],inFileName))
     sys.exit()
 
+if language not in ['r','python']:
+    print("INPUT ERROR: invalid language - %s"%language)
+    sys.exit()
+    
 ## read the outfile results into a dictionary
 outResultsHandle = open(outFileName,'r')
 outResults = {}
@@ -149,10 +156,10 @@ else:
 \usepackage{listings,color,xcolor}
 \usepackage[utf8]{inputenc}
 \definecolor{shadecolor}{rgb}{.9, .9, .9}
-\lstnewenvironment{code}{%
+\lstnewenvironment{code}{
 \lstset{backgroundcolor=\color{shadecolor},
 showstringspaces=false,
-language=python,
+language=%s,
 frame=single,
 framerule=0pt,
 keepspaces=true,
@@ -164,14 +171,14 @@ keywordstyle=\color{blue}\\ttfamily,
 stringstyle=\color{red}\\ttfamily,
 commentstyle=\color{green}\\ttfamily,
 columns=fullflexible}}{}
-\lstnewenvironment{codeout}{%
+\lstnewenvironment{codeout}{
 \lstset{backgroundcolor=\color{shadecolor},
 frame=single,
 framerule=0pt,
 breaklines=true,
 basicstyle=\\ttfamily\scriptsize,
 columns=fullflexible}}{}
-            """
+            """%(language)
             outFileHandle.write("\n%s\n"%preamble)
 
 ## clean up
