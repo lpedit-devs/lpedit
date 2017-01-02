@@ -7,7 +7,7 @@ lpedit
 :Web site: https://github.com/lpedit-devs/lpedit
 :Documentation: http://lpedit-devs.github.io/lpedit/
 :Copyright: This document has been placed in the public domain.
-:License: htsint is released under the 3-clause BSD License
+:License: lpedit is released under the 3-clause BSD License
 
 
 About
@@ -28,17 +28,17 @@ Installation
 
 For more details visit the documentation:
 
-  *  http://ajrichards.github.io/htsint
+  *  http://ajrichards.github.io/lpedit
 
-The easiest way to install and maintain ``htsint`` is to use `pip <https://pypi.python.org/pypi/pip>`_
-
-  .. code-block:: bash
-
-      ~$ pip install htsint
+The easiest way to install and maintain ``lpedit`` is to use `pip <https://pypi.python.org/pypi/pip>`_
 
   .. code-block:: bash
 
-      ~$ pip install htsint --upgrade
+      ~$ pip install lpedit
+
+  .. code-block:: bash
+
+      ~$ pip install lpedit --upgrade
 
 The source is also available on GitHub and may be installed using:
 
@@ -53,6 +53,7 @@ Getting started
 To create a document this example illustrates the generalized syntax:
 
   .. code-block:: python
+
      from lpedit import NoGuiAnalysis
      fileName = 'report-name.nw'
      language = 'python'
@@ -68,12 +69,13 @@ Using lpedit in a publication or technical report?
 Read the `proceedings PDF <http://conference.scipy.org/proceedings/scipy2013/pdfs/richards.pdf>`_ or use the following BIBTEX entry.
 
 .. code-block:: none
-  @InProceedings{richards-proc-scipy-2013,
-     Title              = { lpEdit: an editor to facilitate reproducible analysis via literate programming },
-     Author             = {Adam J Richards and Andrzej S. Kosinski and Camille Bonneaud and Delphine Legrand and Kouros Owzar},
-     Book title         = { Proceedings of the 12th Python in Science Conference },
-     Year               = { 2013 },
-     Editor             = { St\'efan van der Walt and Jarrod Millman and Katy Huff },
-     Pages              = { 85 - 89 }
-  }
+
+   @InProceedings{richards-proc-scipy-2013,
+      Title              = { lpEdit: an editor to facilitate reproducible analysis via literate programming },
+      Author             = {Adam J Richards and Andrzej S. Kosinski and Camille Bonneaud and Delphine Legrand and Kouros Owzar},
+      Book title         = { Proceedings of the 12th Python in Science Conference },
+      Year               = { 2013 },
+      Editor             = { St\'efan van der Walt and Jarrod Millman and Katy Huff },
+      Pages              = { 85 - 89 }
+   }
 	     
