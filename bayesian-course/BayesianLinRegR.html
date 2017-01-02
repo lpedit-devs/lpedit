@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Bayesian linear regression in R &mdash; lpEdit - 0.4.0</title>
+    <title>Bayesian linear regression in R &mdash; lpEdit - 0.5.0</title>
     
     <link rel="stylesheet" href="../_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,20 +23,20 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="lpEdit - 0.4.0" href="../index.html" />
+    <link rel="top" title="lpEdit - 0.5.0" href="../index.html" />
     <link rel="up" title="Bayesian short course - day 2" href="BayesianDay2.html" />
     <link rel="next" title="Contributors" href="../Contributors.html" />
     <link rel="prev" title="About the basic analysis pipeline" href="BayesianPipeline.html" /> 
   </head>
-  <body>
-    <div class="header-wrapper">
+  <body role="document">
+    <div class="header-wrapper" role="banner">
       <div class="header">
           <p class="logo"><a href="../index.html">
             <img class="logo" src="../_static/logo.png" alt="Logo"/>
           </a></p>
         <div class="headertitle"><a
-          href="../index.html">lpEdit - 0.4.0</a></div>
-        <div class="rel">
+          href="../index.html">lpEdit - 0.5.0</a></div>
+        <div class="rel" role="navigation" aria-label="related navigation">
           <a href="BayesianPipeline.html" title="About the basic analysis pipeline"
              accesskey="P">previous</a> |
           <a href="../Contributors.html" title="Contributors"
@@ -55,18 +53,18 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="bayesian-linear-regression-in-r">
 <h1>Bayesian linear regression in R<a class="headerlink" href="#bayesian-linear-regression-in-r" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">A prior distribution does not necessarily imply a temporal priority, instead, it simply represents a specific assumption about a model parameter. Bayes rule tells us how to combine such an assumption about a parameter with our current observations into a logical, quantitative conclusion. The latter is represented by the posterior distribution of the parameter (see <a class="reference internal" href="../References.html#kery10">[Kery10]</a>, page 17).</p>
+<p class="last">A prior distribution does not necessarily imply a temporal priority, instead, it simply represents a specific assumption about a model parameter. Bayes rule tells us how to combine such an assumption about a parameter with our current observations into a logical, quantitative conclusion. The latter is represented by the posterior distribution of the parameter (see <a class="reference internal" href="../References.html#kery10" id="id1">[Kery10]</a>, page 17).</p>
 </div>
-<p>A prior may be uninformative for a data set, but upon transformation with say <tt class="docutils literal"><span class="pre">log</span></tt> the assumptions about a prior may no longer hold.</p>
+<p>A prior may be uninformative for a data set, but upon transformation with say <code class="docutils literal"><span class="pre">log</span></code> the assumptions about a prior may no longer hold.</p>
 <div class="section" id="a-bit-more-on-the-model-of-the-mean">
 <h2>A bit more on the model of the mean<a class="headerlink" href="#a-bit-more-on-the-model-of-the-mean" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mass</span><span class="p">,</span><span class="n">pop</span><span class="p">,</span><span class="n">region</span><span class="p">,</span><span class="n">hab</span><span class="p">,</span><span class="n">svl</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mass</span><span class="p">,</span><span class="n">pop</span><span class="p">,</span><span class="n">region</span><span class="p">,</span><span class="n">hab</span><span class="p">,</span><span class="n">svl</span>
 <span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">40</span>
 <span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">45</span>
 <span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">39</span>
@@ -76,25 +74,25 @@
 </pre></div>
 </div>
 <p class="rubric">read-data</p>
-<div class="highlight-r"><div class="highlight"><pre><span class="c1">## read in the data</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="c1">## read in the data</span>
 data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;./bayesian-course/snakes.csv&quot;</span><span class="p">,</span>header<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>sep<span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">)</span>
-attach<span class="p">(</span>data<span class="p">)</span>
+<span class="kn">attach</span><span class="p">(</span>data<span class="p">)</span>
 
 <span class="c1">## use factors where values are not quantitative</span>
-pop <span class="o">&lt;-</span> as.factor<span class="p">(</span>pop<span class="p">)</span>
-region <span class="o">&lt;-</span> as.factor<span class="p">(</span>region<span class="p">)</span>
-hab <span class="o">&lt;-</span> as.factor<span class="p">(</span>hab<span class="p">)</span>
+pop <span class="o">&lt;-</span> <span class="kp">as.factor</span><span class="p">(</span>pop<span class="p">)</span>
+region <span class="o">&lt;-</span> <span class="kp">as.factor</span><span class="p">(</span>region<span class="p">)</span>
+hab <span class="o">&lt;-</span> <span class="kp">as.factor</span><span class="p">(</span>hab<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
 </pre></div>
 </div>
-<p>In the previous example we just fit a common mean to the <tt class="docutils literal"><span class="pre">mass</span></tt> of all six snakes.  In R again this is written as:</p>
+<p>In the previous example we just fit a common mean to the <code class="docutils literal"><span class="pre">mass</span></code> of all six snakes.  In R again this is written as:</p>
 <p class="rubric">show-lm</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span><span class="m">1</span><span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span><span class="m">1</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
 
 Call:
 lm(formula = mass ~ 1)
@@ -104,22 +102,22 @@ Coefficients:
       7.667
 </pre></div>
 </div>
-<p>This implies a single covariate with a single value for each snake.  This means that the <tt class="docutils literal"><span class="pre">mass</span></tt> of individual snake <img class="math" src="../_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i"/> is represented as an overall mean plus some deviation.</p>
+<p>This implies a single covariate with a single value for each snake.  This means that the <code class="docutils literal"><span class="pre">mass</span></code> of individual snake <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> is represented as an overall mean plus some deviation.</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/07fc1dfe3b36b88900c7fe43692da8876b5cd187.png" alt="\textrm{mass}_{i} = \mu + \epsilon_{i}"/></p>
+<p><img src="../_images/math/69d2c9049d1ca49a4dfbfcaf5ae4be6b0e3ad5f7.png" alt="\textrm{mass}_{i} = \mu + \epsilon_{i}"/></p>
 </div></div></blockquote>
-<p>The individual deviation is called <img class="math" src="../_images/math/91d19b2bf6da8fc4279762e6edacb308528c6e73.png" alt="\epsilon_{i}"/>.  This is also called the <strong>residual</strong> for snake <img class="math" src="../_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i"/>.  We are going to assume a distribution for these residuals.</p>
+<p>The individual deviation is called <img class="math" src="../_images/math/70fdfe35a2be0a2caa824af13149cdeed6d55bd6.png" alt="\epsilon_{i}"/>.  This is also called the <strong>residual</strong> for snake <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/>.  We are going to assume a distribution for these residuals.</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/379daa2bba98dcae4d1e130a52a3d77f12ff311b.png" alt="\epsilon_{i} \sim \mathcal{N}(0,\sigma^{2})"/></p>
+<p><img src="../_images/math/9b90b02fe54ae92d07ad8dd5129b5aa932fd5443.png" alt="\epsilon_{i} \sim \mathcal{N}(0,\sigma^{2})"/></p>
 </div></div></blockquote>
-<p>Behind the scenes when we run <tt class="docutils literal"><span class="pre">lm</span></tt> R is creating something called a <strong>design matrix</strong>.  It is a very important function that helps us understand what is going on.</p>
+<p>Behind the scenes when we run <code class="docutils literal"><span class="pre">lm</span></code> R is creating something called a <strong>design matrix</strong>.  It is a very important function that helps us understand what is going on.</p>
 <p class="rubric">show-design-matrix</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>model.matrix<span class="p">(</span>mass <span class="o">~</span> <span class="m">1</span><span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span>model.matrix<span class="p">(</span>mass <span class="o">~</span> <span class="m">1</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
   (Intercept)
 1           1
 2           1
@@ -134,12 +132,12 @@ attr(,&quot;assign&quot;)
 </div>
 <div class="section" id="t-test">
 <h2>t-test<a class="headerlink" href="#t-test" title="Permalink to this headline">¶</a></h2>
-<p>If we are interested in the effect of a single binary variable like <tt class="docutils literal"><span class="pre">region</span></tt> on <tt class="docutils literal"><span class="pre">mass</span></tt> we can use a t-test.</p>
+<p>If we are interested in the effect of a single binary variable like <code class="docutils literal"><span class="pre">region</span></code> on <code class="docutils literal"><span class="pre">mass</span></code> we can use a t-test.</p>
 <p class="rubric">lm-ttest</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>summary<span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>region<span class="p">)))</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span><span class="kp">summary</span><span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>region<span class="p">)))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
 
 Call:
 lm(formula = mass ~ region)
@@ -153,7 +151,7 @@ Coefficients:
 (Intercept)   6.5000     0.6614   9.827 0.000601 ***
 region2       3.5000     1.1456   3.055 0.037841 *
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
 
 Residual standard error: 1.323 on 4 degrees of freedom
 Multiple R-squared:    0.7,   Adjusted R-squared:  0.625
@@ -163,19 +161,19 @@ F-statistic: 9.333 on 1 and 4 DF,  p-value: 0.03784
 <p>This can be written as:</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/379d474493d3c5729b76f5eedae2c56934a8928c.png" alt="\textrm{mass}_{i} = w_{0} + w_{1} \textrm{ region}_{i} + \epsilon_{i}"/></p>
+<p><img src="../_images/math/32b2bea550f68d898cb56cbec4d660fbf590b146.png" alt="\textrm{mass}_{i} = w_{0} + w_{1} \textrm{ region}_{i} + \epsilon_{i}"/></p>
 </div></div></blockquote>
-<p>So under this model the <tt class="docutils literal"><span class="pre">mass</span></tt> of snake <img class="math" src="../_images/math/34857b3ba74ce5cd8607f3ebd23e9015908ada71.png" alt="i"/> is made up of three components.  We use the same Gaussian (normal) distribution assumption about residuals.</p>
+<p>So under this model the <code class="docutils literal"><span class="pre">mass</span></code> of snake <img class="math" src="../_images/math/df0deb143e5ac127f00bd248ee8001ecae572adc.png" alt="i"/> is made up of three components.  We use the same Gaussian (normal) distribution assumption about residuals.</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/317a2407ed8e0c04ac1640a728882f629b28dc02.png" alt="\textrm{mass}_{i} = \textrm{N}(w_{0} + w_{1} \textrm{ region}_{i} + \epsilon_{i}, \sigma^{2})"/></p>
+<p><img src="../_images/math/8e3426635142c6ca133ab0b4a5127ea5ca61731d.png" alt="\textrm{mass}_{i} = \textrm{N}(w_{0} + w_{1} \textrm{ region}_{i} + \epsilon_{i}, \sigma^{2})"/></p>
 </div></div></blockquote>
-<p>If we assume <img class="math" src="../_images/math/854f9a2007630736f7c4f13d1b86417b05a727a5.png" alt="\epsilon_{i} \sim \mathcal{N}(0,\sigma^{2})"/> then we should test for normality of the individual residuals when using a t-test.</p>
+<p>If we assume <img class="math" src="../_images/math/2a96186e089e7f323ea40b83a4856feb65fce7a2.png" alt="\epsilon_{i} \sim \mathcal{N}(0,\sigma^{2})"/> then we should test for normality of the individual residuals when using a t-test.</p>
 <p class="rubric">t-test-design-matrix-effect</p>
-<div class="highlight-r"><div class="highlight"><pre>model.matrix<span class="p">(</span><span class="o">~</span>region<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span>model.matrix<span class="p">(</span><span class="o">~</span>region<span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
   (Intercept) region2
 1           1       0
 2           1       0
@@ -190,13 +188,13 @@ attr(,&quot;contrasts&quot;)$region
 [1] &quot;contr.treatment&quot;
 </pre></div>
 </div>
-<p>The indicator variable <tt class="docutils literal"><span class="pre">region2</span></tt> contains a 1 for the snakes that are in region 2.  Region 1 becomes a base level and we see the <strong>effect</strong> of region 2 compared to region 1.  The value of the intercept is then the mean <tt class="docutils literal"><span class="pre">mass</span></tt> of snakes in region 1.  This setup is known as the <strong>effects parameterization</strong>.  An equivalent way to look at differences in regions with respect to <tt class="docutils literal"><span class="pre">mass</span></tt> is to reparameterize the model as a <strong>means parameterization</strong>.</p>
+<p>The indicator variable <code class="docutils literal"><span class="pre">region2</span></code> contains a 1 for the snakes that are in region 2.  Region 1 becomes a base level and we see the <strong>effect</strong> of region 2 compared to region 1.  The value of the intercept is then the mean <code class="docutils literal"><span class="pre">mass</span></code> of snakes in region 1.  This setup is known as the <strong>effects parameterization</strong>.  An equivalent way to look at differences in regions with respect to <code class="docutils literal"><span class="pre">mass</span></code> is to reparameterize the model as a <strong>means parameterization</strong>.</p>
 <p class="rubric">t-test-design-matrix-means</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>model.matrix<span class="p">(</span><span class="o">~</span>region<span class="m">-1</span><span class="p">))</span>
-print<span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>region<span class="m">-1</span><span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span>model.matrix<span class="p">(</span><span class="o">~</span>region<span class="m">-1</span><span class="p">))</span>
+<span class="kp">print</span><span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>region<span class="m">-1</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
   region1 region2
 1       1       0
 2       1       0
@@ -223,17 +221,17 @@ region1  region2
 </div>
 <div class="section" id="simple-linear-regression">
 <h2>Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Permalink to this headline">¶</a></h2>
-<p>To examine the response between a continuous response variable <tt class="docutils literal"><span class="pre">mass</span></tt> and a continuous explanatory variable <tt class="docutils literal"><span class="pre">svl</span></tt>.  We use simple linear regression.</p>
+<p>To examine the response between a continuous response variable <code class="docutils literal"><span class="pre">mass</span></code> and a continuous explanatory variable <code class="docutils literal"><span class="pre">svl</span></code>.  We use simple linear regression.</p>
 <blockquote>
 <div><div class="math">
-<p><img src="../_images/math/dab9244901ab597922746cceb7f2e96084ba85c3.png" alt="\textrm{mass}_{i} = w_{0} + w_{1} \textrm{ svl}_{i} + \epsilon_{i}"/></p>
+<p><img src="../_images/math/3dfdbfed30fe1acaa74dc797636caa000610c17f.png" alt="\textrm{mass}_{i} = w_{0} + w_{1} \textrm{ svl}_{i} + \epsilon_{i}"/></p>
 </div></div></blockquote>
 <p>The difference between this and a t-test is in the contents of the explanatory variable.  Here is the design matrix.</p>
 <p class="rubric">linreg-design-matrix</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>model.matrix<span class="p">(</span><span class="o">~</span>svl<span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span>model.matrix<span class="p">(</span><span class="o">~</span>svl<span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
   (Intercept) svl
 1           1  40
 2           1  45
@@ -245,8 +243,8 @@ attr(,&quot;assign&quot;)
 [1] 0 1
 </pre></div>
 </div>
-<p>Download: <a class="reference download internal" href="../_downloads/LinearRegression.rnw"><tt class="xref download docutils literal"><span class="pre">LinearRegression.rnw</span></tt></a></p>
-<div class="highlight-latex"><div class="highlight"><pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+<p>Download: <a class="reference download internal" href="../_downloads/LinearRegression.rnw" download=""><code class="xref download docutils literal"><span class="pre">LinearRegression.rnw</span></code></a></p>
+<div class="highlight-latex"><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
 <span class="k">\usepackage</span><span class="nb">{</span>amsmath,graphicx<span class="nb">}</span>
 <span class="k">\title</span><span class="nb">{</span>Bayesian Linear Regression<span class="nb">}</span>
 <span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>
@@ -384,10 +382,10 @@ print(lm(mass~msvl))
 <div class="section" id="which-parameterization-to-use">
 <h3>Which parameterization to use<a class="headerlink" href="#which-parameterization-to-use" title="Permalink to this headline">¶</a></h3>
 <p class="rubric">linear-reg-effects-in-R</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>svl<span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>svl<span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
 
 Call:
 lm(formula = mass ~ svl)
@@ -397,15 +395,15 @@ Coefficients:
     -5.5588       0.2804
 </pre></div>
 </div>
-<p>The intercept has little meaning as it says that a snake of length 0 weight -5.6 units.  We can give the model a more relevant meaning by transforming <tt class="docutils literal"><span class="pre">svl</span></tt></p>
+<p>The intercept has little meaning as it says that a snake of length 0 weight -5.6 units.  We can give the model a more relevant meaning by transforming <code class="docutils literal"><span class="pre">svl</span></code></p>
 <div class="math">
-<p><img src="../_images/math/bac6686c755d596b184fdd002d517feb36dfbc43.png" alt="\textrm{svl} = svl - mean(svl)"/></p>
+<p><img src="../_images/math/e3a0b24454997e9aac27f85e49fe4b04b598388a.png" alt="\textrm{svl} = svl - mean(svl)"/></p>
 </div><p class="rubric">linear-reg-adjusted-intercept-in-R</p>
-<div class="highlight-r"><div class="highlight"><pre>msvl <span class="o">=</span> svl <span class="o">-</span> mean<span class="p">(</span>svl<span class="p">)</span>
-print<span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>msvl<span class="p">))</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span>msvl <span class="o">&lt;-</span> svl <span class="o">-</span> <span class="kp">mean</span><span class="p">(</span>svl<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span>lm<span class="p">(</span>mass<span class="o">~</span>msvl<span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
 
 Call:
 lm(formula = mass ~ msvl)
@@ -418,7 +416,7 @@ Coefficients:
 <p>This will cause the intercept to become the expected mass of a snake at the average of the observed size distribution.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Try changing you code to reflect this.  Hint: <tt class="docutils literal"><span class="pre">mean</span></tt> is a function in BUGS.</p>
+<p class="last">Try changing you code to reflect this.  Hint: <code class="docutils literal"><span class="pre">mean</span></code> is a function in BUGS.</p>
 </div>
 </div>
 </div>
@@ -431,23 +429,22 @@ Coefficients:
         </div>
         <div class="sidebar">
           <h3>Table Of Contents</h3>
-          <ul>
+          <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lpEdit.html">lpEdit - an editor for literate programming</a></li>
-<li class="toctree-l1"><a class="reference internal" href="BayesianCourse.html">Bayesian short course</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="BayesianCourse.html">Bayesian short course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../References.html">Works Cited</a></li>
 </ul>
 
-          <h3 style="margin-top: 1.5em;">Search</h3>
-          <form class="search" action="../search.html" method="get">
-            <input type="text" name="q" />
-            <input type="submit" value="Go" />
-            <input type="hidden" name="check_keywords" value="yes" />
-            <input type="hidden" name="area" value="default" />
-          </form>
-          <p class="searchtip" style="font-size: 90%">
-            Enter search terms or a module, class or function name.
-          </p>
+          <div role="search">
+            <h3 style="margin-top: 1.5em;">Search</h3>
+            <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
         </div>
         <div class="clearer"></div>
       </div>
@@ -456,23 +453,27 @@ Coefficients:
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="BayesianPipeline.html" title="About the basic analysis pipeline"
-             >previous</a> |
-          <a href="../Contributors.html" title="Contributors"
-             >next</a> |
-          <a href="../genindex.html" title="General Index"
-             >index</a>
-            <br/>
-            <a href="../_sources/bayesian-course/BayesianLinRegR.txt"
-               rel="nofollow">Show Source</a>
+          <div role="navigation" aria-label="related navigaton">
+            <a href="BayesianPipeline.html" title="About the basic analysis pipeline"
+              >previous</a> |
+            <a href="../Contributors.html" title="Contributors"
+              >next</a> |
+            <a href="../genindex.html" title="General Index"
+              >index</a>
+          </div>
+          <div role="note" aria-label="source link">
+              <br/>
+              <a href="../_sources/bayesian-course/BayesianLinRegR.txt"
+                rel="nofollow">Show Source</a>
+          </div>
         </div>
 
         <div class="right">
           
-    <div class="footer">
-        &copy; Copyright 2014,lpEdit development team.
-      Last updated on Mar 27, 2014.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017,lpEdit development team.
+      Last updated on Jan 02, 2017.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
         </div>
         <div class="clearer"></div>

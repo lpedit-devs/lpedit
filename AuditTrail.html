@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Audit trail &mdash; lpEdit - 0.4.0</title>
+    <title>Audit trail &mdash; lpEdit - 0.5.0</title>
     
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,20 +23,20 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="lpEdit - 0.4.0" href="index.html" />
+    <link rel="top" title="lpEdit - 0.5.0" href="index.html" />
     <link rel="up" title="Reproducible Research" href="ReproducibleResearch.html" />
     <link rel="next" title="Documentation" href="Documentation.html" />
     <link rel="prev" title="Data Sharing" href="DataSharing.html" /> 
   </head>
-  <body>
-    <div class="header-wrapper">
+  <body role="document">
+    <div class="header-wrapper" role="banner">
       <div class="header">
           <p class="logo"><a href="index.html">
             <img class="logo" src="_static/logo.png" alt="Logo"/>
           </a></p>
         <div class="headertitle"><a
-          href="index.html">lpEdit - 0.4.0</a></div>
-        <div class="rel">
+          href="index.html">lpEdit - 0.5.0</a></div>
+        <div class="rel" role="navigation" aria-label="related navigation">
           <a href="DataSharing.html" title="Data Sharing"
              accesskey="P">previous</a> |
           <a href="Documentation.html" title="Documentation"
@@ -55,7 +53,7 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="audit-trail">
 <h1>Audit trail<a class="headerlink" href="#audit-trail" title="Permalink to this headline">¶</a></h1>
@@ -95,23 +93,22 @@
         </div>
         <div class="sidebar">
           <h3>Table Of Contents</h3>
-          <ul>
+          <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="lpEdit.html">lpEdit - an editor for literate programming</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian-course/BayesianCourse.html">Bayesian short course</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bayesian-course/BayesianCourse.html">Bayesian short course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="References.html">Works Cited</a></li>
 </ul>
 
-          <h3 style="margin-top: 1.5em;">Search</h3>
-          <form class="search" action="search.html" method="get">
-            <input type="text" name="q" />
-            <input type="submit" value="Go" />
-            <input type="hidden" name="check_keywords" value="yes" />
-            <input type="hidden" name="area" value="default" />
-          </form>
-          <p class="searchtip" style="font-size: 90%">
-            Enter search terms or a module, class or function name.
-          </p>
+          <div role="search">
+            <h3 style="margin-top: 1.5em;">Search</h3>
+            <form class="search" action="search.html" method="get">
+                <input type="text" name="q" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
         </div>
         <div class="clearer"></div>
       </div>
@@ -120,23 +117,27 @@
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="DataSharing.html" title="Data Sharing"
-             >previous</a> |
-          <a href="Documentation.html" title="Documentation"
-             >next</a> |
-          <a href="genindex.html" title="General Index"
-             >index</a>
-            <br/>
-            <a href="_sources/AuditTrail.txt"
-               rel="nofollow">Show Source</a>
+          <div role="navigation" aria-label="related navigaton">
+            <a href="DataSharing.html" title="Data Sharing"
+              >previous</a> |
+            <a href="Documentation.html" title="Documentation"
+              >next</a> |
+            <a href="genindex.html" title="General Index"
+              >index</a>
+          </div>
+          <div role="note" aria-label="source link">
+              <br/>
+              <a href="_sources/AuditTrail.txt"
+                rel="nofollow">Show Source</a>
+          </div>
         </div>
 
         <div class="right">
           
-    <div class="footer">
-        &copy; Copyright 2014,lpEdit development team.
-      Last updated on Mar 27, 2014.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017,lpEdit development team.
+      Last updated on Jan 02, 2017.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
         </div>
         <div class="clearer"></div>

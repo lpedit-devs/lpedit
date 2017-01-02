@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,14 +6,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Learning R &mdash; lpEdit - 0.4.0</title>
+    <title>Learning R &mdash; lpEdit - 0.5.0</title>
     
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -25,20 +23,20 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="lpEdit - 0.4.0" href="index.html" />
+    <link rel="top" title="lpEdit - 0.5.0" href="index.html" />
     <link rel="up" title="Bayesian short course - day 1" href="bayesian-course/BayesianDay1.html" />
     <link rel="next" title="Plots in Sweave" href="SweavePlots.html" />
     <link rel="prev" title="Sweave example walkthrough" href="SweaveExampleWalkthrough.html" /> 
   </head>
-  <body>
-    <div class="header-wrapper">
+  <body role="document">
+    <div class="header-wrapper" role="banner">
       <div class="header">
           <p class="logo"><a href="index.html">
             <img class="logo" src="_static/logo.png" alt="Logo"/>
           </a></p>
         <div class="headertitle"><a
-          href="index.html">lpEdit - 0.4.0</a></div>
-        <div class="rel">
+          href="index.html">lpEdit - 0.5.0</a></div>
+        <div class="rel" role="navigation" aria-label="related navigation">
           <a href="SweaveExampleWalkthrough.html" title="Sweave example walkthrough"
              accesskey="P">previous</a> |
           <a href="SweavePlots.html" title="Plots in Sweave"
@@ -55,50 +53,50 @@
             
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="learning-r">
 <h1>Learning R<a class="headerlink" href="#learning-r" title="Permalink to this headline">¶</a></h1>
 <p>Learning R can be a career long endeavor.  The best advise is to use it every chance you get.  And do not be afraid to ask questions&#8211; R is a very common language and many people can help you.</p>
 <blockquote>
 <div><ul class="simple">
-<li>Exit R &#8211; Type <tt class="docutils literal"><span class="pre">q()</span></tt></li>
-<li>Get help &#8211; <tt class="docutils literal"><span class="pre">?mean</span></tt> or <tt class="docutils literal"><span class="pre">help(mean)</span></tt></li>
+<li>Exit R &#8211; Type <code class="docutils literal"><span class="pre">q()</span></code></li>
+<li>Get help &#8211; <code class="docutils literal"><span class="pre">?mean</span></code> or <code class="docutils literal"><span class="pre">help(mean)</span></code></li>
 </ul>
 </div></blockquote>
 <p class="rubric">predefined-variables</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span>pi<span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span><span class="kc">pi</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
 [1] 3.141593
 </pre></div>
 </div>
 <p>Declaring variables.</p>
 <p class="rubric">other-varialbes</p>
-<div class="highlight-r"><div class="highlight"><pre>print<span class="p">(</span><span class="s">&quot;I am a String&quot;</span><span class="p">)</span>
+<div class="highlight-r"><div class="highlight"><pre><span></span><span class="kp">print</span><span class="p">(</span><span class="s">&quot;I am a String&quot;</span><span class="p">)</span>
 a <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
-print<span class="p">(</span>a<span class="p">)</span>
-print<span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span>a<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none"><div class="highlight"><pre>[1] &quot;...&quot;
+<div class="highlight-none"><div class="highlight"><pre><span></span>[1] &quot;...&quot;
 [1] &quot;I am a String&quot;
 [1]  1  2  3  4  5  6  7  8  9 10
 [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li>What does the command <tt class="docutils literal"><span class="pre">seq</span></tt> do?</li>
-<li>Wha about <img class="math" src="_images/math/26c703e258bf6991981d019ae3f5e997c95ad2c2.png" alt="1:10 + 5"/>?</li>
+<li>What does the command <code class="docutils literal"><span class="pre">seq</span></code> do?</li>
+<li>Wha about <img class="math" src="_images/math/d4204928427931fb19d21b852977d9bcbadb97bc.png" alt="1:10 + 5"/>?</li>
 </ol>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference download internal" href="_downloads/RQuickReference.pdf"><tt class="xref download docutils literal"><span class="pre">RQuickReference</span> <span class="pre">(pdf)</span></tt></a> - very handy summary of R functions by <a class="reference external" href="http://www.stat.fsu.edu/people/faculty.php?id=40">Elizabeth Slate</a></li>
-<li><a class="reference download internal" href="_downloads/RBasics-I-v2.pdf"><tt class="xref download docutils literal"><span class="pre">RBasics</span> <span class="pre">Part</span> <span class="pre">I</span> <span class="pre">(pdf)</span></tt></a> - short course on R by <a class="reference external" href="http://www.queensu.ca/biology/undergrad/courses/undergradthesis/537projects/MontgomerieR.html">R. Montgomerie</a></li>
-<li><a class="reference download internal" href="_downloads/RBasics-II-v2.pdf"><tt class="xref download docutils literal"><span class="pre">RBasics</span> <span class="pre">Part</span> <span class="pre">II</span> <span class="pre">(pdf)</span></tt></a> - short course on R part II</li>
+<li><a class="reference download internal" href="_downloads/RQuickReference.pdf" download=""><code class="xref download docutils literal"><span class="pre">RQuickReference</span> <span class="pre">(pdf)</span></code></a> - very handy summary of R functions by <a class="reference external" href="http://www.stat.fsu.edu/people/faculty.php?id=40">Elizabeth Slate</a></li>
+<li><a class="reference download internal" href="_downloads/RBasics-I-v2.pdf" download=""><code class="xref download docutils literal"><span class="pre">RBasics</span> <span class="pre">Part</span> <span class="pre">I</span> <span class="pre">(pdf)</span></code></a> - short course on R by <a class="reference external" href="http://www.queensu.ca/biology/undergrad/courses/undergradthesis/537projects/MontgomerieR.html">R. Montgomerie</a></li>
+<li><a class="reference download internal" href="_downloads/RBasics-II-v2.pdf" download=""><code class="xref download docutils literal"><span class="pre">RBasics</span> <span class="pre">Part</span> <span class="pre">II</span> <span class="pre">(pdf)</span></code></a> - short course on R part II</li>
 <li>An <a class="reference external" href="http://www.stat.wisc.edu/~larget/r.html">R primer for introductory statistics</a></li>
 </ul>
 </div></blockquote>
@@ -112,23 +110,22 @@ print<span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span
         </div>
         <div class="sidebar">
           <h3>Table Of Contents</h3>
-          <ul>
+          <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="lpEdit.html">lpEdit - an editor for literate programming</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bayesian-course/BayesianCourse.html">Bayesian short course</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bayesian-course/BayesianCourse.html">Bayesian short course</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Contributors.html">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="References.html">Works Cited</a></li>
 </ul>
 
-          <h3 style="margin-top: 1.5em;">Search</h3>
-          <form class="search" action="search.html" method="get">
-            <input type="text" name="q" />
-            <input type="submit" value="Go" />
-            <input type="hidden" name="check_keywords" value="yes" />
-            <input type="hidden" name="area" value="default" />
-          </form>
-          <p class="searchtip" style="font-size: 90%">
-            Enter search terms or a module, class or function name.
-          </p>
+          <div role="search">
+            <h3 style="margin-top: 1.5em;">Search</h3>
+            <form class="search" action="search.html" method="get">
+                <input type="text" name="q" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+            </form>
+          </div>
         </div>
         <div class="clearer"></div>
       </div>
@@ -137,23 +134,27 @@ print<span class="p">(</span>a<span class="o">&gt;</span><span class="m">5</span
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="SweaveExampleWalkthrough.html" title="Sweave example walkthrough"
-             >previous</a> |
-          <a href="SweavePlots.html" title="Plots in Sweave"
-             >next</a> |
-          <a href="genindex.html" title="General Index"
-             >index</a>
-            <br/>
-            <a href="_sources/LearningR.txt"
-               rel="nofollow">Show Source</a>
+          <div role="navigation" aria-label="related navigaton">
+            <a href="SweaveExampleWalkthrough.html" title="Sweave example walkthrough"
+              >previous</a> |
+            <a href="SweavePlots.html" title="Plots in Sweave"
+              >next</a> |
+            <a href="genindex.html" title="General Index"
+              >index</a>
+          </div>
+          <div role="note" aria-label="source link">
+              <br/>
+              <a href="_sources/LearningR.txt"
+                rel="nofollow">Show Source</a>
+          </div>
         </div>
 
         <div class="right">
           
-    <div class="footer">
-        &copy; Copyright 2014,lpEdit development team.
-      Last updated on Mar 27, 2014.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017,lpEdit development team.
+      Last updated on Jan 02, 2017.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
     </div>
         </div>
         <div class="clearer"></div>

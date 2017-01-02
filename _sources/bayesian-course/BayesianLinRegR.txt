@@ -124,7 +124,7 @@ If we are interested in the effect of a single binary variable like ``region`` o
   (Intercept)   6.5000     0.6614   9.827 0.000601 ***
   region2       3.5000     1.1456   3.055 0.037841 *  
   ---
-  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+  Signif. codes:  0 *** 0.001 ** 0.01 * 0.05 . 0.1   1
   
   Residual standard error: 1.323 on 4 degrees of freedom
   Multiple R-squared:    0.7,	Adjusted R-squared:  0.625 
@@ -291,7 +291,7 @@ The intercept has little meaning as it says that a snake of length 0 weight -5.6
 
 .. code-block:: r 
 
-  msvl = svl - mean(svl)
+  msvl <- svl - mean(svl)
   print(lm(mass~msvl))
 
 
