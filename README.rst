@@ -26,10 +26,6 @@ lpedit is undergoing some changes
 Installation
 ===============
 
-For more details visit the documentation:
-
-  *  http://ajrichards.github.io/lpedit
-
 The easiest way to install and maintain ``lpedit`` is to use `pip <https://pypi.python.org/pypi/pip>`_
 
   .. code-block:: bash
